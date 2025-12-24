@@ -1,6 +1,3 @@
-Here is the complete `README.md` file, ready to copy and paste.
-
-```markdown
 # Corbs Blog
 
 A high-performance, customizable personal blog built with [Eleventy (11ty)](https://www.11ty.dev/). This project features a robust theming system, instant client-side search, and a clean Markdown-first writing workflow.
