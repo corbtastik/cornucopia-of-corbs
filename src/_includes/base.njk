@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} | DevBlog</title>
     
-    <!-- Dynamic Font Configuration -->
+    <!-- 1. Normalize/Reset (Load this FIRST) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css">
+
+    <!-- 2. Dynamic Font Configuration -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="{{ fonts.url }}" rel="stylesheet">
+    <!-- Extra fonts for 'Term' theme -->
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;700&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- Inject Configured Fonts as CSS Variables -->
+    <!-- 3. Inject Configured Fonts as CSS Variables -->
     <style>
         :root {
             --font-family-primary: {{ fonts.primary | safe }};
@@ -19,45 +24,59 @@
         }
     </style>
 
+    <!-- 4. Your Custom Styles (Load this LAST to override defaults) -->
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <header>
         <nav class="site-nav">
-            <a href="/" class="logo">DevBlog_</a>
+            <a href="/" class="logo">Yolo Blog</a>
             
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search posts, tags..." autocomplete="off">
+                <input type="text" id="search-input" placeholder="Search posts, tags, date..." autocomplete="off">
             </div>
 
             <div class="theme-controls">
                 <select id="theme-select" class="theme-select" aria-label="Select Theme">
-                    <option value="corbs">Corbs</option>
-                    <option value="default">Default (GitHub)</option>
-                    <option value="synthwave">Synthwave '84</option>
-                    <option value="dracula">Dracula</option>
-                    <option value="nord">Nord</option>
-                    <option value="monokai">Monokai</option>
-                    <option value="solarized">Solarized</option>
-                    <option value="gruvbox">Gruvbox</option>
-                    <option value="onedark">One Dark</option>
-                    <option value="tokyonight">Tokyo Night</option>
-                    <option value="catppuccin">Catppuccin</option>
-                    <option value="material">Material Palenight</option>
-                    <option value="cyberpunk">Cyberpunk</option>
-                    <option value="coffee">Coffee</option>
-                    <option value="midnight">Midnight</option>
-                    <option value="terminal">Terminal</option>
-                    <option value="ubuntu">Ubuntu</option>
-                    <option value="shades-purple">Shades of Purple</option>
-                    <option value="zenburn">Zenburn</option>
-                    <option value="deepspace">Deep Space</option>
-                    <option value="moonlight">Moonlight</option>
-                    <option value="nightowl">Night Owl</option>
-                    <option value="panda">Panda</option>
-                    <option value="cobalt">Cobalt2</option>
-                    <option value="ayu">Ayu</option>
-                    <option value="forest">Forest</option>
+                    <optgroup label="Custom">
+                        <option value="corbs">Corbs</option>
+                        <option value="bleu">Bleu</option>
+                        <option value="cream">Cream</option>
+                        <option value="dusk">Dusk</option>
+                        <option value="grape">Grape</option>
+                        <option value="neon">Neon</option>
+                        <option value="newspaper">Newspaper</option>
+                        <option value="reveal">Reveal</option>
+                        <option value="term">Term (Hacker)</option>
+                        <option value="yolo">Yolo</option>
+                    </optgroup>
+                    <optgroup label="Presets">
+                        <option value="default">Default (GitHub)</option>
+                        <option value="synthwave">Synthwave '84</option>
+                        <option value="dracula">Dracula</option>
+                        <option value="nord">Nord</option>
+                        <option value="monokai">Monokai</option>
+                        <option value="solarized">Solarized</option>
+                        <option value="gruvbox">Gruvbox</option>
+                        <option value="onedark">One Dark</option>
+                        <option value="tokyonight">Tokyo Night</option>
+                        <option value="catppuccin">Catppuccin</option>
+                        <option value="material">Material Palenight</option>
+                        <option value="cyberpunk">Cyberpunk</option>
+                        <option value="coffee">Coffee</option>
+                        <option value="midnight">Midnight</option>
+                        <option value="terminal">Terminal (Classic)</option>
+                        <option value="ubuntu">Ubuntu</option>
+                        <option value="shades-purple">Shades of Purple</option>
+                        <option value="zenburn">Zenburn</option>
+                        <option value="deepspace">Deep Space</option>
+                        <option value="moonlight">Moonlight</option>
+                        <option value="nightowl">Night Owl</option>
+                        <option value="panda">Panda</option>
+                        <option value="cobalt">Cobalt2</option>
+                        <option value="ayu">Ayu</option>
+                        <option value="forest">Forest</option>
+                    </optgroup>
                 </select>
 
                 <button id="theme-toggle" class="theme-btn">Light Mode</button>
@@ -77,7 +96,7 @@
     </main>
 
     <footer>
-        <p>© 2025 Built with Markdown & 11ty.</p>
+        <p>© 2025 Built with AI and Love</p>
     </footer>
 
     <script src="/assets/js/search.js"></script>

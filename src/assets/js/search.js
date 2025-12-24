@@ -81,8 +81,10 @@ if (searchInput) {
             const title = post.title ? post.title.toLowerCase() : '';
             const desc = post.description ? post.description.toLowerCase() : '';
             const tags = post.tags ? post.tags.join(' ').toLowerCase() : '';
+            // Also search date if you want
+            const date = post.date ? post.date : '';
             
-            return title.includes(term) || desc.includes(term) || tags.includes(term);
+            return title.includes(term) || desc.includes(term) || tags.includes(term) || date.includes(term);
         });
 
         displayResults(matches);
@@ -107,11 +109,17 @@ function displayResults(matches) {
             ? `<br><small style="opacity: 0.7;">Tags: ${post.tags.join(', ')}</small>` 
             : '';
 
-        // Insert HTML
+        // Safe Date
+        const dateStr = post.date || '';
+
+        // Insert HTML with new Header Structure
         li.innerHTML = `
-            <h2 style="margin-top:0; font-size: 1.5rem;">
-                <a href="${post.url}">${post.title}</a>
-            </h2>
+            <div class="post-header">
+                <h2 style="font-size: 1.5rem; margin:0; line-height: 1.3;">
+                    <a href="${post.url}">${post.title}</a>
+                </h2>
+                <span class="post-date">${dateStr}</span>
+            </div>
             <p>${post.description || 'No description available.'}</p>
             ${tagsHtml}
         `;

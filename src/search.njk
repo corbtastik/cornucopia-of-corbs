@@ -1,6 +1,5 @@
 ---
 permalink: /search.json
-eleventyExcludeFromCollections: true
 ---
 [
 {% for post in collections.posts %}
@@ -8,6 +7,7 @@ eleventyExcludeFromCollections: true
     "title": "{{ post.data.title | safe }}",
     "url": "{{ post.url }}",
     "description": "{{ post.data.description | safe }}",
+    "date": "{{ post.date.toISOString().slice(0, 10) }}",
     "tags": [{% for tag in post.data.tags %}"{{ tag }}"{% if not loop.last %},{% endif %}{% endfor %}]
   }{% if not loop.last %},{% endif %}
 {% endfor %}

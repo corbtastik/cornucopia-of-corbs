@@ -10,21 +10,105 @@
    0. CORBS (Custom Port)
    ----------------------------------------------------------- */
 html[data-theme-set="corbs"][data-mode="dark"] {
-    --bg-color: #14043a;       /* $dark-primary-color */
-    --text-color: #21daff;     /* $dark-secondary-color (Cyan Text) */
-    --primary-color: #f83a90;  /* $dark-on-primary-color (Pink Accent) */
-    --border-color: #4493ef;   /* $dark-link-color */
-    --card-bg: #190648;        /* $dark-secondary-container-color */
-    --search-bg: #14043a;      /* Matches BG */
+    --bg-color: #14043a; --text-color: #21daff; --primary-color: #f83a90; --border-color: #4493ef; --card-bg: #190648; --search-bg: #14043a;
+}
+html[data-theme-set="corbs"][data-mode="light"] {
+    --bg-color: #f1ecff; --text-color: #3b0aa4; --primary-color: #f61379; --border-color: #3389ed; --card-bg: #e9e2ff; --search-bg: #ffffff;
 }
 
-html[data-theme-set="corbs"][data-mode="light"] {
-    --bg-color: #f1ecff;       /* $light-primary-color */
-    --text-color: #3b0aa4;     /* $light-on-primary-color */
-    --primary-color: #f61379;  /* $light-primary-container-color */
-    --border-color: #3389ed;   /* $light-secondary-color */
-    --card-bg: #e9e2ff;        /* $light-secondary-container-color */
-    --search-bg: #ffffff;      /* Clean white for search inputs */
+/* -----------------------------------------------------------
+   0.1 BLEU
+   ----------------------------------------------------------- */
+html[data-theme-set="bleu"][data-mode="dark"] {
+    --bg-color: #00173d; --text-color: #aed8ff; --primary-color: #47edff; --border-color: #0c3b85; --card-bg: #0c3b85; --search-bg: #00173d;
+}
+html[data-theme-set="bleu"][data-mode="light"] {
+    --bg-color: #e3f2fd; --text-color: #092a5e; --primary-color: #7206b7; --border-color: #bbdefb; --card-bg: #c6e5fb; --search-bg: #ffffff;
+}
+
+/* -----------------------------------------------------------
+   0.2 CREAM
+   ----------------------------------------------------------- */
+html[data-theme-set="cream"][data-mode="dark"] {
+    --bg-color: #f0f7f6; --text-color: #8b1852; --primary-color: #ff016e; --border-color: #da2f85; --card-bg: #f2b6d4; --search-bg: #f0f7f6;
+}
+html[data-theme-set="cream"][data-mode="light"] {
+    --bg-color: #f0f7f6; --text-color: #117e96; --primary-color: #1abddf; --border-color: #22c8e9; --card-bg: #e5f1f0; --search-bg: #ffffff;
+}
+
+/* -----------------------------------------------------------
+   0.3 DUSK
+   ----------------------------------------------------------- */
+html[data-theme-set="dusk"][data-mode="dark"] {
+    --bg-color: #20142e; --text-color: #f549b3; --primary-color: #b2feff; --border-color: #fe6c11; --card-bg: #460a5b; --search-bg: #20142e;
+}
+html[data-theme-set="dusk"][data-mode="light"] {
+    --bg-color: #fffcfb; --text-color: #20142e; --primary-color: #00a0ff; --border-color: #ff6d00; --card-bg: #fcd9ef; --search-bg: #ffffff;
+}
+
+/* -----------------------------------------------------------
+   0.4 GRAPE
+   ----------------------------------------------------------- */
+html[data-theme-set="grape"][data-mode="dark"] {
+    --bg-color: #390f6c; --text-color: #f4edfd; --primary-color: #4493ef; --border-color: #8128ed; --card-bg: #8128ed; --search-bg: #390f6c;
+}
+html[data-theme-set="grape"][data-mode="light"] {
+    --bg-color: #f4edfd; --text-color: #390f6c; --primary-color: #4493ef; --border-color: #8128ed; --card-bg: #ffffff; --search-bg: #ffffff;
+}
+
+/* -----------------------------------------------------------
+   0.5 NEON
+   ----------------------------------------------------------- */
+html[data-theme-set="neon"][data-mode="dark"] {
+    --bg-color: #141414; --text-color: #15c4ff; --primary-color: #fc00ff; --border-color: #344dff; --card-bg: #202020; --search-bg: #141414;
+}
+html[data-theme-set="neon"][data-mode="light"] {
+    --bg-color: #edf2f4; --text-color: #6a21eb; --primary-color: #fc00ff; --border-color: #ff1573; --card-bg: #ffffff; --search-bg: #ffffff;
+}
+
+/* -----------------------------------------------------------
+   0.6 NEWSPAPER
+   ----------------------------------------------------------- */
+html[data-theme-set="newspaper"][data-mode="dark"] {
+    --bg-color: #141414; --text-color: #e0e0e0; --primary-color: #f72685; --border-color: #5c5c5c; --card-bg: #1a1a1a; --search-bg: #000000;
+}
+html[data-theme-set="newspaper"][data-mode="light"] {
+    --bg-color: #e0e0e0; --text-color: #0a0a0a; --primary-color: #f72685; --border-color: #5c5c5c; --card-bg: #f5f5f5; --search-bg: #ffffff;
+}
+
+/* -----------------------------------------------------------
+   0.7 REVEAL
+   ----------------------------------------------------------- */
+html[data-theme-set="reveal"][data-mode="dark"] {
+    --bg-color: #091129; --text-color: #fefcfb; --primary-color: #339ff4; --border-color: #ec0a6f; --card-bg: #033c50; --search-bg: #091129;
+}
+html[data-theme-set="reveal"][data-mode="light"] {
+    --bg-color: #fefcfb; --text-color: #091129; --primary-color: #339ff4; --border-color: #f72685; --card-bg: #ebfaff; --search-bg: #ffffff;
+}
+
+/* -----------------------------------------------------------
+   0.8 TERM (Includes Font Overrides)
+   ----------------------------------------------------------- */
+html[data-theme-set="term"] {
+    --font-family-primary: "Azeret Mono", monospace;
+    --font-family-secondary: "IBM Plex Mono", monospace;
+    --font-family-monospace: "Inconsolata", monospace;
+}
+html[data-theme-set="term"][data-mode="dark"] {
+    --bg-color: #020202; --text-color: #2afe13; --primary-color: #6177f5; --border-color: #e502e6; --card-bg: #0d0d0d; --search-bg: #000000;
+}
+html[data-theme-set="term"][data-mode="light"] {
+    --bg-color: #e6e5e6; --text-color: #020202; --primary-color: #e502e6; --border-color: #6177f5; --card-bg: #ffffff; --search-bg: #ffffff;
+}
+
+/* -----------------------------------------------------------
+   0.9 YOLO
+   ----------------------------------------------------------- */
+html[data-theme-set="yolo"][data-mode="dark"] {
+    --bg-color: #060823; --text-color: #cacef7; --primary-color: #4ffa7b; --border-color: #bf3efd; --card-bg: #251359; --search-bg: #060823;
+}
+html[data-theme-set="yolo"][data-mode="light"] {
+    --bg-color: #dee1f7; --text-color: #060823; --primary-color: #00ce35; --border-color: #bf3efd; --card-bg: #ebefff; --search-bg: #ffffff;
 }
 
 /* -----------------------------------------------------------
@@ -168,7 +252,7 @@ html[data-theme-set="midnight"][data-mode="light"] {
 }
 
 /* -----------------------------------------------------------
-   15. TERMINAL (Hacker)
+   15. TERMINAL (Classic)
    ----------------------------------------------------------- */
 html[data-theme-set="terminal"][data-mode="dark"] {
     --bg-color: #000000; --text-color: #00ff00; --primary-color: #00ff00; --border-color: #004400; --card-bg: #0a0a0a; --search-bg: #000000;
@@ -324,7 +408,7 @@ header {
     /* Sticky Magic */
     position: sticky;
     top: 0;
-    z-index: 1000; /* Ensures it stays above images/code blocks */
+    z-index: 1000; 
 }
 
 .site-nav {
@@ -339,6 +423,7 @@ header {
     font-weight: bold;
     font-size: 1.2rem;
     white-space: nowrap;
+    font-family: var(--font-family-secondary);
 }
 
 /* Search Widget */
@@ -374,9 +459,25 @@ header {
     background: var(--card-bg);
     color: var(--text-color);
     border: 1px solid var(--border-color);
-    padding: 8px;
     border-radius: 6px;
     cursor: pointer;
+    font-family: var(--font-family-secondary);
+    
+    /* 1. Reset Native Appearance */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* 2. Custom Arrow (Neutral Gray) */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23888888%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-size: 10px;
+    
+    /* 3. Positioning: Move arrow 12px from the right edge */
+    background-position: right 12px center;
+    
+    /* 4. Padding: Ensure text doesn't overlap the new arrow position */
+    padding: 8px 32px 8px 12px;
 }
 
 .theme-btn {
@@ -425,14 +526,26 @@ footer {
     min-height: 120px; 
 }
 
-/* Card Content Spacing fixes */
-.post-item h1, 
-.post-item h2, 
-.post-item h3, 
-.post-item a {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
+/* New: Post Header Row for Title and Date */
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline; /* Aligns title and date to bottom text line */
+  margin-bottom: 0.5rem;
+}
+
+/* Override existing h2 styles inside the header row */
+.post-header h2 {
+    margin: 0;
     line-height: 1.3;
+}
+
+/* New: Date Styling */
+.post-date {
+  font-size: 1rem; /* Same as p text */
+  opacity: 0.8;    /* Slightly muted */
+  white-space: nowrap;
+  margin-left: 1rem;
 }
 
 .post-item p {
@@ -449,6 +562,13 @@ footer {
 
 
 /* --- MARKDOWN ELEMENTS --- */
+
+hr {
+    border: 0;
+    border-top: 2px dashed var(--border-color);
+    margin: 2rem 0;
+}
+
 blockquote {
   border-left: 4px solid var(--primary-color);
   background-color: var(--card-bg);
