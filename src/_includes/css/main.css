@@ -428,6 +428,120 @@ img { max-width: 100%; height: auto; border-radius: 6px; }
 }
 
 /* =========================================
+   7. SIDEBAR & NAVIGATION UPDATES
+   ========================================= */
+
+/* Grouping Logo and Menu Button */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Hamburger Button */
+#menu-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+#menu-btn:hover {
+    transform: scale(1.1);
+    color: var(--primary-color);
+}
+
+/* --- The Sidebar (Hidden by default) --- */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    background-color: var(--card-bg);
+    border-right: 1px solid var(--border-color);
+    z-index: 2000; /* Above everything */
+    transform: translateX(-100%); /* Hide off-screen left */
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+}
+
+#sidebar.active {
+    transform: translateX(0); /* Slide in */
+}
+
+/* Sidebar Overlay (Darkens background) */
+#sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(2px);
+    z-index: 1999; /* Below sidebar, above content */
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Sidebar Contents */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px dashed var(--border-color);
+    padding-bottom: 15px;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-family: var(--font-family-primary);
+}
+
+#close-sidebar {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    font-family: var(--font-family-secondary);
+}
+
+.sidebar-nav a:hover {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+/* =========================================
    4. MOBILE RESPONSIVE HEADER
    ========================================= */
 @media (max-width: 768px) {
@@ -436,11 +550,15 @@ img { max-width: 100%; height: auto; border-radius: 6px; }
         padding: 1rem;
         gap: 1rem;
     }
-
-    /* 1. Logo: Top Left (UPDATED SELECTOR) */
-    .logo-link {
+    /* 1. Left Group: Top Left */
+    .nav-left {
         order: 1;
     }
+
+    /* 1. Logo: Top Left (UPDATED SELECTOR) */
+    /* .logo-link {
+        order: 1;
+    } */
 
     /* 2. Controls: Top Right */
     .theme-controls {

@@ -1,0 +1,46 @@
+---
+title: "Tags"
+layout: base.njk
+description: "Browse posts by topic."
+---
+
+<h1>Topics</h1>
+
+<!-- 1. List of all tags at the top for quick navigation -->
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px;">
+{% for tag, posts in collections %}
+  {% if tag != "all" and tag != "posts" %}
+    <a href="#{{ tag }}" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 5px 10px; border-radius: 4px; text-decoration: none; color: var(--text-color);">
+        #{{ tag }} <span style="opacity: 0.6; font-size: 0.8em;">({{ posts.length }})</span>
+    </a>
+  {% endif %}
+{% endfor %}
+</div>
+
+<hr>
+
+<!-- 2. The Sections -->
+{% for tag, posts in collections %}
+  {% if tag != "all" and tag != "posts" %}
+    
+    <section id="{{ tag }}" style="margin-bottom: 60px;">
+      <h2 style="border-bottom: 2px solid var(--primary-color); display: inline-block; padding-bottom: 5px; margin-bottom: 20px;">
+        #{{ tag }}
+      </h2>
+
+      <ul class="post-list">
+        {% for post in posts | reverse %}
+          <li class="post-item" style="padding: 1.5rem;">
+            <div class="post-header">
+                <h3 style="margin: 0;">
+                    <a href="{{ post.url }}">{{ post.data.title }}</a>
+                </h3>
+                <span class="post-date" style="font-size: 0.9rem;">{{ post.date.toISOString().slice(0, 10) }}</span>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+  {% endif %}
+{% endfor %}
