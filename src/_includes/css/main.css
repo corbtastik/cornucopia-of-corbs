@@ -211,6 +211,7 @@ blockquote {
 }
 blockquote p { margin: 0; }
 
+/* Inline Code - Keep this for simple backticks not in blocks */
 :not(pre) > code {
   background-color: var(--border-color);
   color: var(--primary-color); 
@@ -219,18 +220,18 @@ blockquote p { margin: 0; }
   font-size: 0.9em;
 }
 
+/* 
+   Code Blocks: Layout Only 
+   Colors/Backgrounds are now handled by src/_includes/css/syntax/*.css 
+*/
 pre {
-  background-color: #161b22; 
-  padding: 1.5rem;
-  border-radius: 8px;
-  overflow-x: auto;
   margin: 1.5rem 0;
-  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow-x: auto; /* Keeps scrollbars if needed */
 }
 
 pre code {
   background-color: transparent;
-  color: #c9d1d9;
   font-size: 0.95em;
   line-height: 1.5;
   padding: 0;
@@ -260,6 +261,71 @@ tbody tr:nth-of-type(even) { background-color: rgba(127, 127, 127, 0.05); }
 tbody tr:hover { background-color: var(--border-color); cursor: default; }
 tbody tr:last-of-type { border-bottom: 2px solid var(--primary-color); }
 img { max-width: 100%; height: auto; border-radius: 6px; }
+
+/* =========================================
+   5. CODE TOOLBAR (Gemini Style)
+   ========================================= */
+
+.code-wrapper {
+    margin: 2rem 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg); /* Use card bg for the header strip */
+    overflow: hidden; /* Ensures corners clip correctly */
+}
+
+/* Ensure the pre inside loses its margin/border as the wrapper handles it */
+.code-wrapper pre {
+    margin: 0;
+    border: none;
+    border-top: 1px solid var(--border-color); /* Separator line */
+    border-radius: 0; /* Remove radius since wrapper has it */
+}
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: rgba(0,0,0,0.2); /* Slight tint for header */
+    font-family: var(--font-family-secondary);
+    font-size: 0.85rem;
+}
+
+.code-lang {
+    font-weight: bold;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.code-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.code-actions button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    opacity: 0.6;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.code-actions button:hover {
+    opacity: 1;
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Collapsed State */
+.code-wrapper.collapsed {
+    border-bottom: 1px solid var(--border-color);
+}
 
 /* =========================================
    4. MOBILE RESPONSIVE HEADER

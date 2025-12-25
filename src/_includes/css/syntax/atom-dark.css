@@ -1,0 +1,61 @@
+/* Atom One Dark Syntax Highlight */
+
+/* 1. The Container (The Box) */
+pre {
+  background: #282c34;
+  color: #abb2bf;
+  font-family: var(--font-family-monospace);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  overflow: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  line-height: 1.5;
+  tab-size: 4;
+}
+
+/* 2. The Code Text inside */
+code[class*="language-"],
+pre code {
+  color: inherit;
+  background: transparent; /* Important: Let the pre background show through */
+  font-family: inherit;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+/* 3. Tokens (Colors) */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata { color: #5c6370; font-style: italic; }
+.token.punctuation { color: #abb2bf; }
+.token.selector,
+.token.tag { color: #e06c75; }
+.token.property,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.attr-name,
+.token.deleted { color: #d19a66; }
+.token.string,
+.token.char,
+.token.attr-value,
+.token.builtin,
+.token.inserted { color: #98c379; }
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string { color: #56b6c2; }
+.token.atrule,
+.token.keyword { color: #c678dd; }
+.token.function,
+.token.class-name { color: #61afef; }
+.token.regex,
+.token.important,
+.token.variable { color: #c678dd; }

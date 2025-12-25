@@ -1,7 +1,9 @@
 // .eleventy.js
 const { DateTime } = require("luxon"); // Optional: helper for dates if needed later
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function(eleventyConfig) {
+    eleventyConfig.addPlugin(syntaxHighlight);
     // Copy the `assets` folder to the output
     eleventyConfig.addPassthroughCopy("src/assets");
     

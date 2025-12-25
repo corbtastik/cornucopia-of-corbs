@@ -117,7 +117,7 @@ Here is a sample image with alt text and a title.
 [![Click this banner](https://placehold.co/600x150/007bff/ffffff?text=Clickable+Banner)](https://www.11ty.dev/)
 
 ### Image Grid (Using HTML)
-<div style="display: flex; gap: 10px;">
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
   <img src="https://placehold.co/150" alt="Square 1">
   <img src="https://placehold.co/150" alt="Square 2">
   <img src="https://placehold.co/150" alt="Square 3">
