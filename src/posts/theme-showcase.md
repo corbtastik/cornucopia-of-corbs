@@ -2,27 +2,20 @@
 title: "Theme Showcase"
 date: 2025-12-25
 tags: ["demo", "features", "theme"]
-description: "A live visualization of the currently selected theme's color palette, typography, and code syntax."
+description: "A live visualization of the currently selected theme's palette, typography, and UI components."
 layout: base.njk
 ---
 
-This page is **live**. Use the **Theme Dropdown** in the header to change the theme, and watch the colors and fonts below update instantly to match.
+This page is **live**. Use the **Theme Dropdown** in the header to change the theme. Watch how the specific Corbs-theme variables (like Containers and Tertiary colors) update instantly.
 
 ---
 
 ## 1. Color Palette
 
-Here are the core variables defining the current theme.
-
+### Base Colors
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-bottom: 30px;">
 
-  <!-- Primary Color -->
-  <div style="background-color: var(--primary-color); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <span style="background: rgba(0,0,0,0.5); color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 0.8em; margin-bottom: 5px;">--primary</span>
-    <span style="color: #fff; font-weight: bold; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Primary</span>
-  </div>
-
-  <!-- Background Color -->
+  <!-- Background -->
   <div style="background-color: var(--bg-color); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; text-align: center;">
     <span style="color: var(--text-color); font-weight: bold;">Background</span>
     <span style="color: var(--text-color); font-size: 0.8em; opacity: 0.7;">--bg-color</span>
@@ -48,11 +41,49 @@ Here are the core variables defining the current theme.
 
 </div>
 
+### Accents & Typography
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-bottom: 30px;">
+
+  <!-- Heading Color -->
+  <div style="background-color: var(--bg-color); padding: 20px; border-radius: 8px; border: 1px solid var(--heading-color); display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <span style="color: var(--heading-color); font-weight: bold;">Heading</span>
+    <span style="color: var(--text-color); font-size: 0.8em; opacity: 0.7;">--heading-color</span>
+  </div>
+
+  <!-- Link Color -->
+  <div style="background-color: var(--bg-color); padding: 20px; border-radius: 8px; border: 1px solid var(--link-color); display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <span style="color: var(--link-color); font-weight: bold; text-decoration: underline;">Link</span>
+    <span style="color: var(--text-color); font-size: 0.8em; opacity: 0.7;">--link-color</span>
+  </div>
+
+  <!-- Tertiary Color -->
+  <div style="background-color: var(--bg-color); padding: 20px; border-radius: 8px; border: 1px solid var(--tertiary-color); display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <span style="color: var(--tertiary-color); font-weight: bold;">Tertiary</span>
+    <span style="color: var(--text-color); font-size: 0.8em; opacity: 0.7;">--tertiary-color</span>
+  </div>
+
+</div>
+
+### Containers
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px;">
+
+  <!-- Primary Container -->
+  <div style="background-color: var(--primary-container-bg); padding: 20px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <span style="color: var(--on-primary-container-color); font-weight: bold;">Primary Container</span>
+    <span style="color: var(--on-primary-container-color); font-size: 0.8em; opacity: 0.8;">(Sidebar BG)</span>
+  </div>
+
+  <!-- Secondary Container -->
+  <div style="background-color: var(--secondary-container-bg); padding: 20px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <span style="color: var(--on-secondary-container-color); font-weight: bold;">Secondary Container</span>
+    <span style="color: var(--on-secondary-container-color); font-size: 0.8em; opacity: 0.8;">(Blockquotes/Tags)</span>
+  </div>
+
+</div>
+
 ---
 
 ## 2. Typography
-
-The fonts below are pulled from `src/_data/fonts.json` and assigned to CSS variables.
 
 <div style="background: var(--card-bg); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-color);">
 
@@ -63,7 +94,7 @@ The fonts below are pulled from `src/_data/fonts.json` and assigned to CSS varia
 
 <hr>
 
-<h3 style="font-family: var(--font-family-secondary); margin-top: 1rem;">
+<h3 style="font-family: var(--font-family-secondary); margin-top: 1rem; color: var(--heading-color);">
   Secondary Font (Headings)
 </h3>
 <p style="font-family: var(--font-family-secondary);">
@@ -82,7 +113,34 @@ The fonts below are pulled from `src/_data/fonts.json` and assigned to CSS varia
 
 ---
 
-## 3. Syntax Highlighting
+## 3. UI Components
+
+Testing the specific element styles we implemented.
+
+### Blockquotes
+> This is a blockquote. In the Corbs theme, this uses `secondary-container-bg` for the background, `tertiary-color` for the border, and `on-secondary-container-color` for text.
+
+### Tags (Pills)
+These use the new Pill styling:
+<div class="tag-list">
+  <a href="#" class="tag">#database</a>
+  <a href="#" class="tag">#css</a>
+  <a href="#" class="tag">#design</a>
+  <a href="#" class="tag">#11ty</a>
+</div>
+
+### Data Tables
+The custom grid styling for data.
+
+| Player | Average | HR |
+| :--- | :--- | :--- |
+| **Hank Aaron** | .305 | 755 |
+| **Babe Ruth** | .342 | 714 |
+| **Mookie Wilson** | .274 | 67 |
+
+---
+
+## 4. Syntax Highlighting
 
 This section tests the **token colors** of your currently selected Syntax Highlight theme (e.g., Atom Dark, Dracula).
 
@@ -141,22 +199,4 @@ body {
     display: block !important;
   }
 }
-```
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Theme Test</title>
-</head>
-<body>
-    <!-- Main Container -->
-    <div id="app" data-theme="dark">
-        <h1 class="title">Welcome</h1>
-        <a href="https://example.com" target="_blank">Click Here</a>
-        <button disabled>Disabled</button>
-    </div>
-</body>
-</html>
 ```

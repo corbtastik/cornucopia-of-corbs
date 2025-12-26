@@ -8,7 +8,8 @@ eleventyExcludeFromCollections: true
 {% include "css/themes.css" %}
 
 /* 2. Syntax Highlighting (Configured in src/_data/site.json) */
-{% include "css/syntax/" + site.syntax_theme + ".css" %}
+{# {% include "css/syntax/" + site.syntax_theme + ".css" %} #}
+{% include "css/syntax.css" %}
 
 /* 3. Main Layout */
 {% include "css/main.css" %}

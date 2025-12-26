@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
 
 ### C++
 
-```c++
+```cpp
 #include <iostream>
 using namespace std;
 

@@ -1,0 +1,99 @@
+/* ===========================================================
+   MASTER SYNTAX TEMPLATE (Append to Theme Variables)
+   =========================================================== */
+
+/* 1. The Container */
+pre {
+  background: var(--sh-bg);
+  color: var(--sh-text);
+  font-family: var(--font-family-monospace);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  overflow: auto;
+  border-radius: 8px;
+  border: 1px solid var(--sh-border);
+  line-height: 1.5;
+  tab-size: 4;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 2. The Code Text */
+code[class*="language-"],
+pre code {
+  color: inherit;
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+/* 3. Tokens */
+
+/* Comments */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata { 
+  color: var(--sh-comment); 
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Punctuation */
+.token.punctuation { 
+  color: var(--sh-punctuation); 
+  opacity: 0.8;
+}
+
+/* Namespace */
+.token.namespace { 
+  opacity: .7; 
+}
+
+/* Keywords & Tags */
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted,
+.token.keyword { 
+  color: var(--sh-keyword); 
+}
+
+/* Strings & URLs */
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.url,
+.token.inserted { 
+  color: var(--sh-string); 
+}
+
+/* Entities & Functions */
+.token.entity,
+.token.function,
+.token.class-name { 
+  color: var(--sh-function); 
+}
+
+/* Variables & Regex */
+.token.atrule,
+.token.attr-value,
+.token.regex,
+.token.important,
+.token.variable { 
+  color: var(--sh-variable); 
+}
+
+/* Utilities */
+.token.important,
+.token.bold { font-weight: bold; }
+.token.italic { font-style: italic; }
+.token.entity { cursor: help; }

@@ -785,13 +785,14 @@ var {
 }
 
 /* =========================================
-   TAG PILLS (Global Styles)
+   TAG PILLS (Global Styles) - FIXED
    ========================================= */
 
 /* Applies to tags on the Tags page and within Post Items */
+/* FIX: Added :not(.token) to prevent conflict with syntax highlighting */
 .tag-list a,
 .post-tags a,
-.tag {
+.tag:not(.token) {
     display: inline-block;
     
     /* Shape */
@@ -818,7 +819,7 @@ var {
 /* Hover Effect */
 .tag-list a:hover,
 .post-tags a:hover,
-.tag:hover {
+.tag:not(.token):hover {
     transform: translateY(-2px); /* Slight lift */
     filter: brightness(1.1);     /* Slight glow */
     text-decoration: none;

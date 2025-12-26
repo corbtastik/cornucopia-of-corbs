@@ -4,805 +4,1574 @@
 
 :root {
     --transition-speed: 0.3s;
-
-    /* --- Global Defaults (Fallbacks for other themes) --- */
-    /* If a theme doesn't define these, it falls back to standard behavior */
+    /* --- Global Defaults (Fallbacks) --- */
     --heading-color: var(--text-color);
     --link-color: var(--primary-color);
     --tertiary-color: var(--border-color);
-
     /* Container Defaults */
     --primary-container-bg: var(--card-bg);
     --on-primary-container-color: var(--text-color);
-
     --secondary-container-bg: var(--card-bg);
     --on-secondary-container-color: var(--text-color);
 }
 
-/* -----------------------------------------------------------
-   0. CORBS (Refactored to match Jekyll SCSS)
-   ----------------------------------------------------------- */
+/* =========================================
+   2. BUILT-IN THEMES
+   ========================================= */
+
+/* --- Berry --- */
+html[data-theme-set="berry"][data-mode="dark"] {
+    --bg-color: #150024;
+    --text-color: #ff4da6;
+    --link-color: #6a5acd;
+    --heading-color: #d187ff;
+    --tertiary-color: #9932cc;
+    --card-bg: #24003d;
+    --search-bg: #150024;
+    --border-color: #4b0082;
+    --primary-color: #ff4da6;
+    --primary-container-bg: #24003d;
+    --on-primary-container-color: #ff4da6;
+    --secondary-container-bg: #4b0082;
+    --on-secondary-container-color: #ffffff;
+    --sh-bg: #24003d;
+    --sh-text: #ff4da6;
+    --sh-border: #4b0082;
+    --sh-keyword: #ff4da6;
+    --sh-string: #6a5acd;
+    --sh-function: #d187ff;
+    --sh-variable: #9932cc;
+    --sh-comment: #9932cc;
+    --sh-punctuation: #ff4da6;
+}
+html[data-theme-set="berry"][data-mode="light"] {
+    --bg-color: #fff0f5;
+    --text-color: #800040;
+    --link-color: #663399;
+    --heading-color: #c71585;
+    --tertiary-color: #ba55d3;
+    --card-bg: #ffffff;
+    --search-bg: #fff0f5;
+    --border-color: #ffb6c1;
+    --primary-color: #663399;
+    --primary-container-bg: #ffe6f2;
+    --on-primary-container-color: #800040;
+    --secondary-container-bg: #e6e6fa;
+    --on-secondary-container-color: #4b0082;
+    --sh-bg: #ffffff;
+    --sh-text: #800040;
+    --sh-border: #ffb6c1;
+    --sh-keyword: #663399;
+    --sh-string: #663399;
+    --sh-function: #c71585;
+    --sh-variable: #ba55d3;
+    --sh-comment: #ba55d3;
+    --sh-punctuation: #800040;
+}
+
+/* --- Blackout --- */
+html[data-theme-set="blackout"][data-mode="dark"] {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --link-color: #0091ea;
+    --heading-color: #ffffff;
+    --tertiary-color: #333333;
+    --card-bg: #000000;
+    --search-bg: #000000;
+    --border-color: #333333;
+    --primary-color: #0091ea;
+    --primary-container-bg: #000000;
+    --on-primary-container-color: #ffffff;
+    --secondary-container-bg: #0a0a0a;
+    --on-secondary-container-color: #ffffff;
+    --sh-bg: #000000;
+    --sh-text: #ffffff;
+    --sh-border: #333333;
+    --sh-keyword: #0091ea;
+    --sh-string: #0091ea;
+    --sh-function: #ffffff;
+    --sh-variable: #333333;
+    --sh-comment: #333333;
+    --sh-punctuation: #ffffff;
+}
+html[data-theme-set="blackout"][data-mode="light"] {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --link-color: #0091ea;
+    --heading-color: #000000;
+    --tertiary-color: #e0e0e0;
+    --card-bg: #ffffff;
+    --search-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --primary-color: #0091ea;
+    --primary-container-bg: #ffffff;
+    --on-primary-container-color: #000000;
+    --secondary-container-bg: #f8f8f8;
+    --on-secondary-container-color: #000000;
+    --sh-bg: #ffffff;
+    --sh-text: #000000;
+    --sh-border: #e0e0e0;
+    --sh-keyword: #0091ea;
+    --sh-string: #0091ea;
+    --sh-function: #000000;
+    --sh-variable: #e0e0e0;
+    --sh-comment: #e0e0e0;
+    --sh-punctuation: #000000;
+}
+
+/* --- Bluebonnet --- */
+html[data-theme-set="bluebonnet"][data-mode="dark"] {
+    --bg-color: #0b1026;
+    --text-color: #f0f4f8;
+    --link-color: #d946ef;
+    --heading-color: #818cf8;
+    --tertiary-color: #6b8c42;
+    --card-bg: #161b3d;
+    --search-bg: #0b1026;
+    --border-color: #4338ca;
+    --primary-color: #d946ef;
+    --primary-container-bg: #161b3d;
+    --on-primary-container-color: #f0f4f8;
+    --secondary-container-bg: #312e81;
+    --on-secondary-container-color: #e0e7ff;
+    --sh-bg: #161b3d;
+    --sh-text: #f0f4f8;
+    --sh-border: #4338ca;
+    --sh-keyword: #d946ef;
+    --sh-string: #84cc16;
+    --sh-function: #818cf8;
+    --sh-variable: #a855f7;
+    --sh-comment: #6366f1;
+    --sh-punctuation: #f0f4f8;
+}
+html[data-theme-set="bluebonnet"][data-mode="light"] {
+    --bg-color: #f8fafc;
+    --text-color: #1e1b4b;
+    --link-color: #2563eb;
+    --heading-color: #312e81;
+    --tertiary-color: #4d7c0f;
+    --card-bg: #ffffff;
+    --search-bg: #ffffff;
+    --border-color: #bfdbfe;
+    --primary-color: #2563eb;
+    --primary-container-bg: #eff6ff;
+    --on-primary-container-color: #1e3a8a;
+    --secondary-container-bg: #dbeafe;
+    --on-secondary-container-color: #172554;
+    --sh-bg: #ffffff;
+    --sh-text: #1e1b4b;
+    --sh-border: #bfdbfe;
+    --sh-keyword: #2563eb;
+    --sh-string: #4d7c0f;
+    --sh-function: #7c3aed;
+    --sh-variable: #be185d;
+    --sh-comment: #94a3b8;
+    --sh-punctuation: #1e1b4b;
+}
+
+/* --- Corbs --- */
 html[data-theme-set="corbs"][data-mode="dark"] {
-    /* Mapping SCSS $dark-primary-color (Background) */
     --bg-color: #14043a;
-
-    /* Mapping SCSS $dark-on-primary-color (Body Text) */
     --text-color: #f83a90;
-
-    /* Mapping SCSS $dark-link-color */
     --link-color: #4493ef;
-
-    /* Mapping SCSS $dark-secondary-color (Headings) */
     --heading-color: #21daff;
-
-    /* Mapping SCSS $dark-tertiary-color (Accents/Borders) */
     --tertiary-color: #ac3cf6;
-
-    /* Legacy Compat (Card BG) */
     --card-bg: #190648;
     --search-bg: #14043a;
     --border-color: #4493ef;
     --primary-color: #4493ef;
-    /* Used for outline/focus */
-
-    /* Containers */
     --primary-container-bg: #f61379;
-    /* Sidebar BG */
     --on-primary-container-color: #16004f;
-    /* Sidebar Text */
-
     --secondary-container-bg: #280873;
-    /* Blockquote BG */
     --on-secondary-container-color: #e126c5;
-    /* Blockquote Text */
+    --sh-bg: #190648;
+    --sh-text: #f83a90;
+    --sh-border: #4493ef;
+    --sh-comment: #6d5d9b;
+    --sh-punctuation: #f83a90;
+    --sh-keyword: #21daff;
+    --sh-string: #4493ef;
+    --sh-function: #ac3cf6;
+    --sh-variable: #f61379;
+    --sh-tag: #21daff;
 }
-
 html[data-theme-set="corbs"][data-mode="light"] {
-    /* Mapping SCSS $light-primary-color */
     --bg-color: #f1ecff;
-
-    /* Mapping SCSS $light-on-primary-color */
     --text-color: #3b0aa4;
-
-    /* Mapping SCSS $light-link-color */
     --link-color: #4493ef;
-
-    /* Mapping SCSS $light-secondary-color */
     --heading-color: #3389ed;
-
-    /* Mapping SCSS $light-tertiary-color */
     --tertiary-color: #ac3cf6;
-
-    /* Legacy Compat */
     --card-bg: #e9e2ff;
     --search-bg: #ffffff;
     --border-color: #3389ed;
     --primary-color: #3389ed;
-
-    /* Containers */
     --primary-container-bg: #f61379;
     --on-primary-container-color: #16004f;
-
     --secondary-container-bg: #e9e2ff;
     --on-secondary-container-color: #280873;
+    --sh-bg: #e9e2ff;
+    --sh-text: #3b0aa4;
+    --sh-border: #3389ed;
+    --sh-comment: #897aa8;
+    --sh-punctuation: #3b0aa4;
+    --sh-keyword: #f61379;
+    --sh-string: #3389ed;
+    --sh-function: #ac3cf6;
+    --sh-variable: #280873;
+    --sh-tag: #f61379;
 }
 
-/* -----------------------------------------------------------
-   0.1 BLEU (Existing themes remain unchanged)
-   ----------------------------------------------------------- */
-html[data-theme-set="bleu"][data-mode="dark"] {
-    --bg-color: #00173d;
-    --text-color: #aed8ff;
-    --primary-color: #47edff;
-    --border-color: #0c3b85;
-    --card-bg: #0c3b85;
-    --search-bg: #00173d;
-}
-
-html[data-theme-set="bleu"][data-mode="light"] {
-    --bg-color: #e3f2fd;
-    --text-color: #092a5e;
-    --primary-color: #7206b7;
-    --border-color: #bbdefb;
-    --card-bg: #c6e5fb;
-    --search-bg: #ffffff;
-}
-
-/* -----------------------------------------------------------
-   0.2 CREAM
-   ----------------------------------------------------------- */
+/* --- Cream --- */
 html[data-theme-set="cream"][data-mode="dark"] {
     --bg-color: #f0f7f6;
     --text-color: #8b1852;
-    --primary-color: #ff016e;
-    --border-color: #da2f85;
+    --link-color: #ff016e;
+    --heading-color: #da2f85;
+    --tertiary-color: #d73364;
     --card-bg: #f2b6d4;
     --search-bg: #f0f7f6;
+    --border-color: #da2f85;
+    --primary-color: #ff016e;
+    --primary-container-bg: #f2b6d4;
+    --on-primary-container-color: #791547;
+    --secondary-container-bg: #e5f1f0;
+    --on-secondary-container-color: #da4572;
+    --sh-bg: #f2b6d4;
+    --sh-text: #8b1852;
+    --sh-border: #da2f85;
+    --sh-keyword: #ff016e;
+    --sh-string: #ff016e;
+    --sh-function: #da2f85;
+    --sh-variable: #d73364;
+    --sh-comment: #d73364;
+    --sh-punctuation: #8b1852;
 }
-
 html[data-theme-set="cream"][data-mode="light"] {
     --bg-color: #f0f7f6;
     --text-color: #117e96;
-    --primary-color: #1abddf;
-    --border-color: #22c8e9;
+    --link-color: #1abddf;
+    --heading-color: #22c8e9;
+    --tertiary-color: #1bdec7;
     --card-bg: #e5f1f0;
     --search-bg: #ffffff;
+    --border-color: #22c8e9;
+    --primary-color: #1abddf;
+    --primary-container-bg: #b3f7ef;
+    --on-primary-container-color: #0b5f6f;
+    --secondary-container-bg: #e5f1f0;
+    --on-secondary-container-color: #062f38;
+    --sh-bg: #e5f1f0;
+    --sh-text: #117e96;
+    --sh-border: #22c8e9;
+    --sh-keyword: #1abddf;
+    --sh-string: #1abddf;
+    --sh-function: #22c8e9;
+    --sh-variable: #1bdec7;
+    --sh-comment: #1bdec7;
+    --sh-punctuation: #117e96;
 }
 
-/* -----------------------------------------------------------
-   0.3 DUSK
-   ----------------------------------------------------------- */
-html[data-theme-set="dusk"][data-mode="dark"] {
-    --bg-color: #20142e;
-    --text-color: #f549b3;
-    --primary-color: #b2feff;
-    --border-color: #fe6c11;
-    --card-bg: #460a5b;
-    --search-bg: #20142e;
+/* --- Grayscale --- */
+html[data-theme-set="grayscale"][data-mode="dark"] {
+    --bg-color: #121212;
+    --text-color: #d4d4d4;
+    --link-color: #89CFF0;
+    --heading-color: #ffffff;
+    --tertiary-color: #808080;
+    --card-bg: #1e1e1e;
+    --search-bg: #121212;
+    --border-color: #333333;
+    --primary-color: #89CFF0;
+    --primary-container-bg: #1e1e1e;
+    --on-primary-container-color: #d4d4d4;
+    --secondary-container-bg: #2d2d2d;
+    --on-secondary-container-color: #ffffff;
+    --sh-bg: #1e1e1e;
+    --sh-text: #d4d4d4;
+    --sh-border: #333333;
+    --sh-keyword: #89CFF0;
+    --sh-string: #89CFF0;
+    --sh-function: #ffffff;
+    --sh-variable: #808080;
+    --sh-comment: #808080;
+    --sh-punctuation: #d4d4d4;
 }
-
-html[data-theme-set="dusk"][data-mode="light"] {
-    --bg-color: #fffcfb;
-    --text-color: #20142e;
-    --primary-color: #00a0ff;
-    --border-color: #ff6d00;
-    --card-bg: #fcd9ef;
+html[data-theme-set="grayscale"][data-mode="light"] {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --link-color: #4A90E2;
+    --heading-color: #000000;
+    --tertiary-color: #bbbbbb;
+    --card-bg: #f8f9fa;
     --search-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --primary-color: #4A90E2;
+    --primary-container-bg: #f0f0f0;
+    --on-primary-container-color: #000000;
+    --secondary-container-bg: #eeeeee;
+    --on-secondary-container-color: #000000;
+    --sh-bg: #f8f9fa;
+    --sh-text: #333333;
+    --sh-border: #e0e0e0;
+    --sh-keyword: #4A90E2;
+    --sh-string: #4A90E2;
+    --sh-function: #000000;
+    --sh-variable: #bbbbbb;
+    --sh-comment: #bbbbbb;
+    --sh-punctuation: #333333;
 }
 
-/* -----------------------------------------------------------
-   0.4 GRAPE
-   ----------------------------------------------------------- */
-html[data-theme-set="grape"][data-mode="dark"] {
-    --bg-color: #390f6c;
-    --text-color: #f4edfd;
-    --primary-color: #4493ef;
-    --border-color: #8128ed;
-    --card-bg: #8128ed;
-    --search-bg: #390f6c;
+/* --- Horizon --- */
+html[data-theme-set="horizon"][data-mode="dark"] {
+    --bg-color: #1C1E26;
+    --text-color: #D5D8DA;
+    --link-color: #25B0BC;
+    --heading-color: #E95678;
+    --tertiary-color: #FAB795;
+    --card-bg: #232530;
+    --search-bg: #16161C;
+    --border-color: #2E303E;
+    --primary-color: #E95678;
+    --primary-container-bg: #232530;
+    --on-primary-container-color: #D5D8DA;
+    --secondary-container-bg: #2E303E;
+    --on-secondary-container-color: #FAB795;
+    --sh-bg: #232530;
+    --sh-text: #D5D8DA;
+    --sh-border: #2E303E;
+    --sh-keyword: #E95678;
+    --sh-string: #25B0BC;
+    --sh-function: #FAB795;
+    --sh-variable: #D5D8DA;
+    --sh-comment: #2E303E;
+    --sh-punctuation: #D5D8DA;
+}
+html[data-theme-set="horizon"][data-mode="light"] {
+    --bg-color: #FDF0ED;
+    --text-color: #1A1C23;
+    --link-color: #1D8991;
+    --heading-color: #DA103F;
+    --tertiary-color: #F6661E;
+    --card-bg: #FFFFFF;
+    --search-bg: #FADAD1;
+    --border-color: #F9CBBE;
+    --primary-color: #DA103F;
+    --primary-container-bg: #FADAD1;
+    --on-primary-container-color: #1A1C23;
+    --secondary-container-bg: #F9CBBE;
+    --on-secondary-container-color: #DA103F;
+    --sh-bg: #FFFFFF;
+    --sh-text: #1A1C23;
+    --sh-border: #F9CBBE;
+    --sh-keyword: #DA103F;
+    --sh-string: #1D8991;
+    --sh-function: #F6661E;
+    --sh-variable: #1A1C23;
+    --sh-comment: #F9CBBE;
+    --sh-punctuation: #1A1C23;
 }
 
-html[data-theme-set="grape"][data-mode="light"] {
-    --bg-color: #f4edfd;
-    --text-color: #390f6c;
-    --primary-color: #4493ef;
-    --border-color: #8128ed;
-    --card-bg: #ffffff;
+/* --- Mongo --- */
+html[data-theme-set="mongo"][data-mode="dark"] {
+    --bg-color: #001e2b;
+    --text-color: #e8f1f2;
+    --link-color: #00ed64;
+    --heading-color: #ffffff;
+    --tertiary-color: #00684a;
+    --card-bg: #0b2d3e;
+    --search-bg: #001e2b;
+    --border-color: #1e3d4a;
+    --primary-color: #00ed64;
+    --primary-container-bg: #0b2d3e;
+    --on-primary-container-color: #00ed64;
+    --secondary-container-bg: #113647;
+    --on-secondary-container-color: #ffffff;
+    --sh-bg: #06212e;
+    --sh-text: #e8f1f2;
+    --sh-border: #1e3d4a;
+    --sh-keyword: #00ed64;
+    --sh-string: #20ffb0;
+    --sh-function: #ffffff;
+    --sh-variable: #00ed64;
+    --sh-comment: #5e7f8a;
+    --sh-punctuation: #e8f1f2;
+}
+html[data-theme-set="mongo"][data-mode="light"] {
+    --bg-color: #ffffff;
+    --text-color: #001e2b;
+    --link-color: #00684a;
+    --heading-color: #001e2b;
+    --tertiary-color: #00ed64;
+    --card-bg: #f5f9fa;
     --search-bg: #ffffff;
+    --border-color: #00ed64;
+    --primary-color: #00684a;
+    --primary-container-bg: #e3fcf7;
+    --on-primary-container-color: #001e2b;
+    --secondary-container-bg: #f0f5f5;
+    --on-secondary-container-color: #00684a;
+    --sh-bg: #f9fbfb;
+    --sh-text: #001e2b;
+    --sh-border: #cbece5;
+    --sh-keyword: #00684a;
+    --sh-string: #00ed64;
+    --sh-function: #001e2b;
+    --sh-variable: #014e3d;
+    --sh-comment: #8faeb5;
+    --sh-punctuation: #001e2b;
 }
 
-/* -----------------------------------------------------------
-   0.5 NEON
-   ----------------------------------------------------------- */
-html[data-theme-set="neon"][data-mode="dark"] {
-    --bg-color: #141414;
-    --text-color: #15c4ff;
-    --primary-color: #fc00ff;
-    --border-color: #344dff;
-    --card-bg: #202020;
-    --search-bg: #141414;
-}
-
-html[data-theme-set="neon"][data-mode="light"] {
-    --bg-color: #edf2f4;
-    --text-color: #6a21eb;
-    --primary-color: #fc00ff;
-    --border-color: #ff1573;
-    --card-bg: #ffffff;
-    --search-bg: #ffffff;
-}
-
-/* -----------------------------------------------------------
-   0.6 NEWSPAPER
-   ----------------------------------------------------------- */
+/* --- Newspaper --- */
 html[data-theme-set="newspaper"][data-mode="dark"] {
     --bg-color: #141414;
     --text-color: #e0e0e0;
-    --primary-color: #f72685;
-    --border-color: #5c5c5c;
+    --link-color: #f72685;
+    --heading-color: #ffffff;
+    --tertiary-color: #999999;
     --card-bg: #1a1a1a;
     --search-bg: #000000;
+    --border-color: #5c5c5c;
+    --primary-color: #f72685;
+    --primary-container-bg: #1a1a1a;
+    --on-primary-container-color: #e0e0e0;
+    --secondary-container-bg: #252525;
+    --on-secondary-container-color: #f72685;
+    --sh-bg: #1a1a1a;
+    --sh-text: #e0e0e0;
+    --sh-border: #5c5c5c;
+    --sh-keyword: #f72685;
+    --sh-string: #f72685;
+    --sh-function: #e0e0e0;
+    --sh-variable: #5c5c5c;
+    --sh-comment: #5c5c5c;
+    --sh-punctuation: #e0e0e0;
 }
-
 html[data-theme-set="newspaper"][data-mode="light"] {
     --bg-color: #e0e0e0;
     --text-color: #0a0a0a;
-    --primary-color: #f72685;
-    --border-color: #5c5c5c;
+    --link-color: #d60064;
+    --heading-color: #000000;
+    --tertiary-color: #5c5c5c;
     --card-bg: #f5f5f5;
     --search-bg: #ffffff;
+    --border-color: #5c5c5c;
+    --primary-color: #d60064;
+    --primary-container-bg: #f5f5f5;
+    --on-primary-container-color: #0a0a0a;
+    --secondary-container-bg: #ffffff;
+    --on-secondary-container-color: #d60064;
+    --sh-bg: #f5f5f5;
+    --sh-text: #0a0a0a;
+    --sh-border: #5c5c5c;
+    --sh-keyword: #f72685;
+    --sh-string: #f72685;
+    --sh-function: #0a0a0a;
+    --sh-variable: #5c5c5c;
+    --sh-comment: #5c5c5c;
+    --sh-punctuation: #0a0a0a;
 }
 
-/* -----------------------------------------------------------
-   0.7 REVEAL
-   ----------------------------------------------------------- */
+/* --- No Style --- */
+html[data-theme-set="no-style"][data-mode="dark"] {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --link-color: #3391ff;
+    --heading-color: #ffffff;
+    --tertiary-color: #ffffff;
+    --card-bg: #000000;
+    --search-bg: #000000;
+    --border-color: #ffffff;
+    --primary-color: #3391ff;
+    --primary-container-bg: #000000;
+    --on-primary-container-color: #ffffff;
+    --secondary-container-bg: #000000;
+    --on-secondary-container-color: #ffffff;
+    --sh-bg: #000000;
+    --sh-text: #ffffff;
+    --sh-border: #ffffff;
+    --sh-keyword: #ffffff;
+    --sh-string: #ffffff;
+    --sh-function: #ffffff;
+    --sh-variable: #ffffff;
+    --sh-comment: #ffffff;
+    --sh-punctuation: #ffffff;
+}
+html[data-theme-set="no-style"][data-mode="light"] {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --link-color: #0000EE;
+    --heading-color: #000000;
+    --tertiary-color: #000000;
+    --card-bg: #ffffff;
+    --search-bg: #ffffff;
+    --border-color: #000000;
+    --primary-color: #0000EE;
+    --primary-container-bg: #ffffff;
+    --on-primary-container-color: #000000;
+    --secondary-container-bg: #ffffff;
+    --on-secondary-container-color: #000000;
+    --sh-bg: #ffffff;
+    --sh-text: #000000;
+    --sh-border: #000000;
+    --sh-keyword: #000000;
+    --sh-string: #000000;
+    --sh-function: #000000;
+    --sh-variable: #000000;
+    --sh-comment: #000000;
+    --sh-punctuation: #000000;
+}
+
+/* --- Reef --- */
+html[data-theme-set="reef"][data-mode="dark"] {
+    --bg-color: #001e2b;
+    --text-color: #00ffe5;
+    --link-color: #ff5e7e;
+    --heading-color: #00b8ff;
+    --tertiary-color: #ffd900;
+    --card-bg: #002b3d;
+    --search-bg: #001e2b;
+    --border-color: #004d6e;
+    --primary-color: #00ffe5;
+    --primary-container-bg: #002b3d;
+    --on-primary-container-color: #00ffe5;
+    --secondary-container-bg: #004d6e;
+    --on-secondary-container-color: #ff5e7e;
+    --sh-bg: #002b3d;
+    --sh-text: #00ffe5;
+    --sh-border: #004d6e;
+    --sh-keyword: #00ffe5;
+    --sh-string: #ff5e7e;
+    --sh-function: #00b8ff;
+    --sh-variable: #ffd900;
+    --sh-comment: #ffd900;
+    --sh-punctuation: #00ffe5;
+}
+html[data-theme-set="reef"][data-mode="light"] {
+    --bg-color: #f0fbff;
+    --text-color: #004d66;
+    --link-color: #ff3366;
+    --heading-color: #0099cc;
+    --tertiary-color: #ffcc00;
+    --card-bg: #ffffff;
+    --search-bg: #f0fbff;
+    --border-color: #b3e6ff;
+    --primary-color: #ff3366;
+    --primary-container-bg: #e0f7ff;
+    --on-primary-container-color: #004d66;
+    --secondary-container-bg: #b3e6ff;
+    --on-secondary-container-color: #003344;
+    --sh-bg: #ffffff;
+    --sh-text: #004d66;
+    --sh-border: #b3e6ff;
+    --sh-keyword: #ff3366;
+    --sh-string: #ff3366;
+    --sh-function: #0099cc;
+    --sh-variable: #ffcc00;
+    --sh-comment: #ffcc00;
+    --sh-punctuation: #004d66;
+}
+
+/* --- Reveal --- */
 html[data-theme-set="reveal"][data-mode="dark"] {
     --bg-color: #091129;
     --text-color: #fefcfb;
-    --primary-color: #339ff4;
-    --border-color: #ec0a6f;
+    --link-color: #339ff4;
+    --heading-color: #ec0a6f;
+    --tertiary-color: #339ff4;
     --card-bg: #033c50;
     --search-bg: #091129;
+    --border-color: #ec0a6f;
+    --primary-color: #339ff4;
+    --primary-container-bg: #033c50;
+    --on-primary-container-color: #fefcfb;
+    --secondary-container-bg: #061d33;
+    --on-secondary-container-color: #ec0a6f;
+    --sh-bg: #033c50;
+    --sh-text: #fefcfb;
+    --sh-border: #ec0a6f;
+    --sh-keyword: #339ff4;
+    --sh-string: #339ff4;
+    --sh-function: #ec0a6f;
+    --sh-variable: #ec0a6f;
+    --sh-comment: #ec0a6f;
+    --sh-punctuation: #fefcfb;
 }
-
 html[data-theme-set="reveal"][data-mode="light"] {
     --bg-color: #fefcfb;
     --text-color: #091129;
-    --primary-color: #339ff4;
-    --border-color: #f72685;
+    --link-color: #0077cc;
+    --heading-color: #f72685;
+    --tertiary-color: #339ff4;
     --card-bg: #ebfaff;
     --search-bg: #ffffff;
+    --border-color: #f72685;
+    --primary-color: #0077cc;
+    --primary-container-bg: #ebfaff;
+    --on-primary-container-color: #091129;
+    --secondary-container-bg: #ffffff;
+    --on-secondary-container-color: #f72685;
+    --sh-bg: #ebfaff;
+    --sh-text: #091129;
+    --sh-border: #f72685;
+    --sh-keyword: #339ff4;
+    --sh-string: #339ff4;
+    --sh-function: #f72685;
+    --sh-variable: #f72685;
+    --sh-comment: #f72685;
+    --sh-punctuation: #091129;
 }
 
-/* -----------------------------------------------------------
-   0.8 TERM (Includes Font Overrides)
-   ----------------------------------------------------------- */
-html[data-theme-set="term"] {
-    --font-family-primary: "Azeret Mono", monospace;
-    --font-family-secondary: "IBM Plex Mono", monospace;
-    --font-family-monospace: "Inconsolata", monospace;
+/* --- Snazzy --- */
+html[data-theme-set="snazzy"][data-mode="dark"] {
+    --bg-color: #282a36;
+    --text-color: #eff0eb;
+    --link-color: #ff6ac1;
+    --heading-color: #9aedfe;
+    --tertiary-color: #f3f99d;
+    --card-bg: #34353e;
+    --search-bg: #282a36;
+    --border-color: #57c7ff;
+    --primary-color: #ff6ac1;
+    --primary-container-bg: #34353e;
+    --on-primary-container-color: #eff0eb;
+    --secondary-container-bg: #44454d;
+    --on-secondary-container-color: #57c7ff;
+    --sh-bg: #34353e;
+    --sh-text: #eff0eb;
+    --sh-border: #57c7ff;
+    --sh-keyword: #ff6ac1;
+    --sh-string: #ff6ac1;
+    --sh-function: #9aedfe;
+    --sh-variable: #f3f99d;
+    --sh-comment: #f3f99d;
+    --sh-punctuation: #eff0eb;
 }
-
-html[data-theme-set="term"][data-mode="dark"] {
-    --bg-color: #020202;
-    --text-color: #2afe13;
-    --primary-color: #6177f5;
-    --border-color: #e502e6;
-    --card-bg: #0d0d0d;
-    --search-bg: #000000;
-}
-
-html[data-theme-set="term"][data-mode="light"] {
-    --bg-color: #e6e5e6;
-    --text-color: #020202;
-    --primary-color: #e502e6;
-    --border-color: #6177f5;
+html[data-theme-set="snazzy"][data-mode="light"] {
+    --bg-color: #fafafa;
+    --text-color: #5e5e5e;
+    --link-color: #ff5c57;
+    --heading-color: #282a36;
+    --tertiary-color: #9aedfe;
     --card-bg: #ffffff;
-    --search-bg: #ffffff;
+    --search-bg: #eff0eb;
+    --border-color: #e5e5e6;
+    --primary-color: #ff5c57;
+    --primary-container-bg: #eff0eb;
+    --on-primary-container-color: #5e5e5e;
+    --secondary-container-bg: #e2e4e5;
+    --on-secondary-container-color: #282a36;
+    --sh-bg: #ffffff;
+    --sh-text: #5e5e5e;
+    --sh-border: #e5e5e6;
+    --sh-keyword: #ff5c57;
+    --sh-string: #ff5c57;
+    --sh-function: #282a36;
+    --sh-variable: #9aedfe;
+    --sh-comment: #9aedfe;
+    --sh-punctuation: #5e5e5e;
 }
 
-/* -----------------------------------------------------------
-   0.9 YOLO
-   ----------------------------------------------------------- */
+/* --- Sunset --- */
+html[data-theme-set="sunset"][data-mode="dark"] {
+    --bg-color: #2e001f;
+    --text-color: #ffbd59;
+    --link-color: #ff66c4;
+    --heading-color: #ff5e00;
+    --tertiary-color: #ff0055;
+    --card-bg: #45002e;
+    --search-bg: #2e001f;
+    --border-color: #70004b;
+    --primary-color: #ffbd59;
+    --primary-container-bg: #45002e;
+    --on-primary-container-color: #ffbd59;
+    --secondary-container-bg: #70004b;
+    --on-secondary-container-color: #ffe6c7;
+    --sh-bg: #45002e;
+    --sh-text: #ffbd59;
+    --sh-border: #70004b;
+    --sh-keyword: #ffbd59;
+    --sh-string: #ff66c4;
+    --sh-function: #ff5e00;
+    --sh-variable: #ff0055;
+    --sh-comment: #ff0055;
+    --sh-punctuation: #ffbd59;
+}
+html[data-theme-set="sunset"][data-mode="light"] {
+    --bg-color: #fff9e6;
+    --text-color: #993300;
+    --link-color: #cc0066;
+    --heading-color: #e65c00;
+    --tertiary-color: #ffcc00;
+    --card-bg: #ffffff;
+    --search-bg: #fff9e6;
+    --border-color: #ffcc99;
+    --primary-color: #cc0066;
+    --primary-container-bg: #ffe6cc;
+    --on-primary-container-color: #993300;
+    --secondary-container-bg: #ffcc99;
+    --on-secondary-container-color: #660033;
+    --sh-bg: #ffffff;
+    --sh-text: #993300;
+    --sh-border: #ffcc99;
+    --sh-keyword: #cc0066;
+    --sh-string: #cc0066;
+    --sh-function: #e65c00;
+    --sh-variable: #ffcc00;
+    --sh-comment: #ffcc00;
+    --sh-punctuation: #993300;
+}
+
+/* --- Vice --- */
+html[data-theme-set="vice"][data-mode="dark"] {
+    --bg-color: #100b29;
+    --text-color: #ff7df9;
+    --link-color: #23d1fa;
+    --heading-color: #f5ce42;
+    --tertiary-color: #ff0055;
+    --card-bg: #1b123d;
+    --search-bg: #100b29;
+    --border-color: #ff7df9;
+    --primary-color: #23d1fa;
+    --primary-container-bg: #1b123d;
+    --on-primary-container-color: #23d1fa;
+    --secondary-container-bg: #2b1d52;
+    --on-secondary-container-color: #ff7df9;
+    --sh-bg: #1b123d;
+    --sh-text: #ff7df9;
+    --sh-border: #ff7df9;
+    --sh-keyword: #23d1fa;
+    --sh-string: #23d1fa;
+    --sh-function: #f5ce42;
+    --sh-variable: #ff0055;
+    --sh-comment: #ff0055;
+    --sh-punctuation: #ff7df9;
+}
+html[data-theme-set="vice"][data-mode="light"] {
+    --bg-color: #ffffff;
+    --text-color: #8b006d;
+    --link-color: #00a8cc;
+    --heading-color: #ff007f;
+    --tertiary-color: #ffd700;
+    --card-bg: #fdf2f9;
+    --search-bg: #ffffff;
+    --border-color: #ff9ee3;
+    --primary-color: #00a8cc;
+    --primary-container-bg: #fdf2f9;
+    --on-primary-container-color: #8b006d;
+    --secondary-container-bg: #e0f7fa;
+    --on-secondary-container-color: #0088a3;
+    --sh-bg: #fdf2f9;
+    --sh-text: #8b006d;
+    --sh-border: #ff9ee3;
+    --sh-keyword: #00a8cc;
+    --sh-string: #00a8cc;
+    --sh-function: #ff007f;
+    --sh-variable: #ffd700;
+    --sh-comment: #ffd700;
+    --sh-punctuation: #8b006d;
+}
+
+/* --- Winter Is Coming --- */
+html[data-theme-set="winter-is-coming"][data-mode="dark"] {
+    --bg-color: #011627;
+    --text-color: #a599e9;
+    --link-color: #5f7e97;
+    --heading-color: #7eebff;
+    --tertiary-color: #d19a66;
+    --card-bg: #0b2942;
+    --search-bg: #011627;
+    --border-color: #1d3b53;
+    --primary-color: #7eebff;
+    --primary-container-bg: #0b2942;
+    --on-primary-container-color: #a599e9;
+    --secondary-container-bg: #0d2538;
+    --on-secondary-container-color: #99c794;
+    --sh-bg: #0b2942;
+    --sh-text: #a599e9;
+    --sh-border: #1d3b53;
+    --sh-keyword: #7eebff;
+    --sh-string: #5f7e97;
+    --sh-function: #7eebff;
+    --sh-variable: #d19a66;
+    --sh-comment: #5f7e97;
+    --sh-punctuation: #a599e9;
+}
+html[data-theme-set="winter-is-coming"][data-mode="light"] {
+    --bg-color: #ffffff;
+    --text-color: #235e9a;
+    --link-color: #005cc5;
+    --heading-color: #0444ac;
+    --tertiary-color: #a87e53;
+    --card-bg: #f3f3f3;
+    --search-bg: #ffffff;
+    --border-color: #dcdcdc;
+    --primary-color: #005cc5;
+    --primary-container-bg: #f3f3f3;
+    --on-primary-container-color: #235e9a;
+    --secondary-container-bg: #e0e0e0;
+    --on-secondary-container-color: #2f86d2;
+    --sh-bg: #f3f3f3;
+    --sh-text: #235e9a;
+    --sh-border: #dcdcdc;
+    --sh-keyword: #005cc5;
+    --sh-string: #005cc5;
+    --sh-function: #0444ac;
+    --sh-variable: #a87e53;
+    --sh-comment: #a87e53;
+    --sh-punctuation: #235e9a;
+}
+
+/* --- Yolo --- */
 html[data-theme-set="yolo"][data-mode="dark"] {
     --bg-color: #060823;
     --text-color: #cacef7;
-    --primary-color: #4ffa7b;
-    --border-color: #bf3efd;
+    --link-color: #4ffa7b;
+    --heading-color: #f9246c;
+    --tertiary-color: #3b6afe;
     --card-bg: #251359;
     --search-bg: #060823;
+    --border-color: #bf3efd;
+    --primary-color: #4ffa7b;
+    --primary-container-bg: #251359;
+    --on-primary-container-color: #bf3efd;
+    --secondary-container-bg: #251359;
+    --on-secondary-container-color: #bf3efd;
+    --sh-bg: #251359;
+    --sh-text: #cacef7;
+    --sh-border: #bf3efd;
+    --sh-keyword: #4ffa7b;
+    --sh-string: #4ffa7b;
+    --sh-function: #f9246c;
+    --sh-variable: #3b6afe;
+    --sh-comment: #3b6afe;
+    --sh-punctuation: #cacef7;
 }
-
 html[data-theme-set="yolo"][data-mode="light"] {
     --bg-color: #dee1f7;
     --text-color: #060823;
-    --primary-color: #00ce35;
-    --border-color: #bf3efd;
+    --link-color: #00ce35;
+    --heading-color: #1042ff;
+    --tertiary-color: #f9246c;
     --card-bg: #ebefff;
     --search-bg: #ffffff;
+    --border-color: #bf3efd;
+    --primary-color: #00ce35;
+    --primary-container-bg: #ebefff;
+    --on-primary-container-color: #7e15ae;
+    --secondary-container-bg: #ebefff;
+    --on-secondary-container-color: #5d0983;
+    --sh-bg: #ebefff;
+    --sh-text: #060823;
+    --sh-border: #bf3efd;
+    --sh-keyword: #00ce35;
+    --sh-string: #00ce35;
+    --sh-function: #1042ff;
+    --sh-variable: #f9246c;
+    --sh-comment: #f9246c;
+    --sh-punctuation: #060823;
 }
 
-/* -----------------------------------------------------------
-   1. DEFAULT (GitHub Inspired)
-   ----------------------------------------------------------- */
-html[data-theme-set="default"][data-mode="dark"] {
-    --bg-color: #0d1117;
-    --text-color: #c9d1d9;
-    --primary-color: #58a6ff;
-    --border-color: #30363d;
-    --card-bg: #161b22;
-    --search-bg: #0d1117;
-}
 
-html[data-theme-set="default"][data-mode="light"] {
-    --bg-color: #ffffff;
-    --text-color: #24292f;
-    --primary-color: #0969da;
-    --border-color: #d0d7de;
-    --card-bg: #f6f8fa;
-    --search-bg: #ffffff;
-}
+/* =========================================
+   3. COMMUNITY THEMES
+   ========================================= */
 
-/* -----------------------------------------------------------
-   2. SYNTHWAVE '84
-   ----------------------------------------------------------- */
-html[data-theme-set="synthwave"][data-mode="dark"] {
-    --bg-color: #2b213a;
-    --text-color: #fffbf3;
-    --primary-color: #ff7edb;
-    --border-color: #483c6c;
-    --card-bg: #241b2f;
-    --search-bg: #262335;
-}
-
-html[data-theme-set="synthwave"][data-mode="light"] {
-    --bg-color: #f9fbff;
-    --text-color: #2b213a;
-    --primary-color: #b45bcf;
-    --border-color: #ff7edb;
-    --card-bg: #fff0f5;
-    --search-bg: #ffffff;
-}
-
-/* -----------------------------------------------------------
-   3. DRACULA
-   ----------------------------------------------------------- */
-html[data-theme-set="dracula"][data-mode="dark"] {
-    --bg-color: #282a36;
-    --text-color: #f8f8f2;
-    --primary-color: #ff79c6;
-    --border-color: #44475a;
-    --card-bg: #44475a;
-    --search-bg: #282a36;
-}
-
-html[data-theme-set="dracula"][data-mode="light"] {
-    --bg-color: #fafafa;
-    --text-color: #282a36;
-    --primary-color: #bd93f9;
-    --border-color: #dedede;
-    --card-bg: #ffffff;
-    --search-bg: #f0f0f0;
-}
-
-/* -----------------------------------------------------------
-   4. NORD
-   ----------------------------------------------------------- */
-html[data-theme-set="nord"][data-mode="dark"] {
-    --bg-color: #2e3440;
-    --text-color: #d8dee9;
-    --primary-color: #88c0d0;
-    --border-color: #434c5e;
-    --card-bg: #3b4252;
-    --search-bg: #2e3440;
-}
-
-html[data-theme-set="nord"][data-mode="light"] {
-    --bg-color: #eceff4;
-    --text-color: #2e3440;
-    --primary-color: #5e81ac;
-    --border-color: #d8dee9;
-    --card-bg: #ffffff;
-    --search-bg: #e5e9f0;
-}
-
-/* -----------------------------------------------------------
-   5. MONOKAI
-   ----------------------------------------------------------- */
-html[data-theme-set="monokai"][data-mode="dark"] {
-    --bg-color: #272822;
-    --text-color: #f8f8f2;
-    --primary-color: #a6e22e;
-    --border-color: #49483e;
-    --card-bg: #3e3d32;
-    --search-bg: #272822;
-}
-
-html[data-theme-set="monokai"][data-mode="light"] {
-    --bg-color: #fcfcfa;
-    --text-color: #272822;
-    --primary-color: #66d9ef;
-    --border-color: #e6e6e6;
-    --card-bg: #ffffff;
-    --search-bg: #f2f2f2;
-}
-
-/* -----------------------------------------------------------
-   6. SOLARIZED
-   ----------------------------------------------------------- */
-html[data-theme-set="solarized"][data-mode="dark"] {
-    --bg-color: #002b36;
-    --text-color: #93a1a1;
-    --primary-color: #b58900;
-    --border-color: #073642;
-    --card-bg: #073642;
-    --search-bg: #002b36;
-}
-
-html[data-theme-set="solarized"][data-mode="light"] {
-    --bg-color: #fdf6e3;
-    --text-color: #657b83;
-    --primary-color: #2aa198;
-    --border-color: #eee8d5;
-    --card-bg: #ffffff;
-    --search-bg: #fdf6e3;
-}
-
-/* -----------------------------------------------------------
-   7. GRUVBOX
-   ----------------------------------------------------------- */
-html[data-theme-set="gruvbox"][data-mode="dark"] {
-    --bg-color: #282828;
-    --text-color: #ebdbb2;
-    --primary-color: #fabd2f;
-    --border-color: #3c3836;
-    --card-bg: #32302f;
-    --search-bg: #1d2021;
-}
-
-html[data-theme-set="gruvbox"][data-mode="light"] {
-    --bg-color: #fbf1c7;
-    --text-color: #3c3836;
-    --primary-color: #af3a03;
-    --border-color: #d5c4a1;
-    --card-bg: #ebdbb2;
-    --search-bg: #f9f5d7;
-}
-
-/* -----------------------------------------------------------
-   8. ONE DARK (Atom)
-   ----------------------------------------------------------- */
-html[data-theme-set="onedark"][data-mode="dark"] {
-    --bg-color: #282c34;
-    --text-color: #abb2bf;
-    --primary-color: #61afef;
-    --border-color: #3e4452;
-    --card-bg: #21252b;
-    --search-bg: #282c34;
-}
-
-html[data-theme-set="onedark"][data-mode="light"] {
-    --bg-color: #fafafa;
-    --text-color: #383a42;
-    --primary-color: #4078f2;
-    --border-color: #e5e5e6;
-    --card-bg: #ffffff;
-    --search-bg: #f0f0f1;
-}
-
-/* -----------------------------------------------------------
-   9. TOKYO NIGHT
-   ----------------------------------------------------------- */
-html[data-theme-set="tokyonight"][data-mode="dark"] {
-    --bg-color: #1a1b26;
-    --text-color: #a9b1d6;
-    --primary-color: #7aa2f7;
-    --border-color: #292e42;
-    --card-bg: #24283b;
-    --search-bg: #16161e;
-}
-
-html[data-theme-set="tokyonight"][data-mode="light"] {
-    --bg-color: #e1e2e7;
-    --text-color: #343b58;
-    --primary-color: #3d59a1;
-    --border-color: #c0caf5;
-    --card-bg: #ffffff;
-    --search-bg: #d5d6db;
-}
-
-/* -----------------------------------------------------------
-   10. CATPPUCCIN
-   ----------------------------------------------------------- */
-html[data-theme-set="catppuccin"][data-mode="dark"] {
-    --bg-color: #1e1e2e;
-    --text-color: #cdd6f4;
-    --primary-color: #cba6f7;
-    --border-color: #313244;
-    --card-bg: #181825;
-    --search-bg: #1e1e2e;
-}
-
-html[data-theme-set="catppuccin"][data-mode="light"] {
-    --bg-color: #eff1f5;
-    --text-color: #4c4f69;
-    --primary-color: #8839ef;
-    --border-color: #bcc0cc;
-    --card-bg: #e6e9ef;
-    --search-bg: #ffffff;
-}
-
-/* -----------------------------------------------------------
-   11. MATERIAL PALENIGHT
-   ----------------------------------------------------------- */
-html[data-theme-set="material"][data-mode="dark"] {
-    --bg-color: #292d3e;
-    --text-color: #a6accd;
-    --primary-color: #c792ea;
-    --border-color: #434758;
-    --card-bg: #444267;
-    --search-bg: #292d3e;
-}
-
-html[data-theme-set="material"][data-mode="light"] {
-    --bg-color: #fafafa;
-    --text-color: #292d3e;
-    --primary-color: #6200ea;
-    --border-color: #e0e0e0;
-    --card-bg: #ffffff;
-    --search-bg: #f5f5f5;
-}
-
-/* -----------------------------------------------------------
-   12. CYBERPUNK
-   ----------------------------------------------------------- */
-html[data-theme-set="cyberpunk"][data-mode="dark"] {
-    --bg-color: #02040a;
-    --text-color: #00ff9f;
-    --primary-color: #ff003c;
-    --border-color: #00b8ff;
-    --card-bg: #0d0f16;
-    --search-bg: #000000;
-}
-
-html[data-theme-set="cyberpunk"][data-mode="light"] {
-    --bg-color: #fff0f5;
-    --text-color: #1a0525;
-    --primary-color: #ff0090;
-    --border-color: #00e5ff;
-    --card-bg: #ffffff;
-    --search-bg: #ffeeff;
-}
-
-/* -----------------------------------------------------------
-   13. COFFEE
-   ----------------------------------------------------------- */
-html[data-theme-set="coffee"][data-mode="dark"] {
-    --bg-color: #3c3029;
-    --text-color: #e6dccb;
-    --primary-color: #dcb386;
-    --border-color: #5c4b40;
-    --card-bg: #2e241e;
-    --search-bg: #231b16;
-}
-
-html[data-theme-set="coffee"][data-mode="light"] {
-    --bg-color: #f5f0eb;
-    --text-color: #4b3d32;
-    --primary-color: #9c7c5d;
-    --border-color: #d6c9be;
-    --card-bg: #ffffff;
-    --search-bg: #f9f5f2;
-}
-
-/* -----------------------------------------------------------
-   14. MIDNIGHT
-   ----------------------------------------------------------- */
-html[data-theme-set="midnight"][data-mode="dark"] {
-    --bg-color: #0f172a;
-    --text-color: #cbd5e1;
-    --primary-color: #38bdf8;
-    --border-color: #1e293b;
-    --card-bg: #1e293b;
-    --search-bg: #020617;
-}
-
-html[data-theme-set="midnight"][data-mode="light"] {
-    --bg-color: #f0f9ff;
-    --text-color: #0c4a6e;
-    --primary-color: #0284c7;
-    --border-color: #bae6fd;
-    --card-bg: #ffffff;
-    --search-bg: #e0f2fe;
-}
-
-/* -----------------------------------------------------------
-   15. TERMINAL (Classic)
-   ----------------------------------------------------------- */
-html[data-theme-set="terminal"][data-mode="dark"] {
-    --bg-color: #000000;
-    --text-color: #00ff00;
-    --primary-color: #00ff00;
-    --border-color: #004400;
-    --card-bg: #0a0a0a;
-    --search-bg: #000000;
-}
-
-html[data-theme-set="terminal"][data-mode="light"] {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --primary-color: #009900;
-    --border-color: #cccccc;
-    --card-bg: #eeeeee;
-    --search-bg: #ffffff;
-}
-
-/* -----------------------------------------------------------
-   16. UBUNTU
-   ----------------------------------------------------------- */
-html[data-theme-set="ubuntu"][data-mode="dark"] {
-    --bg-color: #300a24;
-    --text-color: #ffffff;
-    --primary-color: #e95420;
-    --border-color: #5e2750;
-    --card-bg: #451535;
-    --search-bg: #28081e;
-}
-
-html[data-theme-set="ubuntu"][data-mode="light"] {
-    --bg-color: #f7f7f7;
-    --text-color: #333333;
-    --primary-color: #e95420;
-    --border-color: #aea79f;
-    --card-bg: #ffffff;
-    --search-bg: #eeeeee;
-}
-
-/* -----------------------------------------------------------
-   17. SHADES OF PURPLE
-   ----------------------------------------------------------- */
-html[data-theme-set="shades-purple"][data-mode="dark"] {
-    --bg-color: #2d2b55;
-    --text-color: #ffffff;
-    --primary-color: #fad000;
-    --border-color: #494685;
-    --card-bg: #1e1e3f;
-    --search-bg: #2d2b55;
-}
-
-html[data-theme-set="shades-purple"][data-mode="light"] {
-    --bg-color: #e6e6fa;
-    --text-color: #2d2b55;
-    --primary-color: #b300b3;
-    --border-color: #d1d1f0;
-    --card-bg: #ffffff;
-    --search-bg: #f8f8ff;
-}
-
-/* -----------------------------------------------------------
-   18. ZENBURN
-   ----------------------------------------------------------- */
-html[data-theme-set="zenburn"][data-mode="dark"] {
-    --bg-color: #3f3f3f;
-    --text-color: #dcdccc;
-    --primary-color: #cc9393;
-    --border-color: #5f5f5f;
-    --card-bg: #4f4f4f;
-    --search-bg: #383838;
-}
-
-html[data-theme-set="zenburn"][data-mode="light"] {
-    --bg-color: #f0f0f0;
-    --text-color: #3f3f3f;
-    --primary-color: #8c5353;
-    --border-color: #d0d0d0;
-    --card-bg: #ffffff;
-    --search-bg: #e8e8e8;
-}
-
-/* -----------------------------------------------------------
-   19. DEEP SPACE
-   ----------------------------------------------------------- */
-html[data-theme-set="deepspace"][data-mode="dark"] {
-    --bg-color: #1b2032;
-    --text-color: #9f9f9f;
-    --primary-color: #516aec;
-    --border-color: #2a3350;
-    --card-bg: #23293f;
-    --search-bg: #151928;
-}
-
-html[data-theme-set="deepspace"][data-mode="light"] {
-    --bg-color: #f4f6fa;
-    --text-color: #333333;
-    --primary-color: #3a4b9e;
-    --border-color: #dbe0eb;
-    --card-bg: #ffffff;
-    --search-bg: #eaeef6;
-}
-
-/* -----------------------------------------------------------
-   20. MOONLIGHT
-   ----------------------------------------------------------- */
-html[data-theme-set="moonlight"][data-mode="dark"] {
-    --bg-color: #191f2e;
-    --text-color: #e4f3fa;
-    --primary-color: #82aaff;
-    --border-color: #2e3c56;
-    --card-bg: #222a3e;
-    --search-bg: #131723;
-}
-
-html[data-theme-set="moonlight"][data-mode="light"] {
-    --bg-color: #f3f6fc;
-    --text-color: #2f384b;
-    --primary-color: #4a6fa5;
-    --border-color: #c9d2e0;
-    --card-bg: #ffffff;
-    --search-bg: #e6ebf5;
-}
-
-/* -----------------------------------------------------------
-   21. NIGHT OWL
-   ----------------------------------------------------------- */
-html[data-theme-set="nightowl"][data-mode="dark"] {
-    --bg-color: #011627;
-    --text-color: #d6deeb;
-    --primary-color: #82aaff;
-    --border-color: #5f7e97;
-    --card-bg: #0b2942;
-    --search-bg: #01111d;
-}
-
-html[data-theme-set="nightowl"][data-mode="light"] {
-    --bg-color: #f0f4f8;
-    --text-color: #403f53;
-    --primary-color: #2c7c79;
-    --border-color: #d9e2ec;
-    --card-bg: #ffffff;
-    --search-bg: #e1e8ef;
-}
-
-/* -----------------------------------------------------------
-   22. PANDA
-   ----------------------------------------------------------- */
-html[data-theme-set="panda"][data-mode="dark"] {
-    --bg-color: #292a2b;
-    --text-color: #e6e6e6;
-    --primary-color: #19f9d8;
-    --border-color: #454749;
-    --card-bg: #242526;
-    --search-bg: #292a2b;
-}
-
-html[data-theme-set="panda"][data-mode="light"] {
-    --bg-color: #ffffff;
-    --text-color: #292a2b;
-    --primary-color: #00b395;
-    --border-color: #e6e6e6;
-    --card-bg: #f5f5f5;
-    --search-bg: #ffffff;
-}
-
-/* -----------------------------------------------------------
-   23. COBALT2
-   ----------------------------------------------------------- */
-html[data-theme-set="cobalt"][data-mode="dark"] {
-    --bg-color: #193549;
-    --text-color: #ffffff;
-    --primary-color: #ffc600;
-    --border-color: #15232d;
-    --card-bg: #0d222f;
-    --search-bg: #122533;
-}
-
-html[data-theme-set="cobalt"][data-mode="light"] {
-    --bg-color: #f0f7ff;
-    --text-color: #15232d;
-    --primary-color: #0088ff;
-    --border-color: #cce4ff;
-    --card-bg: #ffffff;
-    --search-bg: #e6f2ff;
-}
-
-/* -----------------------------------------------------------
-   24. AYU
-   ----------------------------------------------------------- */
+/* --- Ayu --- */
 html[data-theme-set="ayu"][data-mode="dark"] {
     --bg-color: #0f1419;
     --text-color: #e6e1cf;
-    --primary-color: #ffb454;
-    --border-color: #253340;
+    --link-color: #ffb454;
+    --heading-color: #39bae6;
+    --tertiary-color: #c2d94c;
     --card-bg: #131721;
     --search-bg: #0b0e12;
+    --border-color: #253340;
+    --primary-color: #ffb454;
+    --primary-container-bg: #131721;
+    --on-primary-container-color: #e6e1cf;
+    --secondary-container-bg: #253340;
+    --on-secondary-container-color: #ffb454;
+    --sh-bg: #131721;
+    --sh-text: #e6e1cf;
+    --sh-border: #253340;
+    --sh-keyword: #ffb454;
+    --sh-string: #ffb454;
+    --sh-function: #39bae6;
+    --sh-variable: #c2d94c;
+    --sh-comment: #c2d94c;
+    --sh-punctuation: #e6e1cf;
 }
-
 html[data-theme-set="ayu"][data-mode="light"] {
     --bg-color: #fafafa;
     --text-color: #5c6166;
-    --primary-color: #ff9940;
-    --border-color: #f0f0f0;
+    --link-color: #86b300;
+    --heading-color: #55b4d4;
+    --tertiary-color: #ff9940;
     --card-bg: #ffffff;
     --search-bg: #f5f5f5;
+    --border-color: #f0f0f0;
+    --primary-color: #ff9940;
+    --primary-container-bg: #f5f5f5;
+    --on-primary-container-color: #5c6166;
+    --secondary-container-bg: #f5f5f5;
+    --on-secondary-container-color: #5c6166;
+    --sh-bg: #ffffff;
+    --sh-text: #5c6166;
+    --sh-border: #f0f0f0;
+    --sh-keyword: #ff9940;
+    --sh-string: #ff9940;
+    --sh-function: #55b4d4;
+    --sh-variable: #86b300;
+    --sh-comment: #86b300;
+    --sh-punctuation: #5c6166;
 }
 
-/* -----------------------------------------------------------
-   25. FOREST
-   ----------------------------------------------------------- */
-html[data-theme-set="forest"][data-mode="dark"] {
-    --bg-color: #1a2f1a;
-    --text-color: #d4eac8;
-    --primary-color: #4caf50;
-    --border-color: #2e4d2e;
-    --card-bg: #223e22;
-    --search-bg: #1a2f1a;
+/* --- Bluloco --- */
+html[data-theme-set="bluloco"][data-mode="dark"] {
+    --bg-color: #282c34;
+    --text-color: #abb2bf;
+    --link-color: #10b1fe;
+    --heading-color: #f9c859;
+    --tertiary-color: #ff6480;
+    --card-bg: #343944;
+    --search-bg: #282c34;
+    --border-color: #3e4452;
+    --primary-color: #10b1fe;
+    --primary-container-bg: #343944;
+    --on-primary-container-color: #abb2bf;
+    --secondary-container-bg: #3a404c;
+    --on-secondary-container-color: #3fc56b;
+    --sh-bg: #343944;
+    --sh-text: #abb2bf;
+    --sh-border: #3e4452;
+    --sh-keyword: #10b1fe;
+    --sh-string: #10b1fe;
+    --sh-function: #f9c859;
+    --sh-variable: #ff6480;
+    --sh-comment: #ff6480;
+    --sh-punctuation: #abb2bf;
 }
-
-html[data-theme-set="forest"][data-mode="light"] {
-    --bg-color: #f1f8e9;
-    --text-color: #33691e;
-    --primary-color: #558b2f;
-    --border-color: #c5e1a5;
+html[data-theme-set="bluloco"][data-mode="light"] {
+    --bg-color: #F9F9F9;
+    --text-color: #383a42;
+    --link-color: #0098dd;
+    --heading-color: #d52753;
+    --tertiary-color: #23974a;
     --card-bg: #ffffff;
+    --search-bg: #F0F0F0;
+    --border-color: #E0E0E0;
+    --primary-color: #0098dd;
+    --primary-container-bg: #ffffff;
+    --on-primary-container-color: #383a42;
+    --secondary-container-bg: #eaeaea;
+    --on-secondary-container-color: #c5a332;
+    --sh-bg: #ffffff;
+    --sh-text: #383a42;
+    --sh-border: #E0E0E0;
+    --sh-keyword: #0098dd;
+    --sh-string: #0098dd;
+    --sh-function: #d52753;
+    --sh-variable: #23974a;
+    --sh-comment: #23974a;
+    --sh-punctuation: #383a42;
+}
+
+/* --- Catppuccin --- */
+html[data-theme-set="catppuccin"][data-mode="dark"] {
+    --bg-color: #1e1e2e;
+    --text-color: #cdd6f4;
+    --link-color: #cba6f7;
+    --heading-color: #89b4fa;
+    --tertiary-color: #f38ba8;
+    --card-bg: #181825;
+    --search-bg: #1e1e2e;
+    --border-color: #313244;
+    --primary-color: #cba6f7;
+    --primary-container-bg: #181825;
+    --on-primary-container-color: #cdd6f4;
+    --secondary-container-bg: #313244;
+    --on-secondary-container-color: #cba6f7;
+    --sh-bg: #181825;
+    --sh-text: #cdd6f4;
+    --sh-border: #313244;
+    --sh-keyword: #cba6f7;
+    --sh-string: #cba6f7;
+    --sh-function: #89b4fa;
+    --sh-variable: #f38ba8;
+    --sh-comment: #f38ba8;
+    --sh-punctuation: #cdd6f4;
+}
+html[data-theme-set="catppuccin"][data-mode="light"] {
+    --bg-color: #eff1f5;
+    --text-color: #4c4f69;
+    --link-color: #8839ef;
+    --heading-color: #1e66f5;
+    --tertiary-color: #d20f39;
+    --card-bg: #e6e9ef;
     --search-bg: #ffffff;
+    --border-color: #bcc0cc;
+    --primary-color: #8839ef;
+    --primary-container-bg: #e6e9ef;
+    --on-primary-container-color: #4c4f69;
+    --secondary-container-bg: #bcc0cc;
+    --on-secondary-container-color: #8839ef;
+    --sh-bg: #e6e9ef;
+    --sh-text: #4c4f69;
+    --sh-border: #bcc0cc;
+    --sh-keyword: #8839ef;
+    --sh-string: #8839ef;
+    --sh-function: #1e66f5;
+    --sh-variable: #d20f39;
+    --sh-comment: #d20f39;
+    --sh-punctuation: #4c4f69;
+}
+
+/* --- Cobalt --- */
+html[data-theme-set="cobalt"][data-mode="dark"] {
+    --bg-color: #193549;
+    --text-color: #ffffff;
+    --link-color: #ffc600;
+    --heading-color: #0088ff;
+    --tertiary-color: #3ad900;
+    --card-bg: #0d222f;
+    --search-bg: #122533;
+    --border-color: #15232d;
+    --primary-color: #ffc600;
+    --primary-container-bg: #0d222f;
+    --on-primary-container-color: #ffffff;
+    --secondary-container-bg: #15232d;
+    --on-secondary-container-color: #ffc600;
+    --sh-bg: #0d222f;
+    --sh-text: #ffffff;
+    --sh-border: #15232d;
+    --sh-keyword: #ffc600;
+    --sh-string: #ffc600;
+    --sh-function: #0088ff;
+    --sh-variable: #3ad900;
+    --sh-comment: #3ad900;
+    --sh-punctuation: #ffffff;
+}
+html[data-theme-set="cobalt"][data-mode="light"] {
+    --bg-color: #f0f7ff;
+    --text-color: #15232d;
+    --link-color: #00c400;
+    --heading-color: #0088ff;
+    --tertiary-color: #ffc600;
+    --card-bg: #ffffff;
+    --search-bg: #e6f2ff;
+    --border-color: #cce4ff;
+    --primary-color: #0088ff;
+    --primary-container-bg: #e6f2ff;
+    --on-primary-container-color: #15232d;
+    --secondary-container-bg: #e6f2ff;
+    --on-secondary-container-color: #15232d;
+    --sh-bg: #ffffff;
+    --sh-text: #15232d;
+    --sh-border: #cce4ff;
+    --sh-keyword: #0088ff;
+    --sh-string: #0088ff;
+    --sh-function: #ffc600;
+    --sh-variable: #00c400;
+    --sh-comment: #00c400;
+    --sh-punctuation: #15232d;
+}
+
+/* --- Deep Space --- */
+html[data-theme-set="deepspace"][data-mode="dark"] {
+    --bg-color: #1b2032;
+    --text-color: #9f9f9f;
+    --link-color: #516aec;
+    --heading-color: #b5e4f4;
+    --tertiary-color: #8a7fd5;
+    --card-bg: #23293f;
+    --search-bg: #151928;
+    --border-color: #2a3350;
+    --primary-color: #516aec;
+    --primary-container-bg: #23293f;
+    --on-primary-container-color: #9f9f9f;
+    --secondary-container-bg: #2a3350;
+    --on-secondary-container-color: #516aec;
+    --sh-bg: #23293f;
+    --sh-text: #9f9f9f;
+    --sh-border: #2a3350;
+    --sh-keyword: #516aec;
+    --sh-string: #516aec;
+    --sh-function: #b5e4f4;
+    --sh-variable: #8a7fd5;
+    --sh-comment: #8a7fd5;
+    --sh-punctuation: #9f9f9f;
+}
+html[data-theme-set="deepspace"][data-mode="light"] {
+    --bg-color: #f4f6fa;
+    --text-color: #333333;
+    --link-color: #3a4b9e;
+    --heading-color: #516aec;
+    --tertiary-color: #707a8c;
+    --card-bg: #ffffff;
+    --search-bg: #eaeef6;
+    --border-color: #dbe0eb;
+    --primary-color: #3a4b9e;
+    --primary-container-bg: #eaeef6;
+    --on-primary-container-color: #333333;
+    --secondary-container-bg: #eaeef6;
+    --on-secondary-container-color: #333333;
+    --sh-bg: #ffffff;
+    --sh-text: #333333;
+    --sh-border: #dbe0eb;
+    --sh-keyword: #3a4b9e;
+    --sh-string: #3a4b9e;
+    --sh-function: #516aec;
+    --sh-variable: #707a8c;
+    --sh-comment: #707a8c;
+    --sh-punctuation: #333333;
+}
+
+/* --- GitHub --- */
+html[data-theme-set="github"][data-mode="dark"] {
+    --bg-color: #0d1117;
+    --text-color: #c9d1d9;
+    --link-color: #58a6ff;
+    --heading-color: #ffffff;
+    --tertiary-color: #238636;
+    --card-bg: #161b22;
+    --search-bg: #0d1117;
+    --border-color: #30363d;
+    --primary-color: #58a6ff;
+    --primary-container-bg: #161b22;
+    --on-primary-container-color: #c9d1d9;
+    --secondary-container-bg: #21262d;
+    --on-secondary-container-color: #58a6ff;
+    --sh-bg: #161b22;
+    --sh-text: #c9d1d9;
+    --sh-border: #30363d;
+    --sh-keyword: #ff7b72;
+    --sh-string: #a5d6ff;
+    --sh-function: #d2a8ff;
+    --sh-variable: #ffa657;
+    --sh-comment: #8b949e;
+    --sh-punctuation: #c9d1d9;
+}
+html[data-theme-set="github"][data-mode="light"] {
+    --bg-color: #ffffff;
+    --text-color: #24292f;
+    --link-color: #0969da;
+    --heading-color: #1f2328;
+    --tertiary-color: #1a7f37;
+    --card-bg: #f6f8fa;
+    --search-bg: #ffffff;
+    --border-color: #d0d7de;
+    --primary-color: #0969da;
+    --primary-container-bg: #f6f8fa;
+    --on-primary-container-color: #24292f;
+    --secondary-container-bg: #ddf4ff;
+    --on-secondary-container-color: #0969da;
+    --sh-bg: #f6f8fa;
+    --sh-text: #24292f;
+    --sh-border: #d0d7de;
+    --sh-keyword: #d73a49;
+    --sh-string: #032f62;
+    --sh-function: #6f42c1;
+    --sh-variable: #e36209;
+    --sh-comment: #6a737d;
+    --sh-punctuation: #24292f;
+}
+
+/* --- Midnight --- */
+html[data-theme-set="midnight"][data-mode="dark"] {
+    --bg-color: #0f172a;
+    --text-color: #cbd5e1;
+    --link-color: #38bdf8;
+    --heading-color: #818cf8;
+    --tertiary-color: #c084fc;
+    --card-bg: #1e293b;
+    --search-bg: #020617;
+    --border-color: #1e293b;
+    --primary-color: #38bdf8;
+    --primary-container-bg: #1e293b;
+    --on-primary-container-color: #cbd5e1;
+    --secondary-container-bg: #334155;
+    --on-secondary-container-color: #38bdf8;
+    --sh-bg: #1e293b;
+    --sh-text: #cbd5e1;
+    --sh-border: #1e293b;
+    --sh-keyword: #38bdf8;
+    --sh-string: #38bdf8;
+    --sh-function: #818cf8;
+    --sh-variable: #c084fc;
+    --sh-comment: #c084fc;
+    --sh-punctuation: #cbd5e1;
+}
+html[data-theme-set="midnight"][data-mode="light"] {
+    --bg-color: #f0f9ff;
+    --text-color: #0c4a6e;
+    --link-color: #0284c7;
+    --heading-color: #0369a1;
+    --tertiary-color: #4f46e5;
+    --card-bg: #ffffff;
+    --search-bg: #e0f2fe;
+    --border-color: #bae6fd;
+    --primary-color: #0284c7;
+    --primary-container-bg: #e0f2fe;
+    --on-primary-container-color: #0c4a6e;
+    --secondary-container-bg: #e0f2fe;
+    --on-secondary-container-color: #0c4a6e;
+    --sh-bg: #ffffff;
+    --sh-text: #0c4a6e;
+    --sh-border: #bae6fd;
+    --sh-keyword: #0284c7;
+    --sh-string: #0284c7;
+    --sh-function: #0369a1;
+    --sh-variable: #4f46e5;
+    --sh-comment: #4f46e5;
+    --sh-punctuation: #0c4a6e;
+}
+
+/* --- Moonlight --- */
+html[data-theme-set="moonlight"][data-mode="dark"] {
+    --bg-color: #191f2e;
+    --text-color: #e4f3fa;
+    --link-color: #82aaff;
+    --heading-color: #c099ff;
+    --tertiary-color: #4fd6be;
+    --card-bg: #222a3e;
+    --search-bg: #131723;
+    --border-color: #2e3c56;
+    --primary-color: #82aaff;
+    --primary-container-bg: #222a3e;
+    --on-primary-container-color: #e4f3fa;
+    --secondary-container-bg: #2e3c56;
+    --on-secondary-container-color: #82aaff;
+    --sh-bg: #222a3e;
+    --sh-text: #e4f3fa;
+    --sh-border: #2e3c56;
+    --sh-keyword: #82aaff;
+    --sh-string: #82aaff;
+    --sh-function: #c099ff;
+    --sh-variable: #4fd6be;
+    --sh-comment: #4fd6be;
+    --sh-punctuation: #e4f3fa;
+}
+html[data-theme-set="moonlight"][data-mode="light"] {
+    --bg-color: #f3f6fc;
+    --text-color: #2f384b;
+    --link-color: #4a6fa5;
+    --heading-color: #7c8f8f;
+    --tertiary-color: #50c4aa;
+    --card-bg: #ffffff;
+    --search-bg: #e6ebf5;
+    --border-color: #c9d2e0;
+    --primary-color: #4a6fa5;
+    --primary-container-bg: #e6ebf5;
+    --on-primary-container-color: #2f384b;
+    --secondary-container-bg: #ffffff;
+    --on-secondary-container-color: #2f384b;
+    --sh-bg: #ffffff;
+    --sh-text: #2f384b;
+    --sh-border: #c9d2e0;
+    --sh-keyword: #4a6fa5;
+    --sh-string: #4a6fa5;
+    --sh-function: #7c8f8f;
+    --sh-variable: #50c4aa;
+    --sh-comment: #50c4aa;
+    --sh-punctuation: #2f384b;
+}
+
+/* --- Night Owl --- */
+html[data-theme-set="nightowl"][data-mode="dark"] {
+    --bg-color: #011627;
+    --text-color: #d6deeb;
+    --link-color: #82aaff;
+    --heading-color: #ecc48d;
+    --tertiary-color: #addb67;
+    --card-bg: #0b2942;
+    --search-bg: #01111d;
+    --border-color: #5f7e97;
+    --primary-color: #82aaff;
+    --primary-container-bg: #0b2942;
+    --on-primary-container-color: #d6deeb;
+    --secondary-container-bg: #0b2942;
+    --on-secondary-container-color: #d6deeb;
+    --sh-bg: #0b2942;
+    --sh-text: #d6deeb;
+    --sh-border: #5f7e97;
+    --sh-keyword: #82aaff;
+    --sh-string: #82aaff;
+    --sh-function: #ecc48d;
+    --sh-variable: #addb67;
+    --sh-comment: #addb67;
+    --sh-punctuation: #d6deeb;
+}
+html[data-theme-set="nightowl"][data-mode="light"] {
+    --bg-color: #f0f4f8;
+    --text-color: #403f53;
+    --link-color: #2c7c79;
+    --heading-color: #ba5d2f;
+    --tertiary-color: #09949a;
+    --card-bg: #ffffff;
+    --search-bg: #e1e8ef;
+    --border-color: #d9e2ec;
+    --primary-color: #2c7c79;
+    --primary-container-bg: #e1e8ef;
+    --on-primary-container-color: #403f53;
+    --secondary-container-bg: #ffffff;
+    --on-secondary-container-color: #403f53;
+    --sh-bg: #ffffff;
+    --sh-text: #403f53;
+    --sh-border: #d9e2ec;
+    --sh-keyword: #2c7c79;
+    --sh-string: #2c7c79;
+    --sh-function: #ba5d2f;
+    --sh-variable: #09949a;
+    --sh-comment: #09949a;
+    --sh-punctuation: #403f53;
+}
+
+/* --- Nord --- */
+html[data-theme-set="nord"][data-mode="dark"] {
+    --bg-color: #2e3440;
+    --text-color: #d8dee9;
+    --link-color: #88c0d0;
+    --heading-color: #81a1c1;
+    --tertiary-color: #ebcb8b;
+    --card-bg: #3b4252;
+    --search-bg: #2e3440;
+    --border-color: #434c5e;
+    --primary-color: #88c0d0;
+    --primary-container-bg: #3b4252;
+    --on-primary-container-color: #d8dee9;
+    --secondary-container-bg: #434c5e;
+    --on-secondary-container-color: #88c0d0;
+    --sh-bg: #3b4252;
+    --sh-text: #d8dee9;
+    --sh-border: #434c5e;
+    --sh-keyword: #88c0d0;
+    --sh-string: #88c0d0;
+    --sh-function: #81a1c1;
+    --sh-variable: #ebcb8b;
+    --sh-comment: #ebcb8b;
+    --sh-punctuation: #d8dee9;
+}
+html[data-theme-set="nord"][data-mode="light"] {
+    --bg-color: #eceff4;
+    --text-color: #2e3440;
+    --link-color: #5e81ac;
+    --heading-color: #bf616a;
+    --tertiary-color: #a3be8c;
+    --card-bg: #ffffff;
+    --search-bg: #e5e9f0;
+    --border-color: #d8dee9;
+    --primary-color: #5e81ac;
+    --primary-container-bg: #e5e9f0;
+    --on-primary-container-color: #2e3440;
+    --secondary-container-bg: #d8dee9;
+    --on-secondary-container-color: #5e81ac;
+    --sh-bg: #ffffff;
+    --sh-text: #2e3440;
+    --sh-border: #d8dee9;
+    --sh-keyword: #5e81ac;
+    --sh-string: #5e81ac;
+    --sh-function: #bf616a;
+    --sh-variable: #a3be8c;
+    --sh-comment: #a3be8c;
+    --sh-punctuation: #2e3440;
+}
+
+/* --- One Dark --- */
+html[data-theme-set="onedark"][data-mode="dark"] {
+    --bg-color: #282c34;
+    --text-color: #abb2bf;
+    --link-color: #61afef;
+    --heading-color: #e06c75;
+    --tertiary-color: #98c379;
+    --card-bg: #21252b;
+    --search-bg: #282c34;
+    --border-color: #3e4452;
+    --primary-color: #61afef;
+    --primary-container-bg: #21252b;
+    --on-primary-container-color: #abb2bf;
+    --secondary-container-bg: #3e4452;
+    --on-secondary-container-color: #61afef;
+    --sh-bg: #21252b;
+    --sh-text: #abb2bf;
+    --sh-border: #3e4452;
+    --sh-keyword: #61afef;
+    --sh-string: #61afef;
+    --sh-function: #e06c75;
+    --sh-variable: #98c379;
+    --sh-comment: #98c379;
+    --sh-punctuation: #abb2bf;
+}
+html[data-theme-set="onedark"][data-mode="light"] {
+    --bg-color: #fafafa;
+    --text-color: #383a42;
+    --link-color: #4078f2;
+    --heading-color: #e45649;
+    --tertiary-color: #50a14f;
+    --card-bg: #ffffff;
+    --search-bg: #f0f0f1;
+    --border-color: #e5e5e6;
+    --primary-color: #4078f2;
+    --primary-container-bg: #f0f0f1;
+    --on-primary-container-color: #383a42;
+    --secondary-container-bg: #f0f0f1;
+    --on-secondary-container-color: #383a42;
+    --sh-bg: #ffffff;
+    --sh-text: #383a42;
+    --sh-border: #e5e5e6;
+    --sh-keyword: #4078f2;
+    --sh-string: #4078f2;
+    --sh-function: #e45649;
+    --sh-variable: #50a14f;
+    --sh-comment: #50a14f;
+    --sh-punctuation: #383a42;
+}
+
+/* --- Panda --- */
+html[data-theme-set="panda"][data-mode="dark"] {
+    --bg-color: #292a2b;
+    --text-color: #e6e6e6;
+    --link-color: #19f9d8;
+    --heading-color: #ff75b5;
+    --tertiary-color: #ffb86c;
+    --card-bg: #242526;
+    --search-bg: #292a2b;
+    --border-color: #454749;
+    --primary-color: #19f9d8;
+    --primary-container-bg: #242526;
+    --on-primary-container-color: #e6e6e6;
+    --secondary-container-bg: #454749;
+    --on-secondary-container-color: #19f9d8;
+    --sh-bg: #242526;
+    --sh-text: #e6e6e6;
+    --sh-border: #454749;
+    --sh-keyword: #19f9d8;
+    --sh-string: #19f9d8;
+    --sh-function: #ff75b5;
+    --sh-variable: #ffb86c;
+    --sh-comment: #ffb86c;
+    --sh-punctuation: #e6e6e6;
+}
+html[data-theme-set="panda"][data-mode="light"] {
+    --bg-color: #ffffff;
+    --text-color: #292a2b;
+    --link-color: #00b395;
+    --heading-color: #d12e6d;
+    --tertiary-color: #b08d00;
+    --card-bg: #f5f5f5;
+    --search-bg: #ffffff;
+    --border-color: #e6e6e6;
+    --primary-color: #00b395;
+    --primary-container-bg: #f5f5f5;
+    --on-primary-container-color: #292a2b;
+    --secondary-container-bg: #f5f5f5;
+    --on-secondary-container-color: #292a2b;
+    --sh-bg: #f5f5f5;
+    --sh-text: #292a2b;
+    --sh-border: #e6e6e6;
+    --sh-keyword: #00b395;
+    --sh-string: #00b395;
+    --sh-function: #d12e6d;
+    --sh-variable: #b08d00;
+    --sh-comment: #b08d00;
+    --sh-punctuation: #292a2b;
+}
+
+/* --- Synthwave '84 --- */
+html[data-theme-set="synthwave"][data-mode="dark"] {
+    --bg-color: #2b213a;
+    --text-color: #fffbf3;
+    --link-color: #ff7edb;
+    --heading-color: #36f9f6;
+    --tertiary-color: #f97e72;
+    --card-bg: #241b2f;
+    --search-bg: #262335;
+    --border-color: #483c6c;
+    --primary-color: #ff7edb;
+    --primary-container-bg: #241b2f;
+    --on-primary-container-color: #fffbf3;
+    --secondary-container-bg: #483c6c;
+    --on-secondary-container-color: #36f9f6;
+    --sh-bg: #241b2f;
+    --sh-text: #fffbf3;
+    --sh-border: #483c6c;
+    --sh-keyword: #ff7edb;
+    --sh-string: #ff7edb;
+    --sh-function: #36f9f6;
+    --sh-variable: #f97e72;
+    --sh-comment: #f97e72;
+    --sh-punctuation: #fffbf3;
+}
+html[data-theme-set="synthwave"][data-mode="light"] {
+    --bg-color: #f9fbff;
+    --text-color: #2b213a;
+    --link-color: #b45bcf;
+    --heading-color: #ff7edb;
+    --tertiary-color: #36f9f6;
+    --card-bg: #fff0f5;
+    --search-bg: #ffffff;
+    --border-color: #ff7edb;
+    --primary-color: #b45bcf;
+    --primary-container-bg: #fff0f5;
+    --on-primary-container-color: #2b213a;
+    --secondary-container-bg: #f4f2fc;
+    --on-secondary-container-color: #1b7d7c;
+    --sh-bg: #fff0f5;
+    --sh-text: #2b213a;
+    --sh-border: #ff7edb;
+    --sh-keyword: #b45bcf;
+    --sh-string: #b45bcf;
+    --sh-function: #ff7edb;
+    --sh-variable: #36f9f6;
+    --sh-comment: #36f9f6;
+    --sh-punctuation: #2b213a;
+}
+
+/* --- Tokyo Night --- */
+html[data-theme-set="tokyonight"][data-mode="dark"] {
+    --bg-color: #1a1b26;
+    --text-color: #a9b1d6;
+    --link-color: #7aa2f7;
+    --heading-color: #bb9af7;
+    --tertiary-color: #9ece6a;
+    --card-bg: #24283b;
+    --search-bg: #16161e;
+    --border-color: #292e42;
+    --primary-color: #7aa2f7;
+    --primary-container-bg: #24283b;
+    --on-primary-container-color: #a9b1d6;
+    --secondary-container-bg: #414868;
+    --on-secondary-container-color: #7aa2f7;
+    --sh-bg: #24283b;
+    --sh-text: #a9b1d6;
+    --sh-border: #292e42;
+    --sh-keyword: #7aa2f7;
+    --sh-string: #7aa2f7;
+    --sh-function: #bb9af7;
+    --sh-variable: #9ece6a;
+    --sh-comment: #9ece6a;
+    --sh-punctuation: #a9b1d6;
+}
+html[data-theme-set="tokyonight"][data-mode="light"] {
+    --bg-color: #e1e2e7;
+    --text-color: #343b58;
+    --link-color: #3d59a1;
+    --heading-color: #8c4351;
+    --tertiary-color: #485e30;
+    --card-bg: #ffffff;
+    --search-bg: #d5d6db;
+    --border-color: #c0caf5;
+    --primary-color: #3d59a1;
+    --primary-container-bg: #c0caf5;
+    --on-primary-container-color: #343b58;
+    --secondary-container-bg: #ccced4;
+    --on-secondary-container-color: #343b58;
+    --sh-bg: #ffffff;
+    --sh-text: #343b58;
+    --sh-border: #c0caf5;
+    --sh-keyword: #3d59a1;
+    --sh-string: #3d59a1;
+    --sh-function: #8c4351;
+    --sh-variable: #485e30;
+    --sh-comment: #485e30;
+    --sh-punctuation: #343b58;
 }
