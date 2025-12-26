@@ -153,6 +153,28 @@ Tables are great for structured data.
 
 ---
 
+## YouTube Videos
+
+{% youtube "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "My Favorite Song" %}
+
+Or just the URL without a title:
+
+{% youtube "https://youtu.be/dQw4w9WgXcQ" %}
+
+---
+
+## GitHub Gists
+
+Option 1: Embed the whole Gist
+
+{% gist "https://gist.github.com/corbtastik/5c77562ad919f08a171f6f3f4d4a6849" %}
+
+Option 2: Embed a specific file from a Gist
+(Useful if a Gist contains multiple files)
+
+{% gist "https://gist.github.com/corbtastik/5c77562ad919f08a171f6f3f4d4a6849", "mongodb-deployment.yaml" %}
+
+
 ## Other Elements
 
 ### Horizontal Rules
