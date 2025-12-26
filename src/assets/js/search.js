@@ -1,48 +1,5 @@
 /* =========================================
-   1. ADVANCED THEMING LOGIC
-   ========================================= */
-const themeToggleBtn = document.getElementById('theme-toggle');
-const themeSelect = document.getElementById('theme-select');
-const rootElement = document.documentElement;
-
-// 1. Load saved settings or defaults
-const savedMode = localStorage.getItem('mode') || 'dark';
-const savedThemeSet = localStorage.getItem('theme-set') || 'default';
-
-// 2. Apply settings immediately
-rootElement.setAttribute('data-mode', savedMode);
-rootElement.setAttribute('data-theme-set', savedThemeSet);
-
-// 3. Update UI controls to match state
-themeToggleBtn.textContent = savedMode === 'light' ? 'Dark Mode' : 'Light Mode';
-if (themeSelect) {
-    themeSelect.value = savedThemeSet;
-}
-
-// 4. Toggle Mode (Dark/Light)
-themeToggleBtn.addEventListener('click', () => {
-    const currentMode = rootElement.getAttribute('data-mode');
-    const newMode = currentMode === 'light' ? 'dark' : 'light';
-
-    rootElement.setAttribute('data-mode', newMode);
-    localStorage.setItem('mode', newMode);
-    
-    // Update Button Text
-    themeToggleBtn.textContent = newMode === 'light' ? 'Dark Mode' : 'Light Mode';
-});
-
-// 5. Change Theme Set (Default/Ocean/Forest)
-if (themeSelect) {
-    themeSelect.addEventListener('change', (e) => {
-        const newSet = e.target.value;
-        rootElement.setAttribute('data-theme-set', newSet);
-        localStorage.setItem('theme-set', newSet);
-    });
-}
-
-
-/* =========================================
-   2. INSTANT SEARCH LOGIC
+   SEARCH LOGIC (Theming moved to base.njk)
    ========================================= */
 let searchIndex = [];
 
@@ -106,7 +63,7 @@ function displayResults(matches) {
         
         // Format Tags (if any)
         const tagsHtml = post.tags.length 
-            ? `<br><small style="opacity: 0.7;">Tags: ${post.tags.join(', ')}</small>` 
+            ? `<br><div class="post-tags" style="margin-top:0.5rem; font-size: 0.8em;">${post.tags.map(tag => `<span class="tag" style="pointer-events:none;">#${tag}</span>`).join('')}</div>` 
             : '';
 
         // Safe Date

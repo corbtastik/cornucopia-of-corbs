@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" data-mode="dark" data-theme-set="default">
+<html lang="en"> <!-- Removed hardcoded data-mode/data-theme-set to prevent flash -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} | DevBlog</title>
     
+    <!-- 0. THEME BLOCKING SCRIPT (Prevents Flash of Incorrect Theme) -->
+    <script>
+        (function() {
+            // Check localStorage or fallback to default
+            // These keys now match the bottom script exactly
+            const savedTheme = localStorage.getItem('theme-set') || 'default';
+            const savedMode = localStorage.getItem('theme-mode') || 'dark';
+            
+            // Apply immediately before the body renders
+            document.documentElement.setAttribute('data-theme-set', savedTheme);
+            document.documentElement.setAttribute('data-mode', savedMode);
+        })();
+    </script>
+
     <!-- 1. Normalize/Reset (Load this FIRST) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css">
 
@@ -141,5 +155,30 @@
     <script src="/assets/js/code-toolbar.js"></script>
     <script src="/assets/js/lightbox.js"></script>
     <script src="/assets/js/sidebar.js"></script>
+    
+    <!-- Theme Logic (Handles UI toggles and localStorage) -->
+    <script>
+        const themeSelect = document.getElementById('theme-select');
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Set UI to match current state (read from HTML tag set by head script)
+        themeSelect.value = html.getAttribute('data-theme-set');
+        themeToggle.innerText = html.getAttribute('data-mode') === 'dark' ? 'Light Mode' : 'Dark Mode';
+
+        themeSelect.addEventListener('change', (e) => {
+            const set = e.target.value;
+            html.setAttribute('data-theme-set', set);
+            localStorage.setItem('theme-set', set);
+        });
+
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-mode');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-mode', next);
+            localStorage.setItem('theme-mode', next);
+            themeToggle.innerText = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+        });
+    </script>
 </body>
 </html>
