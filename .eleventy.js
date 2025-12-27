@@ -69,6 +69,42 @@ module.exports = function(eleventyConfig) {
         `;
     });
 
+    // GALLERY SHORTCODE
+    // Usage: {% gallery myDataArray %}
+    eleventyConfig.addShortcode("gallery", function(photos) {
+        if (!photos || !Array.isArray(photos)) {
+        return ""; // Fail silently if data is missing
+        }
+
+        // Generate the HTML string
+        let html = '<div class="masonry-grid">';
+        
+        photos.forEach(photo => {
+        // Handle fallbacks if some fields are missing in the Front Matter
+        const src = photo.src;
+        const thumb = photo.thumb || photo.src; // Use full src if no thumb provided
+        const caption = photo.caption || "";
+        const alt = photo.alt || caption || "Gallery Image";
+        
+        html += `
+            <div class="gallery-item">
+            <img 
+                src="${thumb}" 
+                data-full-src="${src}" 
+                alt="${alt}" 
+                loading="lazy" 
+                class="lightbox-trigger"
+                data-caption="${caption}"
+            />
+            ${caption ? `<div class="overlay"><span>${caption}</span></div>` : ''}
+            </div>
+        `;
+        });
+
+        html += '</div>';
+        return html;
+    });
+
     return {
         dir: {
             input: "src",
