@@ -86,12 +86,12 @@ html[data-theme-set="blackout"][data-mode="dark"] {
     --on-secondary-container-color: #ffffff;
     --sh-bg: #000000;
     --sh-text: #ffffff;
-    --sh-border: #333333;
+    --sh-border: #666666;
     --sh-keyword: #0091ea;
     --sh-string: #0091ea;
     --sh-function: #ffffff;
-    --sh-variable: #333333;
-    --sh-comment: #333333;
+    --sh-variable: #666666;
+    --sh-comment: #666666;
     --sh-punctuation: #ffffff;
 }
 html[data-theme-set="blackout"][data-mode="light"] {
@@ -99,10 +99,10 @@ html[data-theme-set="blackout"][data-mode="light"] {
     --text-color: #000000;
     --link-color: #0091ea;
     --heading-color: #000000;
-    --tertiary-color: #e0e0e0;
+    --tertiary-color: #969696;
     --card-bg: #ffffff;
     --search-bg: #ffffff;
-    --border-color: #e0e0e0;
+    --border-color: #969696;
     --primary-color: #0091ea;
     --primary-container-bg: #ffffff;
     --on-primary-container-color: #000000;
@@ -110,12 +110,12 @@ html[data-theme-set="blackout"][data-mode="light"] {
     --on-secondary-container-color: #000000;
     --sh-bg: #ffffff;
     --sh-text: #000000;
-    --sh-border: #e0e0e0;
+    --sh-border: #969696;
     --sh-keyword: #0091ea;
     --sh-string: #0091ea;
     --sh-function: #000000;
-    --sh-variable: #e0e0e0;
-    --sh-comment: #e0e0e0;
+    --sh-variable: #969696;
+    --sh-comment: #969696;
     --sh-punctuation: #000000;
 }
 
@@ -521,6 +521,70 @@ html[data-theme-set="no-style"][data-mode="light"] {
     --sh-punctuation: #000000;
 }
 
+/* --- PORKY THEME (Neon Pig) --- */
+
+/* DARK MODE: Deep Void Red background, Electric Cyan & Hot Pink Neon */
+html[data-theme-set="porky"][data-mode="dark"] {
+    --bg-color: #0f0204;                 /* The deep black/red void behind the sign */
+    --text-color: #ffcce6;               /* Pale pink glow for readability */
+    --link-color: #00f2ff;               /* Electric Cyan from the sunglasses rim */
+    --heading-color: #ff0055;            /* Hot Neon Pink from the pig outline */
+    --tertiary-color: #7a4dff;           /* Purple/Blue from the sunglasses lens */
+    
+    --card-bg: #1f050a;                  /* Slightly lighter dark red for cards */
+    --search-bg: #0f0204;
+    --border-color: #ff0055;             /* Neon Pink borders */
+    
+    --primary-color: #00f2ff;            /* Cyan action buttons */
+    --primary-container-bg: #1f050a;     /* Sidebar background */
+    --on-primary-container-color: #00f2ff; /* Cyan text on sidebar */
+    
+    --secondary-container-bg: #2d0814;   /* Blockquotes/Tags background */
+    --on-secondary-container-color: #ffcce6;
+    
+    /* Syntax Highlighting */
+    --sh-bg: #1f050a;
+    --sh-text: #ffcce6;
+    --sh-border: #ff0055;
+    --sh-keyword: #00f2ff;               /* Cyan keywords */
+    --sh-string: #ff80ab;                /* Pink strings */
+    --sh-function: #ffffff;              /* White highlights */
+    --sh-variable: #7a4dff;              /* Purple variables */
+    --sh-comment: #9e9e9e;
+    --sh-punctuation: #ff0055;
+}
+
+/* LIGHT MODE: Candy Shop Vibe - White/Pink background, Darker Pink/Teal text */
+html[data-theme-set="porky"][data-mode="light"] {
+    --bg-color: #fff0f5;                 /* Lavender Blush (Very pale pink) */
+    --text-color: #4a0a18;               /* Dark Burgundy for high contrast text */
+    --link-color: #008c9e;               /* Darker Teal for links (readable on white) */
+    --heading-color: #d40045;            /* Deep Pink/Red headings */
+    --tertiary-color: #5236a0;           /* Deep Purple accents */
+    
+    --card-bg: #ffffff;                  /* Clean white cards */
+    --search-bg: #ffffff;
+    --border-color: #ff80ab;             /* Soft pink borders */
+    
+    --primary-color: #008c9e;            /* Teal primary actions */
+    --primary-container-bg: #ffffff;
+    --on-primary-container-color: #d40045; /* Pink text on sidebar */
+    
+    --secondary-container-bg: #ffe0eb;   /* Light pink container for tags */
+    --on-secondary-container-color: #4a0a18;
+    
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #4a0a18;
+    --sh-border: #ff80ab;
+    --sh-keyword: #008c9e;
+    --sh-string: #d40045;
+    --sh-function: #5236a0;
+    --sh-variable: #d40045;
+    --sh-comment: #999999;
+    --sh-punctuation: #4a0a18;
+}
+
 /* --- Reef --- */
 html[data-theme-set="reef"][data-mode="dark"] {
     --bg-color: #001e2b;
@@ -551,7 +615,7 @@ html[data-theme-set="reef"][data-mode="light"] {
     --text-color: #004d66;
     --link-color: #ff3366;
     --heading-color: #0099cc;
-    --tertiary-color: #ffcc00;
+    --tertiary-color: #a28100;
     --card-bg: #ffffff;
     --search-bg: #f0fbff;
     --border-color: #b3e6ff;
@@ -566,8 +630,8 @@ html[data-theme-set="reef"][data-mode="light"] {
     --sh-keyword: #ff3366;
     --sh-string: #ff3366;
     --sh-function: #0099cc;
-    --sh-variable: #ffcc00;
-    --sh-comment: #ffcc00;
+    --sh-variable: #a28100;
+    --sh-comment: #a28100;
     --sh-punctuation: #004d66;
 }
 
