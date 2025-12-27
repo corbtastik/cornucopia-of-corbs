@@ -110,7 +110,8 @@
     </header>
     
     <main>
-        <div id="content-wrapper">
+        <!-- Ensure content is wrapped in a class JS can find (for TOC generation) -->
+        <div id="content-wrapper" class="post-content">
             {{ content | safe }}
         </div>
 
@@ -127,29 +128,57 @@
     <!-- LIGHTBOX CONTAINER (Hidden) -->
     <!-- The JS will fill this automatically with buttons and images -->
     <div id="lightbox"></div>
+    
+    <!-- SIDEBAR & OVERLAY -->
     <div id="sidebar-overlay"></div>
-    <aside id="sidebar">
+    
+    <aside id="sidebar" class="sidebar">
+        <!-- 1. TOP: Header & Home Link -->
         <div class="sidebar-header">
-            <a href="/" class="logo-link" aria-label="Home">
-                <img src="https://placehold.co/100x100/eee/333?text=Logo" alt="Site Logo" class="site-logo">
-            </a>
-            <button id="close-sidebar">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
+            <div class="logo-row">
+                <a href="/" class="logo-link" aria-label="Home">
+                    <img src="https://placehold.co/100x100/eee/333?text=Logo" alt="Site Logo" class="site-logo">
+                </a>
+                <button id="close-sidebar" aria-label="Close Sidebar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            
+            <div class="sidebar-separator"></div>
+            
+            <nav class="sidebar-nav-top">
+                <a href="/" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
+            </nav>
+            
+            <div class="sidebar-separator"></div>
         </div>
-        <nav class="sidebar-nav">
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-            <a href="/tags/">Tags</a>
-            <a href="/archive/">Archive</a>
-            <!-- Add more Pages here -->
-        </nav>
+
+        <!-- 2. MIDDLE: Dynamic Table of Contents (Only visible on posts) -->
+        <div class="sidebar-toc" id="toc-container">
+            <!-- UPDATED: Removed the "Contents" label text -->
+            {% if '/posts/' in page.inputPath %}
+                <ul id="toc-list"></ul>
+            {% endif %}
+        </div>
+
+        <!-- 3. BOTTOM: Footer Links -->
+        <div class="sidebar-footer">
+            <div class="sidebar-separator"></div>
+            <nav class="sidebar-nav-bottom">
+                <a href="/archive/" class="nav-link">Archive</a>
+                <a href="/tags/" class="nav-link">Tags</a>
+                <a href="/about/" class="nav-link">About</a>
+                <!-- Add more Pages here -->
+            </nav>
+        </div>
     </aside>
 
+    <!-- SCRIPTS -->
     <script src="/assets/js/search.js"></script>
     <script src="/assets/js/code-toolbar.js"></script>
     <script src="/assets/js/lightbox.js"></script>
     <script src="/assets/js/sidebar.js"></script>
+    <script src="/assets/js/toc.js" defer></script> <!-- Added TOC Script -->
     
     <!-- Theme Logic (Handles UI toggles and localStorage) -->
     <script>

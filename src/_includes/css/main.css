@@ -548,8 +548,8 @@ img { max-width: 100%; height: auto; border-radius: 6px; }
     color: var(--link-color);
 }
 
-/* --- The Sidebar (Hidden by default) --- */
-#sidebar {
+/* --- UPDATED SIDEBAR LOGIC (Step 2) --- */
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
@@ -561,15 +561,152 @@ img { max-width: 100%; height: auto; border-radius: 6px; }
     z-index: 2000; /* Above everything */
     transform: translateX(-100%); /* Hide off-screen left */
     transition: transform 0.3s ease-in-out;
+    
+    /* Flexbox Layout for Top/Middle/Bottom */
     display: flex;
     flex-direction: column;
     padding: 20px;
     box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+    overflow: hidden;
 }
 
-#sidebar.active {
+/* Keep the ID selector for JS compatibility */
+#sidebar.active, .sidebar.active {
     transform: translateX(0); /* Slide in */
 }
+
+/* 1. Sidebar Header (Fixed at top) */
+.sidebar-header {
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.logo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#close-sidebar {
+    background: transparent;
+    border: none;
+    color: var(--on-primary-container-color);
+    cursor: pointer;
+}
+
+/* 2. TOC Section (The Middle - Grows to fill space) */
+.sidebar-toc {
+    flex-grow: 1; 
+    overflow-y: auto; /* Scrollable if TOC is long */
+    margin: 10px 0;
+    padding-right: 5px; 
+}
+
+/* Hide scrollbar for cleaner look */
+.sidebar-toc::-webkit-scrollbar { width: 4px; }
+.sidebar-toc::-webkit-scrollbar-thumb { background: var(--tertiary-color); opacity: 0.5; }
+
+.toc-header {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--tertiary-color);
+    margin-bottom: 0.8rem;
+    margin-top: 0;
+}
+
+#toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#toc-list li {
+    margin-bottom: 0.4rem;
+}
+
+#toc-list a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--on-primary-container-color);
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    display: block;
+    
+    /* This border takes up 2px space */
+    border-left: 2px solid transparent; 
+}
+
+/* Hover & Active States */
+#toc-list a:hover,
+#toc-list a.active {
+    opacity: 1;
+    color: var(--link-color);
+    border-left-color: var(--link-color);
+}
+
+/* --- INDENTATION LEVELS (Recalibrated) --- */
+
+/* H1: Align perfectly with Home Link (10px total offset) */
+/* Calculation: 2px border + 8px padding = 10px visual start */
+#toc-list li.toc-h1 a {
+    padding-left: 8px; 
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-top: 10px; /* Slight separation from Home link */
+}
+
+/* H2: Indent ~15px from H1 */
+#toc-list li.toc-h2 a {
+    padding-left: 23px; /* 8px + 15px */
+}
+
+/* H3: Indent ~15px from H2 */
+#toc-list li.toc-h3 a {
+    padding-left: 38px; /* 23px + 15px */
+    font-size: 0.85rem;
+}
+
+/* H4: Indent ~15px from H3 */
+#toc-list li.toc-h4 a {
+    padding-left: 53px; /* 38px + 15px */
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* 3. Footer Section (Fixed at bottom) */
+.sidebar-footer {
+    flex-shrink: 0;
+    margin-top: 10px;
+}
+
+/* Shared: Separator Lines */
+.sidebar-separator {
+    height: 1px;
+    background-image: linear-gradient(to right, var(--on-primary-container-color) 40%, transparent 40%);
+    background-size: 6px 1px; /* Dashed effect */
+    background-repeat: repeat-x;
+    margin: 1rem 0;
+    opacity: 0.3;
+}
+
+/* Shared: Navigation Links */
+.nav-link {
+    display: block;
+    padding: 8px 10px;
+    color: var(--on-primary-container-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: var(--font-family-secondary);
+    transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--link-color);
+}
+
 
 /* Sidebar Overlay (Darkens background) */
 #sidebar-overlay {
@@ -589,51 +726,6 @@ img { max-width: 100%; height: auto; border-radius: 6px; }
 #sidebar-overlay.active {
     display: block;
     opacity: 1;
-}
-
-/* Sidebar Contents */
-.sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    border-bottom: 2px dashed var(--on-primary-container-color);
-    padding-bottom: 15px;
-}
-
-.sidebar-header h3 {
-    margin: 0;
-    font-family: var(--font-family-primary);
-    color: var(--on-primary-container-color);
-}
-
-#close-sidebar {
-    background: transparent;
-    border: none;
-    color: var(--on-primary-container-color);
-    cursor: pointer;
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.sidebar-nav a {
-    text-decoration: none;
-    color: var(--on-primary-container-color);
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 6px;
-    transition: background 0.2s, color 0.2s;
-    font-family: var(--font-family-secondary);
-}
-
-.sidebar-nav a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: var(--tertiary-color);
 }
 
 /* =========================================
