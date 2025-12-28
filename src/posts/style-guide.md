@@ -91,6 +91,7 @@ body {
 Here is a sample image with alt text and a title.
 
 ![A placeholder image of a mountain landscape](https://placehold.co/600x400/EEE/31343C?text=Sample+Image)
+
 *Figure: This is a caption for the image above.*
 
 ### Standard Image
@@ -101,6 +102,7 @@ Here is a sample image with alt text and a title.
 
 ### Image with Caption
 ![Abstract Art](https://placehold.co/400x400/9b59b6/ffffff?text=Abstract+Art)
+
 *Figure 1: An example of abstract placeholder art.*
 
 ### HTML Image (sized to 200px wide)
