@@ -1,25 +1,31 @@
 /**
  * src/assets/js/toc.js
- * Generates Table of Contents for the Sidebar with H1-H4 support
+ * Generates Table of Contents for both Side Rail and Inline Dropdown
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Target the specific container
-    const tocList = document.getElementById('toc-list');
-    const contentArea = document.querySelector('.post-content'); 
+    // 1. Target the specific containers
+    const sideTocList = document.getElementById('toc-list');
+    const inlineTocList = document.getElementById('inline-toc-list');
+    
+    // Support either class or ID for content wrapper
+    const contentArea = document.querySelector('.post-content') || document.getElementById('content-wrapper');
 
-    if (!tocList || !contentArea) return;
+    if (!contentArea) return;
 
-    // 2. Find Headers (Updated to include H1 - H4)
+    // 2. Find Headers (H2 - H4)
     const headers = contentArea.querySelectorAll('h2, h3, h4');
     
+    // Handle empty state: Hide wrappers if no headers found
     if (headers.length === 0) {
-        const container = document.getElementById('toc-container');
-        if (container) container.style.display = 'none';
+        const sideWrapper = document.querySelector('.toc-col');
+        const inlineWrapper = document.querySelector('.inline-toc');
+        if (sideWrapper) sideWrapper.style.display = 'none';
+        if (inlineWrapper) inlineWrapper.style.display = 'none';
         return;
     }
 
-    // 3. Build the List
+    // 3. Build the Lists
     headers.forEach((header, index) => {
         // A. Ensure every header has an ID
         if (!header.id) {
@@ -32,48 +38,77 @@ document.addEventListener('DOMContentLoaded', () => {
             header.id = slug || `section-${index}`;
         }
 
-        // B. Create List Item
-        const li = document.createElement('li');
-        const link = document.createElement('a');
-        
-        link.href = `#${header.id}`;
-        link.textContent = header.textContent;
-        
-        // C. Apply Indentation Classes Dynamically
-        // This will create classes: toc-h1, toc-h2, toc-h3, toc-h4
+        // B. Define hierarchy class
         const tagName = header.tagName.toLowerCase();
-        li.classList.add(`toc-${tagName}`);
+        const className = `toc-${tagName}`;
 
-        li.appendChild(link);
-        tocList.appendChild(li);
+        // C. Helper Function to create a list item
+        const createItem = (isInline) => {
+            const li = document.createElement('li');
+            li.classList.add(className);
+            
+            const link = document.createElement('a');
+            link.href = `#${header.id}`;
+            link.textContent = header.textContent;
+
+            // Click Handler for Smooth Scroll & UI interaction
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                // If clicking from the Inline Dropdown, close the <details> element
+                if (isInline) {
+                    const details = document.getElementById('inline-toc-container');
+                    if (details) details.removeAttribute('open');
+                }
+
+                // Smooth Scroll to target
+                header.scrollIntoView({ behavior: 'smooth' });
+
+                // Push history state without jumping
+                history.pushState(null, null, `#${header.id}`);
+            });
+
+            li.appendChild(link);
+            return li;
+        };
+
+        // D. Append to Side List (if exists)
+        if (sideTocList) {
+            sideTocList.appendChild(createItem(false));
+        }
+
+        // E. Append to Inline List (if exists)
+        if (inlineTocList) {
+            inlineTocList.appendChild(createItem(true));
+        }
     });
 
-    // 4. ScrollSpy
-    const observerOptions = {
-        root: null,
-        // Top: -100px (Ignore the area covered by the sticky header)
-        // Bottom: -80% (Ignore the bottom 80% of screen)
-        // This forces the "Active Zone" to be a narrow strip near the top.
-        rootMargin: '-100px 0px -80% 0px', 
-        threshold: 0
-    };
+    // 4. ScrollSpy (Only needed for the Side Rail to highlight active position)
+    if (sideTocList) {
+        const observerOptions = {
+            root: null,
+            // Top: -100px (Ignore sticky header area)
+            // Bottom: -80% (Focus on top part of screen)
+            rootMargin: '-100px 0px -80% 0px', 
+            threshold: 0
+        };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const allLinks = tocList.querySelectorAll('a');
-                allLinks.forEach(a => a.classList.remove('active'));
-                
-                const id = entry.target.getAttribute('id');
-                const activeLink = tocList.querySelector(`a[href="#${id}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                    // Optional: keep active link in view
-                    // activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove active class from all links
+                    sideTocList.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                    
+                    // Add active class to current link
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = sideTocList.querySelector(`a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
                 }
-            }
-        });
-    }, observerOptions);
+            });
+        }, observerOptions);
 
-    headers.forEach(header => observer.observe(header));
+        headers.forEach(header => observer.observe(header));
+    }
 });

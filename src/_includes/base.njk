@@ -109,25 +109,31 @@
     </header>
     
     <!-- MAIN CONTAINER -->
-    <!-- LOGIC: 
-         1. Check if it's a post ('/posts/' in path)
-         2. AND Check if the Global Feature Flag (site.enable_toc) is TRUE 
-    -->
     <main class="{% if '/posts/' in page.inputPath and site.enable_toc %}layout-with-toc side-{{ toc_side | default('right') }}{% endif %}">
         
+        <!-- 0. Inline TOC (Collapsible Dropdown for smaller screens) -->
+        <!-- Only render if Post + Global Flag is ON -->
+        {% if '/posts/' in page.inputPath and site.enable_toc %}
+        <details id="inline-toc-container" class="inline-toc">
+            <summary class="inline-toc-summary">
+                On this page
+                <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <ul id="inline-toc-list"></ul> <!-- JS fills this -->
+        </details>
+        {% endif %}
+
         <!-- 1. The Article Content -->
-        <!-- Note: We keep 'content-col' class even if TOC is off; CSS handles it gracefully -->
         <div id="content-wrapper" class="post-content content-col">
             {{ content | safe }}
         </div>
 
-        <!-- 2. The Sticky TOC Column -->
-        <!-- SAME LOGIC: Only render if Post + Global Flag is ON -->
+        <!-- 2. The Sticky TOC Column (Desktop Only) -->
         {% if '/posts/' in page.inputPath and site.enable_toc %}
         <aside class="toc-col">
             <div class="toc-sticky-wrapper">
                 <p class="toc-header">On This Page</p>
-                <ul id="toc-list"></ul>
+                <ul id="toc-list"></ul> <!-- JS fills this -->
             </div>
         </aside>
         {% endif %}
@@ -210,6 +216,21 @@
             localStorage.setItem('theme-mode', next);
             themeToggle.innerText = next === 'dark' ? 'Light Mode' : 'Dark Mode';
         });
+    </script>
+    <!-- DYNAMIC HEADER HEIGHT SCRIPT -->
+    <script>
+        function updateHeaderHeight() {
+            const header = document.querySelector('header');
+            if (header) {
+                const height = header.getBoundingClientRect().height;
+                document.documentElement.style.setProperty('--header-height-real', height + 'px');
+            }
+        }
+        // Run on load and resize
+        window.addEventListener('load', updateHeaderHeight);
+        window.addEventListener('resize', updateHeaderHeight);
+        // Run immediately to catch initial render
+        updateHeaderHeight();
     </script>
 </body>
 </html>
