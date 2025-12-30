@@ -1,15 +1,17 @@
 ---
 layout: base.njk
 title: Photography
+description: "A collection of photos."
+mainClass: "wide-layout" 
 ---
+  
+<h1 style="margin-bottom: 2rem;">{{ title }}</h1>
 
 <div class="gallery-container">
-  <!-- The Grid Container -->
   <div class="masonry-grid" id="gallery-grid">
     
     {% for photo in gallery %}
-      <div class="gallery-item" 
-           style="--aspect-ratio: {{ photo.aspectRatio }}">
+      <div class="gallery-item" style="--aspect-ratio: {{ photo.aspectRatio }}">
         
         <img 
           src="{{ photo.thumb }}" 
@@ -23,7 +25,6 @@ title: Photography
           data-source="{{ photo.source }}"
         />
         
-        <!-- Optional Overlay/Hover info -->
         <div class="overlay">
           <span>{{ photo.source }}</span>
         </div>

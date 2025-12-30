@@ -3,7 +3,6 @@ title: "OrbStack and MongoDB"
 gdate: 2025-12-28
 tags: ["tutorial", "orbstack", "mongodb", "docker", "database"]
 description: "How to run a secure, persistent MongoDB Community instance on using OrbStack."
-layout: base.njk
 ---
 
 In [Part 1](/posts/orbstack-getting-started), we covered how to get OrbStack up and running with ephemeral containers. Now, let's build something you can actually use for development: a persistent **MongoDB** database.

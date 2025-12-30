@@ -3,7 +3,6 @@ title: "Theme Showcase"
 date: 2025-12-25
 tags: ["demo", "features", "theme"]
 description: "A live visualization of the currently selected theme's palette, typography, and UI components."
-layout: base.njk
 ---
 
 This page is **live**. Use the **Theme Dropdown** in the header to change the theme. Watch how the specific Corbs-theme variables (like Containers and Tertiary colors) update instantly.

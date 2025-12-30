@@ -3,7 +3,6 @@ title: "Getting Started with OrbStack on macOS"
 gdate: 2025-12-28
 tags: ["macos", "devops", "docker", "kubernetes", "orbstack"]
 description: "A fast, lightweight guide to replacing Docker Desktop with OrbStack for containers, Linux VMs, and Kubernetes."
-layout: base.njk
 toc_side: left
 ---
 

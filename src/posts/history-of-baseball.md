@@ -3,7 +3,6 @@ title: "A Look at Baseball History"
 date: 2025-12-25 09:00:00
 tags: ["history", "sports", "data", "americana"]
 description: "From the Knickerbocker Rules to Moneyball, exploring the data and soul of America's Pastime."
-layout: base.njk
 ---
 
 ## The Myth and The Reality

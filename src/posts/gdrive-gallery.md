@@ -1,7 +1,6 @@
 ---
 title: "GDrive Gallery"
 date: 2025-12-27
-layout: base.njk
 tags: ["photography", "archive", "travel"]
 description: "A collection of photos from Google Drive."
 

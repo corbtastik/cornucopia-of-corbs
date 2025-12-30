@@ -4,10 +4,9 @@ layout: base.njk
 description: "Browse posts by topic."
 ---
 
-<h1>Topics</h1>
+<h1>Tags</h1>
 
-<!-- 1. List of all tags at the top for quick navigation -->
-<!-- Added 'tag-list' class (optional) and removed inline styles from links -->
+<!-- 1. Tag Cloud / Navigation -->
 <div class="tag-list" style="margin-bottom: 40px;">
 {% for tag, posts in collections %}
   {% if tag != "all" and tag != "posts" %}
@@ -25,21 +24,17 @@ description: "Browse posts by topic."
   {% if tag != "all" and tag != "posts" %}
     
     <section id="{{ tag }}" style="margin-bottom: 60px;">
-      <!-- Updated Header to match theme colors better -->
-      <h2>
-        #{{ tag }}
-      </h2>
+      <!-- Header -->
+      <h2>#{{ tag }}</h2>
 
-      <ul class="simple-list">
+      <!-- Replaced custom HTML with the standard component -->
+      <ul class="post-list">
         {% for post in posts | reverse %}
-          <li class="simple-item">
-            <div class="simple-header">
-                <h3 style="margin: 0;">
-                    <a href="{{ post.url }}">{{ post.data.title }}</a>
-                </h3>
-                <span class="simple-date">{{ post.date.toISOString().slice(0, 10) }}</span>
-            </div>
-          </li>
+          
+          {# Pass hide_tags to keep the list clean, since we are already inside a specific tag section #}
+          {% set hide_tags = true %}
+          {% include "components/post-item.njk" %}
+        
         {% endfor %}
       </ul>
     </section>

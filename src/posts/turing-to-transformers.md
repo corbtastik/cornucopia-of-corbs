@@ -3,7 +3,6 @@ title: "Turing to Transformers"
 date: 2025-12-25 10:00:00
 tags: ["ai", "tech", "history", "future"]
 description: "Tracing the evolution of Artificial Intelligence from 1950 to the Agentic era."
-layout: base.njk
 ---
 
 ## The Imitation Game

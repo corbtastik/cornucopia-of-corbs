@@ -3,7 +3,6 @@ title: "Cracking the Bat"
 date: 2025-12-25 10:00:00
 tags: ["baseball", "analytics", "math", "dev"]
 description: "A guide to understanding and calculating essential baseball batting statistics using custom CSS formulas."
-layout: base.njk
 ---
 
 Whether you are looking at a Hall of Famer's plaque or a modern analytical dashboard, baseball statistics can look like alphabet soup. To build a better understanding of the game, let's break down the definitions and formulas behind the most common batting stats.

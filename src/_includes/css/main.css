@@ -465,20 +465,21 @@ body .gist-wrapper .gist-data { background: #fff; }
 
 /* --- XL: Widescreen Mode (>= 1280px) --- */
 @media (min-width: 1280px) {
-    main { padding: 2rem 3rem; margin-top: 0; }
+    /* Allow main to be wider when we have a TOC */
+    main.main-expanded {
+        max-width: 1400px;
+        padding: 2rem 3rem;
+    }
     
     h1, h2, h3, h4, h5, h6 { scroll-margin-top: 100px; }
 
-    main.layout-with-toc {
+    /* Apply Grid to the Wrapper, not just Main */
+    .layout-with-toc {
         display: grid;
         grid-template-columns: minmax(0, 1fr) var(--toc-width);
-        gap: 3rem; max-width: 1400px; 
+        gap: 3rem; 
+        width: 100%;
     }
     .inline-toc { display: none; }
     .toc-col { display: block; }
-}
-
-/* --- 2XL: Extra Wide (>= 1536px) --- */
-@media (min-width: 1536px) {
-    main.layout-with-toc { max-width: 1600px; }
 }

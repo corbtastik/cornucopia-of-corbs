@@ -3,7 +3,6 @@ title: "Yolo Blog"
 date: 2025-12-25 12:00:00
 tags: ["meta", "11ty", "guide", "features"]
 description: "A comprehensive guide to the features, architecture, and developer workflow of this blog engine."
-layout: base.njk
 ---
 
 Welcome to **Corbs Blog v2.0**. This isn't just a static site; it's a feature-rich content engine built on [Eleventy](https://www.11ty.dev/). Over the last few sessions, we have transformed a basic template into a fully responsive, theme-able, and interactive platform.

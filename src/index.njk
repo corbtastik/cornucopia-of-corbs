@@ -10,36 +10,17 @@ pagination:
 
 <ul class="post-list">
 {% for post in posts %}
-  <li class="post-item">
-    <!-- Header Row: Title & Date -->
-    <div class="post-header">
-        <h2 style="font-size: 1.5rem;">
-            <a href="{{ post.url }}">{{ post.data.title }}</a>
-        </h2>
-        <!-- Display date only (YYYY-MM-DD) -->
-        <span class="post-date">{{ post.date.toISOString().slice(0, 10) }}</span>
-    </div>
-
-    <p>{{ post.data.description }}</p>
-
-    <div class="post-tags">
-    {% for tag in post.data.tags %}
-        <a href="/tags/#{{ tag | slug }}">#{{ tag }}</a>
-    {% endfor %}
-    </div>
-  </li>
+    {% include "components/post-item.njk" %}
 {% endfor %}
 </ul>
 
 <div class="pagination">
-    <!-- Left Side: Go back to Newer content (Previous Page) -->
     {% if pagination.href.previous %}
         <a href="{{ pagination.href.previous }}"><<< Newer</a>
     {% else %}
-        <span></span> <!-- Empty spacer to keep alignment correct -->
+        <span></span>
     {% endif %}
 
-    <!-- Right Side: Go forward to Older content (Next Page) -->
     {% if pagination.href.next %}
         <a href="{{ pagination.href.next }}">Older >>></a>
     {% else %}

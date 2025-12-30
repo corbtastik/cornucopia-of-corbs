@@ -3,7 +3,6 @@ title: "Gallery Component Demo"
 date: 2025-12-27
 tags: ["photography", "demo"]
 description: "A demonstration of the custom gallery shortcode using 25 sample images."
-layout: base.njk
 # We define the data array right here in the Front Matter
 # The shortcode {% gallery post_images %} will read this list.
 post_images:

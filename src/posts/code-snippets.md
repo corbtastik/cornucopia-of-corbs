@@ -3,7 +3,6 @@ title: "Code Snippets"
 date: 2025-12-25 10:00:00
 tags: ["code", "syntax-highlighting"]
 description: "Code Snippets for Syntax Highlighting showcase"
-layout: base.njk
 ---
 
 ### Bash

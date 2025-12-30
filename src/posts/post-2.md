@@ -3,7 +3,6 @@ title: "My Second Markdown Post"
 date: 2025-12-24
 tags: ["setup", "coding"]
 description: "How I set up my environment."
-layout: base.njk
 ---
 
 ## Hello World 2

@@ -1,7 +1,7 @@
 ---
 title: "About Me"
-layout: base.njk
 description: "A little bit about the developer behind the code."
+layout: "base.njk"
 ---
 
 ## Hi, I'm You.

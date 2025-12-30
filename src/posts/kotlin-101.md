@@ -3,7 +3,6 @@ title: "Kotlin 101"
 gdate: 2025-12-28
 tags: ["tutorial", "kotlin", "programming", "backend"]
 description: "A comprehensive guide to learning the Kotlin programming language by building a real-world CLI tool."
-layout: base.njk
 ---
 
 Welcome to **Kotlin 101**. If you are coming from Java, Python, or even if this is your first foray into statically typed languages, you are in for a treat. Kotlin has rapidly become one of the most beloved languages in the industry because it manages to be concise without being cryptic, and safe without being restrictive.

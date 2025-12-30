@@ -3,7 +3,6 @@ title: "MongoDB Oh Yeah"
 date: 2025-12-26 10:00:00
 tags: ["database", "mongodb", "cloud", "backend"]
 description: "Moving beyond rows and columns: Understanding the power of the Document Model and the ease of Atlas."
-layout: base.njk
 ---
 
 ## The Problem with Rigid Schemas

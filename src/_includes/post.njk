@@ -1,0 +1,32 @@
+---
+layout: base.njk
+load_toc_script: true
+mainClass: "main-expanded"
+wrapperClass: "layout-with-toc"
+---
+
+<!-- 1. Inline TOC (Mobile) -->
+{% if site.enable_toc %}
+<details id="inline-toc-container" class="inline-toc">
+    <summary class="inline-toc-summary">
+        On this page
+        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </summary>
+    <ul id="inline-toc-list"></ul>
+</details>
+{% endif %}
+
+<!-- 2. The Content Text -->
+<div class="post-content content-col">
+    {{ content | safe }}
+</div>
+
+<!-- 3. The Sticky TOC (Desktop) -->
+{% if site.enable_toc %}
+<aside class="toc-col">
+    <div class="toc-sticky-wrapper">
+        <p class="toc-header">On This Page</p>
+        <ul id="toc-list"></ul>
+    </div>
+</aside>
+{% endif %}

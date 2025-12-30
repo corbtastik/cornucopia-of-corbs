@@ -1,33 +1,24 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Removed hardcoded data-mode/data-theme-set to prevent flash -->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} | DevBlog</title>
     
-    <!-- 0. THEME BLOCKING SCRIPT (Prevents Flash of Incorrect Theme) -->
     <script>
         (function() {
-            // Check localStorage or fallback to default
-            // These keys now match the bottom script exactly
             const savedTheme = localStorage.getItem('theme-set') || 'corbs';
             const savedMode = localStorage.getItem('theme-mode') || 'dark';
-            
-            // Apply immediately before the body renders
             document.documentElement.setAttribute('data-theme-set', savedTheme);
             document.documentElement.setAttribute('data-mode', savedMode);
         })();
     </script>
 
-    <!-- 1. Normalize/Reset (Load this FIRST) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css">
-
-    <!-- 2. Dynamic Font Configuration -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="{{ fonts.url }}" rel="stylesheet">
     
-    <!-- 3. Inject Configured Fonts as CSS Variables -->
     <style>
         :root {
             --font-family-primary: {{ fonts.primary | safe }};
@@ -36,33 +27,24 @@
         }
     </style>
 
-    <!-- 4. Your Custom Styles (Load this LAST to override defaults) -->
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <header>
         <nav class="site-nav">
-            <!-- 1. Left Group (Hamburger + Logo) -->
             <div class="nav-left">
                 <button id="menu-btn" aria-label="Open Menu">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </button>
-                
                 <a href="/" class="logo-link" aria-label="Home">
                     <img src="https://placehold.co/100x100/eee/333?text=Logo" alt="Site Logo" class="site-logo">
                 </a>
             </div>
             
-            <!-- 2. Search -->
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search posts, tags, date..." autocomplete="off">
+                <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
             </div>
 
-            <!-- 3. Controls -->
             <div class="theme-controls">
                 <select id="theme-select" class="theme-select" aria-label="Select Theme">
                     <optgroup label="Built-In Themes">
@@ -102,43 +84,24 @@
                         <option value="tokyonight">Tokyo Night</option>
                     </optgroup>                        
                 </select>
-
                 <button id="theme-toggle" class="theme-btn">Light Mode</button>
             </div>
         </nav>
     </header>
     
     <!-- MAIN CONTAINER -->
-    <main class="{% if '/posts/' in page.inputPath and site.enable_toc %}layout-with-toc side-{{ toc_side | default('right') }}{% endif %}">
+    <!-- 'mainClass' handles the width of the main container (e.g. making it wider for posts) -->
+    <main class="{{ mainClass }}">
         
-        <!-- 0. Inline TOC (Collapsible Dropdown for smaller screens) -->
-        <!-- Only render if Post + Global Flag is ON -->
-        {% if '/posts/' in page.inputPath and site.enable_toc %}
-        <details id="inline-toc-container" class="inline-toc">
-            <summary class="inline-toc-summary">
-                On this page
-                <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </summary>
-            <ul id="inline-toc-list"></ul> <!-- JS fills this -->
-        </details>
-        {% endif %}
-
-        <!-- 1. The Article Content -->
-        <div id="content-wrapper" class="post-content content-col">
+        <!-- CONTENT WRAPPER -->
+        <!-- This ID allows search.js to hide the page content. -->
+        <!-- 'wrapperClass' allows post.njk to turn this div into a CSS Grid for the TOC. -->
+        <div id="content-wrapper" class="{{ wrapperClass }}">
             {{ content | safe }}
         </div>
 
-        <!-- 2. The Sticky TOC Column (Desktop Only) -->
-        {% if '/posts/' in page.inputPath and site.enable_toc %}
-        <aside class="toc-col">
-            <div class="toc-sticky-wrapper">
-                <p class="toc-header">On This Page</p>
-                <ul id="toc-list"></ul> <!-- JS fills this -->
-            </div>
-        </aside>
-        {% endif %}
-
-        <!-- Search Results -->
+        <!-- SEARCH RESULTS -->
+        <!-- Sibling to content-wrapper, so it stays visible when content is hidden. -->
         <div id="search-results-wrapper" style="display: none;">
             <h2>Search Results</h2>
             <ul id="search-results-list" class="post-list"></ul>
@@ -149,34 +112,22 @@
         <p>© 2025 Built with AI and Love</p>
     </footer>
 
-    <!-- LIGHTBOX CONTAINER (Hidden) -->
-    <!-- The JS will fill this automatically with buttons and images -->
+    <!-- GLOBAL UI ELEMENTS -->
     <div id="lightbox"></div>
-    
-    <!-- SIDEBAR & OVERLAY -->
     <div id="sidebar-overlay"></div>
     
-    <!-- SIDEBAR (Left Navigation) -->
-    <!-- NOTE: We REMOVED the middle TOC section from here so it moves to the main view -->
     <aside id="sidebar" class="sidebar">
         <div class="sidebar-header">
             <div class="logo-row">
-                <a href="/" class="logo-link" aria-label="Home">
+                <a href="/" class="logo-link">
                     <img src="https://placehold.co/100x100/eee/333?text=Logo" alt="Site Logo" class="site-logo">
                 </a>
-                <button id="close-sidebar" aria-label="Close Sidebar">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
+                <button id="close-sidebar"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
             </div>
             <div class="sidebar-separator"></div>
-            <nav class="sidebar-nav-top">
-                <a href="/" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
-            </nav>
+            <nav class="sidebar-nav-top"><a href="/" class="nav-link">Home</a></nav>
             <div class="sidebar-separator"></div>
         </div>
-
-        <!-- TOC WAS HERE - NOW REMOVED -->
-
         <div class="sidebar-footer">
             <nav class="sidebar-nav-bottom">
                 <a href="/archive/" class="nav-link">Archive</a>
@@ -186,27 +137,27 @@
         </div>
     </aside>
 
-    <!-- SCRIPTS -->
     <script src="/assets/js/search.js"></script>
     <script src="/assets/js/code-toolbar.js"></script>
     <script src="/assets/js/lightbox.js"></script>
     <script src="/assets/js/sidebar.js"></script>
-    <script src="/assets/js/toc.js" defer></script> <!-- Added TOC Script -->
     
-    <!-- Theme Logic (Handles UI toggles and localStorage) -->
+    {% if load_toc_script %}
+    <script src="/assets/js/toc.js" defer></script>
+    {% endif %}
+    
+    <!-- Theme & Header Logic -->
     <script>
         const themeSelect = document.getElementById('theme-select');
         const themeToggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
 
-        // Set UI to match current state (read from HTML tag set by head script)
         themeSelect.value = html.getAttribute('data-theme-set');
         themeToggle.innerText = html.getAttribute('data-mode') === 'dark' ? 'Light Mode' : 'Dark Mode';
 
         themeSelect.addEventListener('change', (e) => {
-            const set = e.target.value;
-            html.setAttribute('data-theme-set', set);
-            localStorage.setItem('theme-set', set);
+            html.setAttribute('data-theme-set', e.target.value);
+            localStorage.setItem('theme-set', e.target.value);
         });
 
         themeToggle.addEventListener('click', () => {
@@ -216,20 +167,13 @@
             localStorage.setItem('theme-mode', next);
             themeToggle.innerText = next === 'dark' ? 'Light Mode' : 'Dark Mode';
         });
-    </script>
-    <!-- DYNAMIC HEADER HEIGHT SCRIPT -->
-    <script>
+
         function updateHeaderHeight() {
             const header = document.querySelector('header');
-            if (header) {
-                const height = header.getBoundingClientRect().height;
-                document.documentElement.style.setProperty('--header-height-real', height + 'px');
-            }
+            if (header) document.documentElement.style.setProperty('--header-height-real', header.getBoundingClientRect().height + 'px');
         }
-        // Run on load and resize
         window.addEventListener('load', updateHeaderHeight);
         window.addEventListener('resize', updateHeaderHeight);
-        // Run immediately to catch initial render
         updateHeaderHeight();
     </script>
 </body>
