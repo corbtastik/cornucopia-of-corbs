@@ -1,6 +1,6 @@
 ---
 title: "OrbStack and MongoDB"
-gdate: 2025-12-28
+date: 2025-12-28
 tags: ["tutorial", "orbstack", "mongodb", "docker", "database"]
 description: "How to run a secure, persistent MongoDB Community instance on using OrbStack."
 ---

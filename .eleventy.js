@@ -84,7 +84,7 @@ module.exports = function(eleventyConfig) {
         const src = photo.src;
         const thumb = photo.thumb || photo.src; // Use full src if no thumb provided
         const caption = photo.caption || "";
-        const alt = photo.alt || caption || "Gallery Image";
+        const alt = photo.alt || caption || " ";
         
         html += `
             <div class="gallery-item">

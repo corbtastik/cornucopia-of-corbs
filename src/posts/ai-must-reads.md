@@ -1,6 +1,6 @@
 ---
 title: "Must-Read AI Blog Posts: OpenAI + Google DeepMind"
-gdate: 2025-12-30
+date: 2025-12-30
 tags: ["ai", "reading-list", "openai", "google-deepmind", "llms", "genai"]
 description: "A curated, high-signal reading list of official OpenAI and Google DeepMind/Google AI posts (models, evals, safety, and developer tooling)."
 ---

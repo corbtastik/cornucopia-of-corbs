@@ -1,6 +1,6 @@
 ---
 title: "Bash One Pager"
-gdate: 2025-12-27
+date: 2025-12-27
 tags: ["tutorial", "bash", "linux"]
 description: "A little ditty about bash"
 ---

@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Logic: Use 'data-full-src' (Portfolio) -> Fallback to 'src' (Style Guide)
     const fullSrc = currentTrigger.dataset.fullSrc || currentTrigger.src;
     const caption = currentTrigger.dataset.caption || currentTrigger.alt || '';
-    const alt = currentTrigger.alt || 'Gallery Image';
+    const alt = currentTrigger.alt || '';
 
     if (imgElement) {
       imgElement.src = fullSrc;

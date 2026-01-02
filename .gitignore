@@ -14,3 +14,6 @@ Thumbs.db
 # Editor directories
 .vscode/
 .idea/
+
+# This is a local cache folder containing temporary build data and authentication tokens. It should stay local.
+.firebase/

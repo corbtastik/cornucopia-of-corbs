@@ -30,7 +30,6 @@
 .gallery-item {
   break-inside: avoid;
   margin-bottom: 1.5rem;
-  background-color: var(--card-bg, #ffffff);
   border: none; 
   border-radius: 8px; 
   overflow: hidden;
@@ -41,7 +40,7 @@
 
 .gallery-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0,0,0, 0.15);
+  /* box-shadow: 0 10px 20px rgba(0,0,0, 0.15); */
 }
 
 .gallery-item img {
@@ -58,7 +57,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
   color: white;
   padding: 20px 10px 10px 10px;
   opacity: 0;
