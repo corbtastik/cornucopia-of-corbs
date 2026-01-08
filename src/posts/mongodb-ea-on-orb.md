@@ -30,8 +30,17 @@ By the end, you’ll have two scripts:
 
 You will need the following files in your working directory.
 
+### [GitHub Repo](https://github.com/corbtastik/mongodb-ea-orb)
+
+```
+git clone https://github.com/corbtastik/mongodb-ea-orb
+cd mongodb-ea-orb
+```
+
 ### `.env`
-Your credentials and DB names.
+You will need to manually create a .env file with your credentials and DB names.
+
+> Note: the .gitignore blocks the .env file from being committed to git.
 
 ```bash
 # Root (server-wide) admin
