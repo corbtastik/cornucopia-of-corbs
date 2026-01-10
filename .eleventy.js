@@ -15,6 +15,8 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addFilter("dateIso", (dateObj) => {
         return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toISODate();
     });
+    // Copy the `favicon.ico` to the output folder
+    eleventyConfig.addPassthroughCopy("favicon.ico");
     // --- NEW DATE FILTERS END ---
     // Copy the `assets` folder to the output
     eleventyConfig.addPassthroughCopy("src/assets");
