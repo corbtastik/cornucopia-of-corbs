@@ -5,8 +5,6 @@ tags: ["tutorial", "orbstack", "mongodb", "mongodb-enterprise", "docker", "datab
 description: "How to run a secure, persistent MongoDB EA instance using OrbStack."
 ---
 
-# MongoDB Enterprise on OrbStack
-
 This walkthrough stands up a **MongoDB Enterprise Advanced** container on OrbStack (Docker-compatible) with several key features:
 
 *   **Persistent data** using a named Docker volume (`mongodb_ea_data`).

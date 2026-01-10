@@ -156,8 +156,6 @@ post_images:
     alt: "Orange flower burst"
 ---
 
-# So Dakota
-
 There is nothing quite like a road trip through the American West. We packed the car, prepped the grill, and set off on a loop that took us through the [Black Hills](https://en.wikipedia.org/wiki/Black_Hills) of [South Dakota](https://en.wikipedia.org/wiki/South_Dakota), the alien landscapes of [Wyoming](https://en.wikipedia.org/wiki/Wyoming), and the majestic peaks of [Colorado](https://en.wikipedia.org/wiki/Colorado).
 
 ### South Dakota: Custer & Rushmore

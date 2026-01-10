@@ -4,6 +4,18 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function(eleventyConfig) {
     eleventyConfig.addPlugin(syntaxHighlight);
+    // --- NEW DATE FILTERS START ---
+    // 1. Human Readable (e.g., "October 4, 2023")
+    eleventyConfig.addFilter("dateReadable", (dateObj) => {
+        // We use 'utc' to prevent the date shifting by one day due to timezone offsets
+        return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat("LLLL d, yyyy");
+    });
+
+    // 2. Machine Readable (e.g., "2023-10-04") for <time datetime=""> attributes
+    eleventyConfig.addFilter("dateIso", (dateObj) => {
+        return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toISODate();
+    });
+    // --- NEW DATE FILTERS END ---
     // Copy the `assets` folder to the output
     eleventyConfig.addPassthroughCopy("src/assets");
     

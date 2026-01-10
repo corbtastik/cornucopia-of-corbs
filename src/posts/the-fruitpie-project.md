@@ -5,8 +5,6 @@ tags: ["food", "fried-pies", "painting", "pop-art", "procreate"]
 description: "Yummo Pop-Art"
 ---
 
-# The Fruit Pie Project
-
 The Fruit Pie Pop-Art project making Fruit Pies appear out of thin air with Fruit Pie the Magician.
 
 [Procreate](https://procreate.art/) "proto" Pies.

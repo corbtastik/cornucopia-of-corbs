@@ -1,5 +1,5 @@
 ---
-title: "Gallery Component Demo"
+title: "Sample Gallery"
 date: 2025-12-27
 tags: ["photography", "demo"]
 description: "A demonstration of the custom gallery shortcode using 25 sample images."

@@ -237,6 +237,19 @@ footer {
 /* =========================================
    COMPONENTS
    ========================================= */
+/* Add to style.css */
+.post-title {
+    margin-bottom: 0.5rem; /* Space between title and date */
+    line-height: 1.2;
+}
+
+.post-title-date {
+    display: block;
+    margin-bottom: .5rem; /* Space between date and body text */
+    font-family: var(--font-family-monospace); /* Looks cool as monospace */
+    color: var(--tertiary-color)
+}
+
 .post-list,
 .simple-list {
     list-style: none;

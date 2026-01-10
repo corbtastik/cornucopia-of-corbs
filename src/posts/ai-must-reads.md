@@ -1,11 +1,9 @@
 ---
-title: "Must-Read AI Blog Posts: OpenAI + Google DeepMind"
+title: "AI Must-Reads: OpenAI + Google DeepMind"
 date: 2025-12-30
 tags: ["ai", "reading-list", "openai", "google-deepmind", "llms", "genai"]
 description: "A curated, high-signal reading list of official OpenAI and Google DeepMind/Google AI posts (models, evals, safety, and developer tooling)."
 ---
-
-# Must-Read AI Blog Posts: OpenAI + Google DeepMind
 
 A “no fluff” list of official posts worth reading end-to-end.
 

@@ -5,7 +5,7 @@ tags: ["code", "syntax-highlighting"]
 description: "Code Snippets for Syntax Highlighting showcase"
 ---
 
-### Bash
+## Bash
 
 
 ```bash
@@ -25,7 +25,7 @@ say_howdy $1
 
 ---
 
-### C
+## C
 
 ```c
 #include <stdio.h>
@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 
 ---
 
-### C++
+## C++
 
 ```cpp
 #include <iostream>
@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 
 ---
 
-### Dart
+## Dart
 
 ```dart
 import 'dart:io';
@@ -78,7 +78,7 @@ void main(List<String> args) {
 
 ---
 
-### Go
+## Go
 
 ```go
 package main
@@ -101,7 +101,7 @@ func main () {
 
 ---
 
-### HTML
+## HTML
 
 ```html
 <!DOCTYPE html>
@@ -118,7 +118,7 @@ func main () {
 
 ---
 
-### JSON
+## JSON
 
 ```json
 {
@@ -148,7 +148,7 @@ func main () {
 
 ---
 
-### Java
+## Java
 
 ```java
 // Say Howdy
@@ -165,7 +165,7 @@ public class Howdy {
 
 ---
 
-### JavaScript
+## JavaScript
 
 ```javascript
 function sayHowdy(name) {
@@ -183,7 +183,7 @@ sayHowdy(process.argv[2]);
 
 ---
 
-### Kotlin
+## Kotlin
 
 ```kotlin
 // Say Howdy
@@ -199,7 +199,7 @@ fun main(args: Array<String>): Int {
 
 ---
 
-### Markdown
+## Markdown
 
 ```markdown
 # Markdown
@@ -213,7 +213,7 @@ fun main(args: Array<String>): Int {
 
 ---
 
-### Python
+## Python
 
 ```python
 import sys
@@ -231,7 +231,7 @@ sayHowdy(sys.argv[1])
 
 ---
 
-### SCSS
+## SCSS
 
 ```scss
 .light-theme {
@@ -252,7 +252,7 @@ sayHowdy(sys.argv[1])
 
 ---
 
-### SQL
+## SQL
 
 ```sql
 -- Select orders for micky
@@ -265,7 +265,7 @@ AND   price <= 10000
 
 ---
 
-### YAML
+## YAML
 
 ```yaml
 # ---------------------------------------------------------

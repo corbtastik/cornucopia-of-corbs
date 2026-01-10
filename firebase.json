@@ -5,6 +5,13 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "https://www.corbs.io/**",
+        "destination": "https://corbs.io",
+        "type": 301
+      }
     ]
   }
 }

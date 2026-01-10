@@ -5,8 +5,6 @@ tags: ["tutorial", "bash", "linux"]
 description: "A little ditty about bash"
 ---
 
-# The Bash One Pager
-
 This is a one-page reference for the top Bash commands and tricks. It covers everything from basic file operations to intermediate shell scripting.
 
 ## File Operations

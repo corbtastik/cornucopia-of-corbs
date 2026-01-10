@@ -5,7 +5,7 @@ tags: ["tutorial", "orbstack", "mongodb", "docker", "database"]
 description: "How to run a secure, persistent MongoDB Community instance on using OrbStack."
 ---
 
-In [Part 1](/posts/orbstack-getting-started), we covered how to get OrbStack up and running with ephemeral containers. Now, let's build something you can actually use for development: a persistent **MongoDB** database.
+In [Part 1](/posts/getting-started-with-orbstack-on-macos/), we covered how to get OrbStack up and running with ephemeral containers. Now, let's build something you can actually use for development: a persistent **MongoDB** database.
 
 By default, Docker containers lose their data when you remove them. For a database, that is obviously a problem. Furthermore, the default MongoDB container leaves the door wide open with no password.
 

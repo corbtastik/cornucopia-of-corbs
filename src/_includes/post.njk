@@ -18,6 +18,27 @@ wrapperClass: "layout-with-toc"
 
 <!-- 2. The Content Text -->
 <div class="post-content content-col">
+    
+    <!-- Render Title -->
+    <h1 class="post-title">{{ title }}</h1>
+    
+    <!-- Render Date -->
+    <time class="post-title-date" datetime="{{ page.date | dateIso }}">
+        {{ page.date | dateReadable }} 
+    </time>
+
+    <!-- NEW: Render Tags (The Pills) -->
+    {% if tags %}
+    <div class="post-tags">
+        {% for tag in tags %}
+            {# Exclude 'posts' from the list if you use that for your collection #}
+            {% if tag != "posts" %}
+                <a href="/tags/#{{ tag | slug }}">#{{ tag }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
     {{ content | safe }}
 </div>
 

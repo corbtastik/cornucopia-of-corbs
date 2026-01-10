@@ -1,6 +1,6 @@
 {
-  "url": "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Source+Code+Pro:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap",
-  "primary": "'Montserrat', sans-serif",
-  "secondary": "'Montserrat', sans-serif",
-  "monospace": "'Source Code Pro', monospace"
+  "url": "https://fonts.googleapis.com/css2?family=Sora:wght@400;700;800&family=Red+Hat+Display:wght@400;700&family=Space+Mono:wght@400;700&display=swap",
+  "primary": "'Sora', sans-serif",
+  "secondary": "'Red Hat Display', sans-serif",
+  "monospace": "'Space Mono', monospace"
 }

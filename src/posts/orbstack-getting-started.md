@@ -6,8 +6,6 @@ description: "A fast, lightweight guide to replacing Docker Desktop with OrbStac
 toc_side: left
 ---
 
-# Getting Started with OrbStack on macOS
-
 For years, Docker Desktop was the de facto standard for containerization on macOS. However, it often came with a heavy cost: battery drain, loud fans, and slow filesystem performance.
 
 Enter **OrbStack**. It is a native macOS application that is significantly lighter, faster, and integrates seamlessly with the OS. It’s not just a Docker replacement; it’s an all-in-one platform for Linux machines and Kubernetes clusters.

@@ -5,8 +5,6 @@ tags: ["art", "brand", "pixelmator"]
 description: "An 80s'ish looking brand...totally text tubular"
 ---
 
-# Playing with Pixelmator
-
 80s'ish neon colored logos created with Pixelmator Pro. The [80s](https://en.wikipedia.org/wiki/1980s) was a colorful decade, fueled by the rise of [MTV](https://en.wikipedia.org/wiki/MTV), [Atari](https://en.wikipedia.org/wiki/Atari), [Apple](https://en.wikipedia.org/wiki/Apple_Inc.) and neon colored everything.
 
 ## Chicago font

@@ -156,8 +156,6 @@ post_images:
     alt: "Desert solitude: A lone Yucca watching the deluge"
 ---
 
-# The road to Van Horn
-
 Travelling to the westernmost outpost in the central timezone; [Van Horn](https://en.wikipedia.org/wiki/Van_Horn,_Texas), a gem :gem: of a town halfway between [Marfa](https://en.wikipedia.org/wiki/Marfa,_Texas) and the [Guadalupe Mountains National Park](https://en.wikipedia.org/wiki/Guadalupe_Mountains_National_Park).
 
 Meandering from [Hotel Paisano](https://hotelpaisano.com/trost/) in Marfa to [Hotel El Capitan](http://www.thehotelelcapitan.com/history/) in Van Horn, while being followed by a summer shower.
