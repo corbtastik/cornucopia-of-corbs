@@ -1789,6 +1789,55 @@ html[data-theme-set="horizon"][data-mode="light"] {
     --sh-punctuation: #1A1C23;
 }
 
+html[data-theme-set="matrix-neon"][data-mode="dark"] {
+    --bg-color: #000000;
+    --text-color: #f61379;
+    --link-color: #55ccff;
+    --heading-color: #f61379;
+    --tertiary-color: #D500F9;
+    --card-bg: #000d14;
+    --search-bg: #000000;
+    --border-color: #006699;
+    --primary-color: #00aaff;
+    --primary-container-bg: #001a2b;
+    --on-primary-container-color: #00aaff;
+    --secondary-container-bg: #00334d;
+    --on-secondary-container-color: #ffffff;
+    --sh-bg: #000d14;
+    --sh-text: #00aaff;
+    --sh-border: #006699;
+    --sh-keyword: #ffffff;
+    --sh-string: #55ccff;
+    --sh-function: #00aaff;
+    --sh-variable: #80d5ff;
+    --sh-comment: #00334d;
+    --sh-punctuation: #00aaff;
+}
+html[data-theme-set="matrix-neon"][data-mode="light"] {
+    --bg-color: #f0faff;
+    --text-color: #f61379;
+    --link-color: #0077b3;
+    --heading-color: #f61379;
+    --tertiary-color: #D500F9;
+    --card-bg: #ffffff;
+    --search-bg: #f0faff;
+    --border-color: #80d5ff;
+    --primary-color: #0077b3;
+    --primary-container-bg: #d6f2ff;
+    --on-primary-container-color: #004466;
+    --secondary-container-bg: #b3e5ff;
+    --on-secondary-container-color: #001a2b;
+    --sh-bg: #ffffff;
+    --sh-text: #004466;
+    --sh-border: #80d5ff;
+    --sh-keyword: #0077b3;
+    --sh-string: #0077b3;
+    --sh-function: #0099e6;
+    --sh-variable: #00aaff;
+    --sh-comment: #949494;
+    --sh-punctuation: #004466;
+}
+
 /* --- Mongo --- */
 html[data-theme-set="mongo"][data-mode="dark"] {
     --bg-color: #001e2b;
