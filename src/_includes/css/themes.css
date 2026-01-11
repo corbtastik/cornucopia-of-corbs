@@ -15,6 +15,586 @@
     --on-secondary-container-color: var(--text-color);
 }
 
+/* Material Design Colors */
+
+/* Material Pink Dark mode */
+html[data-theme-set="material-pink"][data-mode="dark"] {
+    --bg-color: #880E4F; /* Pink 900 */
+    --text-color: #FCE4EC; /* Pink 50 */
+    --link-color: #FF80AB; /* Pink A100 */
+    --heading-color: #F8BBD0; /* Pink 100 */
+    --tertiary-color: #AD1457; /* Pink 800 */
+    --card-bg: #AD1457; /* Pink 800 */
+    --search-bg: #880E4F; /* Pink 900 */
+    --border-color: #C2185B; /* Pink 700 */
+    --primary-color: #F06292; /* Pink 300 */
+    --primary-container-bg: #AD1457;
+    --on-primary-container-color: #FCE4EC;
+    --secondary-container-bg: #C2185B;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #AD1457;
+    --sh-text: #FCE4EC;
+    --sh-border: #C2185B;
+    --sh-keyword: #FF80AB;
+    --sh-string: #F8BBD0;
+    --sh-function: #F06292;
+    --sh-variable: #F48FB1;
+    --sh-comment: #C51162;
+    --sh-punctuation: #FCE4EC;
+}
+/* Material Pink Light mode */
+html[data-theme-set="material-pink"][data-mode="light"] {
+    --bg-color: #FCE4EC; /* Pink 50 */
+    --text-color: #880E4F; /* Pink 900 */
+    --link-color: #C2185B; /* Pink 700 */
+    --heading-color: #AD1457; /* Pink 800 */
+    --tertiary-color: #F48FB1; /* Pink 200 */
+    --card-bg: #ffffff;
+    --search-bg: #FCE4EC;
+    --border-color: #F8BBD0; /* Pink 100 */
+    --primary-color: #E91E63; /* Pink 500 */
+    --primary-container-bg: #F8BBD0;
+    --on-primary-container-color: #880E4F;
+    --secondary-container-bg: #F48FB1;
+    --on-secondary-container-color: #880E4F;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #880E4F;
+    --sh-border: #F8BBD0;
+    --sh-keyword: #D81B60;
+    --sh-string: #AD1457;
+    --sh-function: #E91E63;
+    --sh-variable: #C2185B;
+    --sh-comment: #9e9e9e; /* Neutral grey for readability */
+    --sh-punctuation: #880E4F;
+}
+
+/* Material Purple Dark mode */
+html[data-theme-set="material-purple"][data-mode="dark"] {
+    --bg-color: #4A148C; /* Purple 900 */
+    --text-color: #F3E5F5; /* Purple 50 */
+    --link-color: #EA80FC; /* Purple A100 */
+    --heading-color: #E1BEE7; /* Purple 100 */
+    --tertiary-color: #6A1B9A; /* Purple 800 */
+    --card-bg: #6A1B9A; /* Purple 800 */
+    --search-bg: #4A148C;
+    --border-color: #7B1FA2; /* Purple 700 */
+    --primary-color: #BA68C8; /* Purple 300 */
+    --primary-container-bg: #6A1B9A;
+    --on-primary-container-color: #F3E5F5;
+    --secondary-container-bg: #7B1FA2;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #6A1B9A;
+    --sh-text: #F3E5F5;
+    --sh-border: #7B1FA2;
+    --sh-keyword: #EA80FC;
+    --sh-string: #E1BEE7;
+    --sh-function: #CE93D8;
+    --sh-variable: #BA68C8;
+    --sh-comment: #AA00FF; /* A700 */
+    --sh-punctuation: #F3E5F5;
+}
+
+/* Material Purple Light mode */
+html[data-theme-set="material-purple"][data-mode="light"] {
+    --bg-color: #F3E5F5; /* Purple 50 */
+    --text-color: #4A148C; /* Purple 900 */
+    --link-color: #7B1FA2; /* Purple 700 */
+    --heading-color: #6A1B9A; /* Purple 800 */
+    --tertiary-color: #CE93D8; /* Purple 200 */
+    --card-bg: #ffffff;
+    --search-bg: #F3E5F5;
+    --border-color: #E1BEE7; /* Purple 100 */
+    --primary-color: #9C27B0; /* Purple 500 */
+    --primary-container-bg: #E1BEE7;
+    --on-primary-container-color: #4A148C;
+    --secondary-container-bg: #CE93D8;
+    --on-secondary-container-color: #4A148C;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #4A148C;
+    --sh-border: #E1BEE7;
+    --sh-keyword: #8E24AA;
+    --sh-string: #6A1B9A;
+    --sh-function: #9C27B0;
+    --sh-variable: #7B1FA2;
+    --sh-comment: #9e9e9e;
+    --sh-punctuation: #4A148C;
+}
+
+/* Material Deep Purple Dark mode */
+html[data-theme-set="material-deep-purple"][data-mode="dark"] {
+    --bg-color: #311B92; /* Deep Purple 900 */
+    --text-color: #EDE7F6; /* Deep Purple 50 */
+    --link-color: #B388FF; /* Deep Purple A100 */
+    --heading-color: #D1C4E9; /* Deep Purple 100 */
+    --tertiary-color: #4527A0; /* Deep Purple 800 */
+    --card-bg: #4527A0;
+    --search-bg: #311B92;
+    --border-color: #512DA8; /* Deep Purple 700 */
+    --primary-color: #9575CD; /* Deep Purple 300 */
+    --primary-container-bg: #4527A0;
+    --on-primary-container-color: #EDE7F6;
+    --secondary-container-bg: #512DA8;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #4527A0;
+    --sh-text: #EDE7F6;
+    --sh-border: #512DA8;
+    --sh-keyword: #B388FF;
+    --sh-string: #D1C4E9;
+    --sh-function: #7E57C2;
+    --sh-variable: #9575CD;
+    --sh-comment: #6200EA; /* Deep Purple A700 */
+    --sh-punctuation: #EDE7F6;
+}
+/* Material Deep Purple Light mode */
+html[data-theme-set="material-deep-purple"][data-mode="light"] {
+    --bg-color: #EDE7F6; /* Deep Purple 50 */
+    --text-color: #311B92; /* Deep Purple 900 */
+    --link-color: #512DA8; /* Deep Purple 700 */
+    --heading-color: #4527A0; /* Deep Purple 800 */
+    --tertiary-color: #B39DDB; /* Deep Purple 200 */
+    --card-bg: #ffffff;
+    --search-bg: #EDE7F6;
+    --border-color: #D1C4E9; /* Deep Purple 100 */
+    --primary-color: #673AB7; /* Deep Purple 500 */
+    --primary-container-bg: #D1C4E9;
+    --on-primary-container-color: #311B92;
+    --secondary-container-bg: #B39DDB;
+    --on-secondary-container-color: #311B92;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #311B92;
+    --sh-border: #D1C4E9;
+    --sh-keyword: #5E35B1;
+    --sh-string: #4527A0;
+    --sh-function: #673AB7;
+    --sh-variable: #512DA8;
+    --sh-comment: #9e9e9e;
+    --sh-punctuation: #311B92;
+}
+/* Material Indigo Dark mode */
+html[data-theme-set="material-indigo"][data-mode="dark"] {
+    --bg-color: #1A237E; /* Indigo 900 */
+    --text-color: #E8EAF6; /* Indigo 50 */
+    --link-color: #8C9EFF; /* Indigo A100 */
+    --heading-color: #C5CAE9; /* Indigo 100 */
+    --tertiary-color: #283593; /* Indigo 800 */
+    --card-bg: #283593;
+    --search-bg: #1A237E;
+    --border-color: #303F9F; /* Indigo 700 */
+    --primary-color: #7986CB; /* Indigo 300 */
+    --primary-container-bg: #283593;
+    --on-primary-container-color: #E8EAF6;
+    --secondary-container-bg: #303F9F;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #283593;
+    --sh-text: #E8EAF6;
+    --sh-border: #303F9F;
+    --sh-keyword: #8C9EFF;
+    --sh-string: #C5CAE9;
+    --sh-function: #5C6BC0;
+    --sh-variable: #7986CB;
+    --sh-comment: #304FFE; /* Indigo A700 */
+    --sh-punctuation: #E8EAF6;
+}
+/* Material Indigo Light mode */
+html[data-theme-set="material-indigo"][data-mode="light"] {
+    --bg-color: #E8EAF6; /* Indigo 50 */
+    --text-color: #1A237E; /* Indigo 900 */
+    --link-color: #303F9F; /* Indigo 700 */
+    --heading-color: #283593; /* Indigo 800 */
+    --tertiary-color: #9FA8DA; /* Indigo 200 */
+    --card-bg: #ffffff;
+    --search-bg: #E8EAF6;
+    --border-color: #C5CAE9; /* Indigo 100 */
+    --primary-color: #3F51B5; /* Indigo 500 */
+    --primary-container-bg: #C5CAE9;
+    --on-primary-container-color: #1A237E;
+    --secondary-container-bg: #9FA8DA;
+    --on-secondary-container-color: #1A237E;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #1A237E;
+    --sh-border: #C5CAE9;
+    --sh-keyword: #3949AB;
+    --sh-string: #283593;
+    --sh-function: #3F51B5;
+    --sh-variable: #303F9F;
+    --sh-comment: #9e9e9e;
+    --sh-punctuation: #1A237E;
+}
+/* Material Blue Dark mode */
+html[data-theme-set="material-blue"][data-mode="dark"] {
+    --bg-color: #0D47A1; /* Blue 900 */
+    --text-color: #E3F2FD; /* Blue 50 */
+    --link-color: #82B1FF; /* Blue A100 */
+    --heading-color: #BBDEFB; /* Blue 100 */
+    --tertiary-color: #1565C0; /* Blue 800 */
+    --card-bg: #1565C0;
+    --search-bg: #0D47A1;
+    --border-color: #1976D2; /* Blue 700 */
+    --primary-color: #64B5F6; /* Blue 300 */
+    --primary-container-bg: #1565C0;
+    --on-primary-container-color: #E3F2FD;
+    --secondary-container-bg: #1976D2;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #1565C0;
+    --sh-text: #E3F2FD;
+    --sh-border: #1976D2;
+    --sh-keyword: #82B1FF;
+    --sh-string: #BBDEFB;
+    --sh-function: #42A5F5;
+    --sh-variable: #64B5F6;
+    --sh-comment: #2962FF; /* Blue A700 */
+    --sh-punctuation: #E3F2FD;
+}
+/* Material Blue Light mode */
+html[data-theme-set="material-blue"][data-mode="light"] {
+    --bg-color: #E3F2FD; /* Blue 50 */
+    --text-color: #0D47A1; /* Blue 900 */
+    --link-color: #1976D2; /* Blue 700 */
+    --heading-color: #1565C0; /* Blue 800 */
+    --tertiary-color: #90CAF9; /* Blue 200 */
+    --card-bg: #ffffff;
+    --search-bg: #E3F2FD;
+    --border-color: #BBDEFB; /* Blue 100 */
+    --primary-color: #2196F3; /* Blue 500 */
+    --primary-container-bg: #BBDEFB;
+    --on-primary-container-color: #0D47A1;
+    --secondary-container-bg: #90CAF9;
+    --on-secondary-container-color: #0D47A1;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #0D47A1;
+    --sh-border: #BBDEFB;
+    --sh-keyword: #1E88E5;
+    --sh-string: #1565C0;
+    --sh-function: #2196F3;
+    --sh-variable: #1976D2;
+    --sh-comment: #9e9e9e;
+    --sh-punctuation: #0D47A1;
+}
+/* Material Light Blue Dark mode */
+html[data-theme-set="material-light-blue"][data-mode="dark"] {
+    --bg-color: #01579B; /* Light Blue 900 */
+    --text-color: #E1F5FE; /* Light Blue 50 */
+    --link-color: #80D8FF; /* Light Blue A100 */
+    --heading-color: #B3E5FC; /* Light Blue 100 */
+    --tertiary-color: #0277BD; /* Light Blue 800 */
+    --card-bg: #0277BD;
+    --search-bg: #01579B;
+    --border-color: #0288D1; /* Light Blue 700 */
+    --primary-color: #4FC3F7; /* Light Blue 300 */
+    --primary-container-bg: #0277BD;
+    --on-primary-container-color: #E1F5FE;
+    --secondary-container-bg: #0288D1;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #0277BD;
+    --sh-text: #E1F5FE;
+    --sh-border: #0288D1;
+    --sh-keyword: #80D8FF;
+    --sh-string: #B3E5FC;
+    --sh-function: #03A9F4;
+    --sh-variable: #4FC3F7;
+    --sh-comment: #0091EA; /* Light Blue A700 */
+    --sh-punctuation: #E1F5FE;
+}
+/* Material Light Blue Light mode */
+html[data-theme-set="material-light-blue"][data-mode="light"] {
+    --bg-color: #E1F5FE; /* Light Blue 50 */
+    --text-color: #01579B; /* Light Blue 900 */
+    --link-color: #0288D1; /* Light Blue 700 */
+    --heading-color: #0277BD; /* Light Blue 800 */
+    --tertiary-color: #81D4FA; /* Light Blue 200 */
+    --card-bg: #ffffff;
+    --search-bg: #E1F5FE;
+    --border-color: #B3E5FC; /* Light Blue 100 */
+    --primary-color: #03A9F4; /* Light Blue 500 */
+    --primary-container-bg: #B3E5FC;
+    --on-primary-container-color: #01579B;
+    --secondary-container-bg: #81D4FA;
+    --on-secondary-container-color: #01579B;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #01579B;
+    --sh-border: #B3E5FC;
+    --sh-keyword: #039BE5;
+    --sh-string: #0277BD;
+    --sh-function: #03A9F4;
+    --sh-variable: #0288D1;
+    --sh-comment: #9e9e9e;
+    --sh-punctuation: #01579B;
+}
+/* Material Cyan Dark mode */
+html[data-theme-set="material-cyan"][data-mode="dark"] {
+    --bg-color: #006064; /* Cyan 900 */
+    --text-color: #E0F7FA; /* Cyan 50 */
+    --link-color: #84FFFF; /* Cyan A100 */
+    --heading-color: #B2EBF2; /* Cyan 100 */
+    --tertiary-color: #00838F; /* Cyan 800 */
+    --card-bg: #00838F;
+    --search-bg: #006064;
+    --border-color: #0097A7; /* Cyan 700 */
+    --primary-color: #4DD0E1; /* Cyan 300 */
+    --primary-container-bg: #00838F;
+    --on-primary-container-color: #E0F7FA;
+    --secondary-container-bg: #0097A7;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #00838F;
+    --sh-text: #E0F7FA;
+    --sh-border: #0097A7;
+    --sh-keyword: #84FFFF;
+    --sh-string: #B2EBF2;
+    --sh-function: #00BCD4;
+    --sh-variable: #4DD0E1;
+    --sh-comment: #00B8D4; /* Cyan A700 */
+    --sh-punctuation: #E0F7FA;
+}
+/* Material Cyan Light mode */
+html[data-theme-set="material-cyan"][data-mode="light"] {
+    --bg-color: #E0F7FA; /* Cyan 50 */
+    --text-color: #006064; /* Cyan 900 */
+    --link-color: #0097A7; /* Cyan 700 */
+    --heading-color: #00838F; /* Cyan 800 */
+    --tertiary-color: #80DEEA; /* Cyan 200 */
+    --card-bg: #ffffff;
+    --search-bg: #E0F7FA;
+    --border-color: #B2EBF2; /* Cyan 100 */
+    --primary-color: #00BCD4; /* Cyan 500 */
+    --primary-container-bg: #B2EBF2;
+    --on-primary-container-color: #006064;
+    --secondary-container-bg: #80DEEA;
+    --on-secondary-container-color: #006064;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #006064;
+    --sh-border: #B2EBF2;
+    --sh-keyword: #00ACC1;
+    --sh-string: #00838F;
+    --sh-function: #00BCD4;
+    --sh-variable: #0097A7;
+    --sh-comment: #9e9e9e;
+    --sh-punctuation: #006064;
+}
+/* Material Teal Dark mode */
+html[data-theme-set="material-teal"][data-mode="dark"] {
+    --bg-color: #004D40; /* Teal 900 */
+    --text-color: #E0F2F1; /* Teal 50 */
+    --link-color: #A7FFEB; /* Teal A100 */
+    --heading-color: #B2DFDB; /* Teal 100 */
+    --tertiary-color: #00695C; /* Teal 800 */
+    --card-bg: #00695C;
+    --search-bg: #004D40;
+    --border-color: #00796B; /* Teal 700 */
+    --primary-color: #4DB6AC; /* Teal 300 */
+    --primary-container-bg: #00695C;
+    --on-primary-container-color: #E0F2F1;
+    --secondary-container-bg: #00796B;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #00695C;
+    --sh-text: #E0F2F1;
+    --sh-border: #00796B;
+    --sh-keyword: #A7FFEB;
+    --sh-string: #B2DFDB;
+    --sh-function: #009688;
+    --sh-variable: #4DB6AC;
+    --sh-comment: #00BFA5; /* Teal A700 */
+    --sh-punctuation: #E0F2F1;
+}
+/* Material Teal Light mode */
+html[data-theme-set="material-teal"][data-mode="light"] {
+    --bg-color: #E0F2F1; /* Teal 50 */
+    --text-color: #004D40; /* Teal 900 */
+    --link-color: #00796B; /* Teal 700 */
+    --heading-color: #00695C; /* Teal 800 */
+    --tertiary-color: #80CBC4; /* Teal 200 */
+    --card-bg: #ffffff;
+    --search-bg: #E0F2F1;
+    --border-color: #B2DFDB; /* Teal 100 */
+    --primary-color: #009688; /* Teal 500 */
+    --primary-container-bg: #B2DFDB;
+    --on-primary-container-color: #004D40;
+    --secondary-container-bg: #80CBC4;
+    --on-secondary-container-color: #004D40;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #004D40;
+    --sh-border: #B2DFDB;
+    --sh-keyword: #00897B;
+    --sh-string: #00695C;
+    --sh-function: #009688;
+    --sh-variable: #00796B;
+    --sh-comment: #9e9e9e;
+    --sh-punctuation: #004D40;
+}
+/* Material Brown Dark mode */
+html[data-theme-set="material-brown"][data-mode="dark"] {
+    --bg-color: #3E2723; /* Brown 900 */
+    --text-color: #EFEBE9; /* Brown 50 */
+    --link-color: #BCAAA4; /* Brown 200 used for visibility */
+    --heading-color: #D7CCC8; /* Brown 100 */
+    --tertiary-color: #4E342E; /* Brown 800 */
+    --card-bg: #4E342E;
+    --search-bg: #3E2723;
+    --border-color: #5D4037; /* Brown 700 */
+    --primary-color: #A1887F; /* Brown 300 */
+    --primary-container-bg: #4E342E;
+    --on-primary-container-color: #EFEBE9;
+    --secondary-container-bg: #5D4037;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #4E342E;
+    --sh-text: #EFEBE9;
+    --sh-border: #5D4037;
+    --sh-keyword: #D7CCC8;
+    --sh-string: #BCAAA4;
+    --sh-function: #A1887F;
+    --sh-variable: #8D6E63; /* Brown 400 */
+    --sh-comment: #795548; /* Brown 500 */
+    --sh-punctuation: #EFEBE9;
+}
+/* Material Brown Light mode */ 
+html[data-theme-set="material-brown"][data-mode="light"] {
+    --bg-color: #EFEBE9; /* Brown 50 */
+    --text-color: #3E2723; /* Brown 900 */
+    --link-color: #5D4037; /* Brown 700 */
+    --heading-color: #4E342E; /* Brown 800 */
+    --tertiary-color: #BCAAA4; /* Brown 200 */
+    --card-bg: #ffffff;
+    --search-bg: #EFEBE9;
+    --border-color: #D7CCC8; /* Brown 100 */
+    --primary-color: #795548; /* Brown 500 */
+    --primary-container-bg: #D7CCC8;
+    --on-primary-container-color: #3E2723;
+    --secondary-container-bg: #BCAAA4;
+    --on-secondary-container-color: #3E2723;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #3E2723;
+    --sh-border: #D7CCC8;
+    --sh-keyword: #6D4C41; /* Brown 600 */
+    --sh-string: #4E342E;
+    --sh-function: #795548;
+    --sh-variable: #5D4037;
+    --sh-comment: #9e9e9e;
+    --sh-punctuation: #3E2723;
+}
+/* Material Gray Dark mode */
+html[data-theme-set="material-gray"][data-mode="dark"] {
+    --bg-color: #212121; /* Gray 900 */
+    --text-color: #FAFAFA; /* Gray 50 */
+    --link-color: #EEEEEE; /* Gray 200 */
+    --heading-color: #F5F5F5; /* Gray 100 */
+    --tertiary-color: #424242; /* Gray 800 */
+    --card-bg: #424242;
+    --search-bg: #212121;
+    --border-color: #616161; /* Gray 700 */
+    --primary-color: #E0E0E0; /* Gray 300 */
+    --primary-container-bg: #424242;
+    --on-primary-container-color: #FAFAFA;
+    --secondary-container-bg: #616161;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #424242;
+    --sh-text: #FAFAFA;
+    --sh-border: #616161;
+    --sh-keyword: #F5F5F5;
+    --sh-string: #EEEEEE;
+    --sh-function: #E0E0E0;
+    --sh-variable: #BDBDBD; /* Gray 400 */
+    --sh-comment: #9E9E9E; /* Gray 500 */
+    --sh-punctuation: #FAFAFA;
+}
+/* Material Gray Light mode */
+html[data-theme-set="material-gray"][data-mode="light"] {
+    --bg-color: #FAFAFA; /* Gray 50 */
+    --text-color: #212121; /* Gray 900 */
+    --link-color: #616161; /* Gray 700 */
+    --heading-color: #424242; /* Gray 800 */
+    --tertiary-color: #EEEEEE; /* Gray 200 */
+    --card-bg: #ffffff;
+    --search-bg: #FAFAFA;
+    --border-color: #F5F5F5; /* Gray 100 */
+    --primary-color: #9E9E9E; /* Gray 500 */
+    --primary-container-bg: #F5F5F5;
+    --on-primary-container-color: #212121;
+    --secondary-container-bg: #EEEEEE;
+    --on-secondary-container-color: #212121;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #212121;
+    --sh-border: #F5F5F5;
+    --sh-keyword: #757575; /* Gray 600 */
+    --sh-string: #424242;
+    --sh-function: #9E9E9E;
+    --sh-variable: #616161;
+    --sh-comment: #BDBDBD; /* Gray 400 */
+    --sh-punctuation: #212121;
+}
+
+/* Material Blue Gray Dark mode */
+html[data-theme-set="material-blue-gray"][data-mode="dark"] {
+    --bg-color: #263238; /* Blue Gray 900 */
+    --text-color: #ECEFF1; /* Blue Gray 50 */
+    --link-color: #B0BEC5; /* Blue Gray 200 */
+    --heading-color: #CFD8DC; /* Blue Gray 100 */
+    --tertiary-color: #37474F; /* Blue Gray 800 */
+    --card-bg: #37474F;
+    --search-bg: #263238;
+    --border-color: #455A64; /* Blue Gray 700 */
+    --primary-color: #90A4AE; /* Blue Gray 300 */
+    --primary-container-bg: #37474F;
+    --on-primary-container-color: #ECEFF1;
+    --secondary-container-bg: #455A64;
+    --on-secondary-container-color: #ffffff;
+    /* Syntax Highlighting */
+    --sh-bg: #37474F;
+    --sh-text: #ECEFF1;
+    --sh-border: #455A64;
+    --sh-keyword: #CFD8DC;
+    --sh-string: #B0BEC5;
+    --sh-function: #90A4AE;
+    --sh-variable: #78909C; /* Blue Gray 400 */
+    --sh-comment: #607D8B; /* Blue Gray 500 */
+    --sh-punctuation: #ECEFF1;
+}
+/* Material Blue Gray Light mode */
+html[data-theme-set="material-blue-gray"][data-mode="light"] {
+    --bg-color: #ECEFF1; /* Blue Gray 50 */
+    --text-color: #263238; /* Blue Gray 900 */
+    --link-color: #455A64; /* Blue Gray 700 */
+    --heading-color: #37474F; /* Blue Gray 800 */
+    --tertiary-color: #B0BEC5; /* Blue Gray 200 */
+    --card-bg: #ffffff;
+    --search-bg: #ECEFF1;
+    --border-color: #CFD8DC; /* Blue Gray 100 */
+    --primary-color: #607D8B; /* Blue Gray 500 */
+    --primary-container-bg: #CFD8DC;
+    --on-primary-container-color: #263238;
+    --secondary-container-bg: #B0BEC5;
+    --on-secondary-container-color: #263238;
+    /* Syntax Highlighting */
+    --sh-bg: #ffffff;
+    --sh-text: #263238;
+    --sh-border: #CFD8DC;
+    --sh-keyword: #546E7A; /* Blue Gray 600 */
+    --sh-string: #37474F;
+    --sh-function: #607D8B;
+    --sh-variable: #455A64;
+    --sh-comment: #9e9e9e;
+    --sh-punctuation: #263238;
+}
+
+/* Matrix Dark mode: 'The Matrix' (Black/Green) */
 html[data-theme-set="matrix-green"][data-mode="dark"] {
     --bg-color: #000000;
     --text-color: #00ff41;
