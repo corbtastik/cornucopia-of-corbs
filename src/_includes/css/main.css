@@ -708,7 +708,7 @@ img {
 /* --- Sticky Inline TOC (The "Bar" Style) --- */
 .inline-toc {
     position: sticky;
-    top: var(--header-height-real, 73px);
+    top: 73px;
     z-index: 900;
 
     background-color: var(--bg-color);
@@ -897,7 +897,7 @@ body .gist-wrapper .gist-data {
     .inline-toc {
         display: block;
         /* Fallback for when JS is slow or disabled */
-        top: var(--header-height-mobile);
+        top: 156px;
         margin-left: -1.5rem;
         margin-right: -1.5rem;
         padding-left: 1.5rem;
@@ -965,7 +965,7 @@ body .gist-wrapper .gist-data {
 
     .inline-toc {
         display: block;
-        top: var(--header-height);
+        top: 73px;
         margin-left: -3rem;
         margin-right: -3rem;
         padding-left: 3rem;
