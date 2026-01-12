@@ -598,8 +598,8 @@ html[data-theme-set="material-blue-gray"][data-mode="light"] {
 html[data-theme-set="matrix-green"][data-mode="dark"] {
     --bg-color: #000000;
     --text-color: #00ff41;
-    --link-color: #008f11;
-    --heading-color: #00ff41;
+    --link-color: #00ff41;
+    --heading-color: #ffffff; /* White Heading Rule */
     --tertiary-color: #003b00;
     --card-bg: #0d0d0d;
     --search-bg: #000000;
@@ -608,11 +608,11 @@ html[data-theme-set="matrix-green"][data-mode="dark"] {
     --primary-container-bg: #0d0d0d;
     --on-primary-container-color: #00ff41;
     --secondary-container-bg: #003b00;
-    --on-secondary-container-color: #00ff41;
+    --on-secondary-container-color: #ffffff; /* Consistent with other Matrix sets */
     --sh-bg: #0d0d0d;
     --sh-text: #00ff41;
     --sh-border: #008f11;
-    --sh-keyword: #ffffff;
+    --sh-keyword: #ffffff; /* White Keyword Rule */
     --sh-string: #008f11;
     --sh-function: #00ff41;
     --sh-variable: #00ff41;
@@ -620,30 +620,29 @@ html[data-theme-set="matrix-green"][data-mode="dark"] {
     --sh-punctuation: #00ff41;
 }
 
-/* Matrix Light mode: 'Ghost in the Machine' (Light Grey/Green) */
 html[data-theme-set="matrix-green"][data-mode="light"] {
-    --bg-color: #e8f5e9;
-    --text-color: #1b5e20;
-    --link-color: #2e7d32;
-    --heading-color: #1b5e20;
-    --tertiary-color: #c8e6c9;
+    --bg-color: #f0fff4; /* Pale Ghost Green */
+    --text-color: #003300;
+    --link-color: #008000;
+    --heading-color: #001a00;
+    --tertiary-color: #ccffcc;
     --card-bg: #ffffff;
-    --search-bg: #e8f5e9;
-    --border-color: #a5d6a7;
-    --primary-color: #1b5e20;
-    --primary-container-bg: #f1f8f1;
-    --on-primary-container-color: #1b5e20;
-    --secondary-container-bg: #c8e6c9;
-    --on-secondary-container-color: #003b00;
+    --search-bg: #f0fff4;
+    --border-color: #b3ffc1;
+    --primary-color: #008000;
+    --primary-container-bg: #e6ffec;
+    --on-primary-container-color: #003300;
+    --secondary-container-bg: #ccffcc;
+    --on-secondary-container-color: #002200;
     --sh-bg: #ffffff;
-    --sh-text: #1b5e20;
-    --sh-border: #a5d6a7;
-    --sh-keyword: #2e7d32;
-    --sh-string: #388e3c;
-    --sh-function: #1b5e20;
-    --sh-variable: #4caf50;
-    --sh-comment: #9e9e9e;
-    --sh-punctuation: #1b5e20;
+    --sh-text: #003300;
+    --sh-border: #b3ffc1;
+    --sh-keyword: #008000;
+    --sh-string: #008000;
+    --sh-function: #006600;
+    --sh-variable: #00ff41;
+    --sh-comment: #a1a1a1;
+    --sh-punctuation: #003300;
 }
 
 html[data-theme-set="matrix-red"][data-mode="dark"] {
