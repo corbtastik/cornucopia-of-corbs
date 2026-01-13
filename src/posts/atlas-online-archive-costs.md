@@ -5,6 +5,23 @@ tags: ["atlas", "mongodb", "online-archive"]
 description: "MongoDB Atlas Online Archive — Cost Estimate & Usage Modeling"
 ---
 
+## **TL;DR; (Quick Read)**
+
+- **MongoDB Atlas Online Archive** moves “cold” data out of your primary cluster into lower-cost object storage **while keeping it queryable**: [https://www.mongodb.com/docs/atlas/online-archive/](https://www.mongodb.com/docs/atlas/online-archive/)
+- This estimate models **10 TB** of archived data and provides **annual costs** for **US East (N. Virginia)** and **South America (São Paulo)**.
+- **Total cost = Storage + Query Processing + (potential) Network Egress**
+  - **Storage** is the predictable baseline (GB-days). For 10 TB it’s roughly:
+    - **~$5.9K/year (US East)**
+    - **~$10.5K/year (São Paulo)**
+  - **Query Processing** is billed at **$5 per TB processed** (i.e., **TB scanned**), **not** “per query.” Well-filtered, date-bounded queries keep this low:
+    - **Light:** ~$120/year (2 TB processed/month)
+    - **Moderate:** ~$1,200/year (20 TB processed/month)
+    - **Heavy:** ~$12,000/year (200 TB processed/month)
+- **Network egress** is a **cloud-provider charge** (not MongoDB). It’s usually **minimal** when reporting runs **in the same cloud region** as Atlas, and it becomes material when results are pulled **to on-prem**, exported in bulk, or moved cross-region: [https://www.mongodb.com/docs/atlas/billing/data-transfer-costs/](https://www.mongodb.com/docs/atlas/billing/data-transfer-costs/)
+- The tables use **Small/Medium/Large egress ranges** to illustrate this uncertainty. The **Atlas billing dashboard + invoice** are the source of truth for final costs.
+
+---
+
 ## **Introduction**
 
 This document provides a practical, experience-based overview of **[MongoDB Atlas Online Archive](https://www.mongodb.com/docs/atlas/online-archive/)** and a set of **cost estimates** for archiving approximately **10 TB of data**.
@@ -306,6 +323,110 @@ Egress is often minimal when:
 This model provides a realistic planning baseline. With more detail on reporting frequency, query patterns, and where reporting tools run, the estimates can be further tightened.
 
 ---
+
+## Appendix Q&A
+
+## Does running reports against Online Archive impact the live Atlas cluster?
+
+### Short answer
+**Not in the way most people worry about.**  
+Queries that read archived data are executed through **Atlas Data Federation**, not by consuming CPU, memory, or disk I/O on the Atlas cluster’s database nodes.
+
+Reference:
+- Atlas Data Federation overview: [https://www.mongodb.com/docs/atlas/data-federation/](https://www.mongodb.com/docs/atlas/data-federation/)
+- Online Archive overview: [https://www.mongodb.com/docs/atlas/online-archive/](https://www.mongodb.com/docs/atlas/online-archive/)
+
+### What happens
+- Archived data lives in **Online Archive** (cloud object storage), not on the cluster’s local disks.
+- Queries that touch archived data are executed by the **Data Federation query engine**, which operates outside the cluster’s data-bearing nodes.
+
+### What *can* touch the cluster
+If a query spans **both hot (live) data and archived data**:
+- The **hot portion** of the query runs on the Atlas cluster (just like any normal query).
+- The **archived portion** runs through Data Federation.
+- Results are merged transparently before being returned.
+
+Practical implication:
+- Heavy historical reporting against Online Archive is designed to **avoid starving transactional workloads** on the live cluster.
+
+> “Archived-data reporting runs through Data Federation, so it doesn’t burn the live cluster’s CPU the way hot data scans do.”
+
+---
+
+## How does data move from the live MongoDB cluster to Online Archive?
+
+### Short answer
+**You define the archive rule; Atlas moves the data automatically.**
+
+Reference:
+- Configure Online Archive: [https://www.mongodb.com/docs/atlas/online-archive/configure-online-archive/](https://www.mongodb.com/docs/atlas/online-archive/configure-online-archive/)
+
+### How it works
+1. You configure an Online Archive on a collection and define **archiving criteria** (commonly date-based, such as `createdAt` or `eventTime`).
+2. Atlas continuously evaluates data in the background.
+3. Documents that meet the criteria are:
+   - Copied into Online Archive
+   - Removed from the hot tier
+4. The process is:
+   - Online
+   - Incremental
+   - Fully managed by Atlas
+
+Important characteristics:
+- No application changes required
+- No downtime
+- Archiving runs continuously, not as a one-time batch
+- Archived data is compressed and optimized for cost
+
+> “You define the rule; Atlas handles the movement.”
+
+---
+
+## Can you run a query across both the live cluster and Online Archive?
+
+### Yes — this is a core capability.
+
+Reference:
+- Online Archive overview: [https://www.mongodb.com/docs/atlas/online-archive/](https://www.mongodb.com/docs/atlas/online-archive/)
+- Atlas Data Federation overview: [https://www.mongodb.com/docs/atlas/data-federation/](https://www.mongodb.com/docs/atlas/data-federation/)
+
+### How it works
+Online Archive is exposed as a **logical extension of your collections**. A single query can span:
+- Hot data in the Atlas cluster
+- Archived data in Online Archive
+
+MongoDB automatically routes:
+- Hot reads to the cluster
+- Archive reads to Data Federation
+
+### Conceptual example
+```js
+db.events.find({
+  eventTime: { $gte: ISODate("2022-01-01") }
+})
+```
+
+If recent data is hot and older data is archived:
+* Recent documents are read from the cluster
+* Older documents are read from Online Archive
+* Results are merged transparently
+
+### Why this matters
+* No separate query language
+* No ETL just to query history
+* Existing reports can continue to work without modification
+
+> “It’s one query, one namespace — MongoDB handles where the data lives.”
+
+---
+
+## Practical considerations
+* Archived data is optimized for throughput and cost, not ultra-low-latency transactional access.
+* Query Processing cost is driven by how much archived data is scanned, not by query count.
+* Best practices:
+  - Always filter on the archive partition key (usually a date)
+  - Avoid unbounded “all-time” scans
+  - Aggregate early where possible
 
 ## **Reference links**
 
