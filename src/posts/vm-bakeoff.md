@@ -9,7 +9,7 @@ description: "A repeatable, CLI-first way to boot an Ubuntu ARM64 VM on Apple Vi
 
 This post is **Part 1** of my VM series. The goal is simple:
 
-> Code on GitHub: [https://github.com/corbtastik/vm-bakeoff](https://github.com/corbtastik/vm-bakeoff)
+Code on GitHub: [https://github.com/corbtastik/vm-bakeoff](https://github.com/corbtastik/vm-bakeoff)
 
 ✅ Boot an **Ubuntu ARM64 VM** on Apple Silicon using **[Lima](https://lima-vm.io/)**  
 ✅ Use **[Apple’s Virtualization.framework](https://developer.apple.com/documentation/virtualization)** (native, not emulation)  
