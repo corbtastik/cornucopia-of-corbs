@@ -1,347 +1,365 @@
 ---
-title: "VMs on macOS (Apple Silicon) with Lima 🦙"
-date: 2026-01-16
-tags: ["apple-silicon", "virtualization", "vm", "lima", "ubuntu", "mongodb"]
-description: "A repeatable, CLI-first way to boot an Ubuntu ARM64 VM on Apple Virtualization.framework (via Lima), attach a persistent data disk, and install MongoDB Community with auth/users."
+title: "Automating Local VMs on macOS (Apple Silicon) with Lima 🦙🍏 (MongoDB + Postgres)"
+date: 2026-01-18
+tags: ["apple-silicon", "virtualization", "vm", "lima", "ubuntu", "mongodb", "postgres"]
+description: "A repeatable, CLI-first framework to spin up multiple independent Lima VMs (with optional persistent disks), and provision MongoDB Community or Postgres idempotently."
 ---
 
-## VMs with Lima (Apple Virtualization.framework) 🦙🍏
+## Automating local VMs with Lima (VZ) 🦙🍏
 
-This post is **Part 1** of my VM series. The goal is simple:
+I wanted a local VM setup on Apple Silicon that’s:
 
-Code on GitHub: [https://github.com/corbtastik/vm-bakeoff](https://github.com/corbtastik/vm-bakeoff)
+✅ **CLI-first** (no clicking around)  
+✅ **Repeatable** (same commands every time)  
+✅ **Modular** (one VM per service: MongoDB VM, Postgres VM, Nginx VM, etc.)  
+✅ **Safe** (no accidental shared disks)  
+✅ **Idempotent provisioning** (safe reruns)
 
-✅ Boot an **Ubuntu ARM64 VM** on Apple Silicon using **[Lima](https://lima-vm.io/)**  
-✅ Use **[Apple’s Virtualization.framework](https://developer.apple.com/documentation/virtualization)** (native, not emulation)  
-✅ Attach a **separate persistent disk** for MongoDB (clear persistence story)  
-✅ Install **[MongoDB Community](https://www.mongodb.com/docs/manual/administration/install-on-linux/)**, enable auth, create users, and store data on the attached disk  
-✅ Make it repeatable with `make` + scripts (same “shape” across platforms)
+So I built a small framework repo:
+
+Code on GitHub: https://github.com/corbtastik/vm-bakeoff 🔗
+
+It uses:
+
+- **[Lima](https://lima-vm.io/)** 🦙 for VM lifecycle on macOS
+- **[Apple Virtualization.framework](https://developer.apple.com/documentation/virtualization)** 🍏 via `vmType: vz` (native, not emulation)
+- **Ubuntu ARM64 cloud images** from **[Canonical](https://cloud-images.ubuntu.com/)** 🐧
+- Separate provisioning scripts for:
+  - **[MongoDB Community](https://www.mongodb.com/docs/manual/administration/install-on-linux/)** 🍃 (I work for MongoDB, so… obviously 😄)
+  - **[Postgres](https://www.postgresql.org/)** 🐘
 
 ---
 
 ## 0) What you’ll build 🧱
 
-- An **[Ubuntu Server ARM64](https://ubuntu.com/download/server/arm)** VM running via Lima (`vmType: vz`)
-- A persistent data disk mounted at **`/data`**
-- MongoDB Community installed via apt repo (MongoDB 8.0 line)
-- MongoDB configured to store data at **`/data/mongodb`**
-- Auth enabled + 2 users created:
-  - `dbAdmin` (root role)
-  - `dbUser` (readWrite + dbAdmin on the `todo` DB)
-- A root-only secrets file: **`/etc/todo-secrets.env`**
-- Convenience aliases available in new shells:
-  - `mdb_admin`
-  - `mdb_user`
+By the end, you’ll be able to do this:
+
+- Create a **MongoDB VM**:
+  - VM name: `mongodb-vz`
+  - Disk name: `mongodb-data` (optional, but recommended for DBs)
+  - MongoDB stores data under `/data/mongodb`
+  - Auth enabled + users created
+- Create a **Postgres VM**:
+  - VM name: `postgres-vz`
+  - Disk name: `postgres-data`
+  - Postgres cluster lives under `/data/postgres/<major>/main`
+  - App role + database created
+- Keep host port forwards collision-free using **offset ports** (manual per VM), e.g.:
+  - MongoDB guest `27017` → host `37017`
+  - Postgres guest `5432` → host `35432`
+
+Most importantly: **each VM is independent**. No “one VM running everything” and no “oops, two VMs share a disk.” 🙅‍♂️💾
 
 ---
 
-## ✅ Why pick Lima?
+## ✅ Why Lima?
 
-- **CLI-first** (exactly what we want for a reproducible automation) ⌨️
-- Uses **Virtualization.framework** on Apple Silicon (`vmType: vz`) 🍏⚡
-- Easy YAML-driven VM config + port forwards 🧩
-- Great for automation comparisons (same workflow per platform) 🧪
+Lima is a great fit for local automation because it’s:
 
-⚠️ Gotchas:
-- Lima’s CLI output varies a bit by version (we avoid `--format` for portability)
-- `vmType` is “birth-time” — changing it later usually means recreating the VM 🔁
+- **YAML-driven** 🧩
+- **Scriptable** ⌨️
+- Supports `vmType: "vz"` on Apple Silicon 🍏⚡
+- Works nicely with a “driver” model (start/stop/run/provision) 🔁
+
+One key Lima concept:
+
+> Some VM settings are effectively **creation-time** (“birth-time”).  
+> So the right pattern is: generate VM YAML *per VM*, then create it.
+
+That’s exactly what this repo does.
 
 ---
 
 ## 1) Repo layout 🗂️
 
-This series repo is structured so each platform can plug into the same `make` targets:
+This repo is intentionally structured around two kinds of config:
 
-- `drivers/`
-  - `lima.sh` — platform driver (create/start/stop/destroy/run/provision helper)
-- `platforms/lima/`
-  - `lima.yaml` — generated pinned VM config
-- `scripts/`
-  - `lima-pin-ubuntu.sh` — generates `platforms/lima/lima.yaml` deterministically
-  - `up.sh`, `down.sh`, `destroy.sh`, `ssh.sh`, `status.sh`, `endpoints.sh`
-  - `provision.sh` — runs guest provisioning script
-  - `guest/provision.sh` — runs *inside the VM* (MongoDB install + config + users)
+### A) VM configuration (CPU, memory, disk, port forwards)
+Each VM has its own file:
+
+- `vms/mongodb.env`
+- `vms/postgres.env`
+- `vms/nginx.env` (example diskless VM)
+
+These define **how the VM runs**.
+
+### B) Software configuration (MongoDB/Postgres settings)
+Each piece of software has its own file:
+
+- `software/mongodb.env`
+- `software/postgres.env`
+- `software/nginx.env`
+
+These define **what gets installed**.
+
+And provisioning scripts combine both.
 
 ---
 
 ## 2) Prereqs (host) 🧰
 
-### Install Lima
-Recommended: **Homebrew** 🍺
+Install Lima and HTTPie:
 
 ```bash
-brew install lima
+brew install lima httpie
 limactl --version
+http --version
 ```
-
-### Optional but handy
-- **[HTTPie](https://httpie.io/)**
-- `git`
 
 ---
 
-## 3) Deterministic Ubuntu image pinning 🔒
+## 3) Deterministic Ubuntu pinning 🔒
 
-We generate a Lima YAML that pins:
-- the Ubuntu cloud image URL
-- the SHA256 digest
+Cloud images change over time. I want a deterministic VM baseline, so we pin the Ubuntu image SHA256 digest.
 
-That means: **reproducible builds** even if defaults change later.
-
-### Generate `platforms/lima/lima.yaml`
+This generates a pinned file used by all Ubuntu VMs:
 
 ```bash
 make ubuntu-pin
 ```
 
-(Behind the scenes that calls `./scripts/lima-pin-ubuntu.sh`.)
+Under the hood, we fetch the SHA256 for the exact Ubuntu cloud image build and write a pinned config in:
 
-### What the generated YAML looks like (example)
-Your generated file pins Ubuntu 24.04 ARM64 and uses `vmType: "vz"`:
+- `platforms/lima/images/ubuntu.env`
 
-```bash
-cat platforms/lima/lima.yaml
-```
-
-Expected shape:
-
-```bash
-vmType: "vz"
-cpus: 4
-memory: "6GiB"
-disk: "20GiB"
-images:
-  - location: "https://cloud-images.ubuntu.com/releases/noble/release-<BUILD>/ubuntu-24.04-server-cloudimg-arm64.img"
-    arch: "aarch64"
-    digest: "sha256:<SHA>"
-portForwards:
-  - guestPort: 80
-    hostPort: 8080
-  - guestPort: 3000
-    hostPort: 8081
-```
-
-> 🎯 Note: We don’t forward guest `22` because Lima manages SSH access internally and some versions reject forwarding `22` explicitly.
+This gives you a stable foundation: “same inputs → same VM base.”
 
 ---
 
-## 4) Data disk strategy (MongoDB lives on `/data`) 💾
+## 4) VM lifecycle: `make up/down/status/ssh/destroy` (per VM) 🎛️
 
-We create a named Lima disk on the host:
+This is the core loop.
 
-- Disk name: `ubuntu-todo-data-lima`
-- Disk size: `20GiB`
-
-Your `drivers/lima.sh` ensures the disk exists before bringing the VM up.
-
-### Key part of `drivers/lima.sh` (disk + up)
-
+### Bring up the MongoDB VM
 ```bash
-ensure_data_disk() {
-  : "${DATA_DISK_NAME:=ubuntu-todo-data-${PLATFORM}}"
-  : "${DATA_DISK_SIZE:=20GiB}"
-
-  if limactl disk list 2>/dev/null | awk 'NR>1 {print $1}' | grep -qx "${DATA_DISK_NAME}"; then
-    echo "✅ Data disk exists: ${DATA_DISK_NAME}"
-  else
-    echo "💾 Creating data disk: ${DATA_DISK_NAME} (${DATA_DISK_SIZE})"
-    limactl disk create "${DATA_DISK_NAME}" --size "${DATA_DISK_SIZE}"
-  fi
-}
-
-up() {
-  require
-  ensure_data_disk
-
-  if [[ ! -f "${LIMA_YAML}" ]]; then
-    echo "🧩 Missing ${LIMA_YAML} — generating via ./scripts/lima-pin-ubuntu.sh"
-    ./scripts/lima-pin-ubuntu.sh
-  fi
-
-  if exists; then
-    echo "▶️  Starting VM: ${VM_NAME}"
-    limactl start --tty=false "${VM_NAME}"
-  else
-    echo "🚀 Creating VM (VZ): ${VM_NAME}"
-    limactl start --name="${VM_NAME}" --tty=false "${LIMA_YAML}"
-  fi
-}
+make up VM=mongodb
+make status VM=mongodb
+make ssh VM=mongodb
 ```
 
-Inside the VM, Lima mounts the attached disk here:
+### Bring up the Postgres VM
+```bash
+make up VM=postgres
+make status VM=postgres
+make ssh VM=postgres
+```
 
-- `/mnt/lima-ubuntu-todo-data-lima`
+### Stop a VM (no data loss)
+```bash
+make down VM=postgres
+```
 
-Then guest provisioning bind-mounts it to:
+### Destroy a VM (and its disk, by default) 💣
+```bash
+make destroy VM=postgres
+```
+
+Want to delete the VM but **keep its disk** (persistence test / rebuild VM config / etc.)?
+
+```bash
+KEEP_DISK=1 make destroy VM=postgres
+```
+
+---
+
+## 5) The disk strategy: optional, per VM 💾
+
+Each VM can choose:
+
+- `HAS_DATA_DISK=1` → create a named Lima disk (`<vm>-data`)
+- `HAS_DATA_DISK=0` → diskless VM (fine for Nginx, utility boxes, etc.)
+
+Inside the guest, the Lima attached disk appears under `/mnt/...` and is bind-mounted to:
 
 - `/data`
 
-✅ MongoDB stores data under `/data/mongodb`
+So for DB VMs, `/data` becomes the “persistence contract.”
+
+✅ MongoDB data goes to `/data/mongodb`  
+✅ Postgres data goes to `/data/postgres/...`
 
 ---
 
-## 5) Bring the VM up 🚀
+## 6) Port forwards: manual “offset style” per VM 🔌
 
-### Start VM
+We define port forwards in each VM’s `.env` so they’re explicit and collision-free.
 
-```bash
-make up PLATFORM=lima
-```
+Example pattern:
 
-### Check status
+- MongoDB VM forwards guest `27017` to host `37017`
+- Postgres VM forwards guest `5432` to host `35432`
 
-```bash
-make status PLATFORM=lima
-```
-
-### Shell into the VM
-
-```bash
-make ssh PLATFORM=lima
-```
-
-Quick sanity inside the VM:
-
-```bash
-uname -m
-ls -la /mnt | grep lima-
-```
-
-You should see:
-- `aarch64`
-- the disk mount like `/mnt/lima-ubuntu-todo-data-lima`
+That means you can run both at once without conflict 😎
 
 ---
 
-## 6) Provision MongoDB Community + users + auth 🔐🍃
+## 7) Provisioning: MongoDB Community 🍃
 
-This runs the guest script inside the VM:
+Once the VM is up, provisioning installs and configures software inside it.
 
+### Provision MongoDB VM
 ```bash
-make provision PLATFORM=lima
+make provision-mongodb VM=mongodb
 ```
 
 What provisioning does (high level):
 
-1) Ensures the disk is reachable in the guest (`/mnt/lima-ubuntu-todo-data-lima`)  
-2) Creates `/data` and bind-mounts the disk there (and persists it in `/etc/fstab`)  
-3) Installs MongoDB Community from MongoDB’s apt repo  
-4) Updates `/etc/mongod.conf`:
-   - `storage.dbPath: /data/mongodb`
+1) Ensures `/data` exists (and uses persistent disk if configured) 💾  
+2) Installs MongoDB Community from MongoDB’s official apt repo 🍃  
+3) Configures `/etc/mongod.conf`:
+   - `dbPath: /data/mongodb`
    - log path under `/data`
-   - `bindIp: 127.0.0.1` (MongoDB is not exposed externally)
-5) Creates `/etc/todo-secrets.env` (root-only)
-6) Reconciles users deterministically (safe on reruns):
-   - temporarily disables auth
-   - creates/updates `dbAdmin` (root)
-   - enables auth
-   - creates/updates `dbUser` on DB `todo`
-7) Verifies auth by running a ping using `MONGODB_URI`
-8) Installs shell aliases in `/etc/profile.d/mongo-aliases.sh`
+   - binds to `127.0.0.1` for safety 🔐  
+4) Creates a root-only secrets file: `/etc/todo-secrets.env` 🔒  
+5) Enables auth and reconciles users idempotently:
+   - `dbAdmin` (root on `admin`)
+   - `dbUser` (readWrite + dbAdmin on `todo`)  
+6) Writes `MONGODB_URI` to the secrets file  
+7) Installs `mdb_user` and `mdb_admin` helper aliases 🎯
 
 ---
 
-## 7) How to verify it worked ✅
+## 8) Verify MongoDB ✅
 
-### A) Confirm MongoDB is using `/data/mongodb`
+SSH into the VM:
 
-Inside the VM:
+```bash
+make ssh VM=mongodb
+```
 
+### Confirm data directory
 ```bash
 sudo ls -la /data
 sudo ls -la /data/mongodb
 sudo systemctl status mongod --no-pager
 ```
 
-### B) Check the secrets file exists
-
+### Check secrets
 ```bash
-sudo ls -la /etc/todo-secrets.env
 sudo cat /etc/todo-secrets.env
 ```
 
-You should see values for:
-- `DB_ADMIN_USER`, `DB_ADMIN_PASS`
-- `DB_USER`, `DB_USER_PASS`
-- `MONGODB_URI`
-
-### C) Auth as dbUser (app user)
-
-After provisioning, open a new shell (or source the aliases):
-
+### Connect as app user (`dbUser`)
 ```bash
-source /etc/profile.d/mongo-aliases.sh
-mdb_user
+sudo bash -lc 'source /etc/todo-secrets.env && mongosh "$MONGODB_URI" --eval "db.runCommand({ ping: 1 })"'
 ```
 
-In mongosh, confirm:
-
+### Connect as admin (`dbAdmin`)
 ```bash
-db.runCommand({ connectionStatus: 1 })
-db.getSiblingDB("todo").getName()
+sudo bash -lc 'source /etc/todo-secrets.env && mongosh --host 127.0.0.1 --port 27017 --username "$DB_ADMIN_USER" --password "$DB_ADMIN_PASS" --authenticationDatabase admin --eval "db.runCommand({ connectionStatus: 1 })"'
 ```
 
-### D) Auth as dbAdmin (root)
-
-```bash
-source /etc/profile.d/mongo-aliases.sh
-mdb_admin
-```
-
-Then confirm privileges:
-
-```bash
-use admin
-db.runCommand({ connectionStatus: 1 })
-db.getUsers()
-```
-
-> If `mdb_user` and `mdb_admin` both work, auth is on and the users are real. 🎉
+If both work, auth is on and users exist. 🎉
 
 ---
 
-## 8) Useful host commands 🕹️
+## 9) Provisioning: Postgres 🐘
+
+Bring up the Postgres VM and provision it:
 
 ```bash
-make endpoints PLATFORM=lima
-make ssh PLATFORM=lima
-make down PLATFORM=lima
-make up PLATFORM=lima
-make destroy PLATFORM=lima
+make up VM=postgres
+make provision-postgres VM=postgres
+```
+
+What provisioning does:
+
+1) Ensures `/data` exists (persistent disk if configured) 💾  
+2) Installs Postgres packages from Ubuntu repos 🐘  
+3) Creates/moves the Postgres cluster to `/data/postgres/<major>/main`  
+4) Configures:
+   - `listen_addresses = 127.0.0.1`
+   - port `5432`
+   - `scram-sha-256` auth for localhost  
+5) Generates or reuses secrets in `/etc/todo-secrets.env`:
+   - `PG_DB`, `PG_USER`, `PG_PASS`
+   - `POSTGRES_URI`
+6) Creates/updates the role idempotently
+7) Creates the database idempotently (using `createdb`, because `CREATE DATABASE` can’t run inside `DO`) ✅
+
+---
+
+## 10) Verify Postgres ✅
+
+SSH into the VM:
+
+```bash
+make ssh VM=postgres
+```
+
+### Check secrets
+```bash
+sudo cat /etc/todo-secrets.env
+```
+
+### Connect as the app user (`todo_pg_user`) and create a table
+```bash
+sudo bash -lc 'source /etc/todo-secrets.env && psql "$POSTGRES_URI" -v ON_ERROR_STOP=1 <<SQL
+CREATE TABLE IF NOT EXISTS todos (
+  id bigserial PRIMARY KEY,
+  title text NOT NULL,
+  done boolean NOT NULL DEFAULT false,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+INSERT INTO todos (title) VALUES (''hello from todo_pg_user'');
+SELECT * FROM todos ORDER BY id DESC LIMIT 5;
+SQL'
+```
+
+### Admin check (superuser)
+On Ubuntu, “admin” is the `postgres` OS user and DB role:
+
+```bash
+sudo -u postgres psql -c "select current_user, current_database();"
+```
+
+Verify the role and DB exist:
+
+```bash
+sudo bash -lc 'source /etc/todo-secrets.env && sudo -u postgres psql -tAc "select rolname from pg_roles where rolname='\''$PG_USER'\''"'
+sudo bash -lc 'source /etc/todo-secrets.env && sudo -u postgres psql -tAc "select datname from pg_database where datname='\''$PG_DB'\''"'
 ```
 
 ---
 
-## 9) Teardown (clean exit) 🧹
+## 11) Optional: connect from macOS via forwarded ports 🍏➡️🐧
 
-Stop the VM:
-
-```bash
-make down PLATFORM=lima
-```
-
-Delete the VM:
+If your Postgres VM forwards guest `5432` to host `35432`, you can connect from macOS like:
 
 ```bash
-make destroy PLATFORM=lima
+psql "postgresql://todo_pg_user:<PG_PASS>@127.0.0.1:35432/todo_pg" -c "select now();"
 ```
 
-> Note: We intentionally keep the data disk as a persistence artifact unless we explicitly delete it (that’s the point of the demo). 😄
+Same idea for MongoDB if you forward guest `27017` to host `37017`:
+
+```bash
+mongosh "mongodb://dbUser:<DB_USER_PASS>@127.0.0.1:37017/todo?authSource=todo"
+```
+
+(Grab passwords from `/etc/todo-secrets.env` inside the VM.)
 
 ---
 
-## Acceptance checklist ✅
+## 12) Acceptance checklist ✅✅✅
 
-- [✅] VM boots Ubuntu **ARM64** (`uname -m` → `aarch64`)
-- [✅] VM is created with `vmType: "vz"` (Apple Virtualization.framework)
-- [✅] Data disk exists on host (`limactl disk list`)
-- [✅] Disk is mounted and bound to `/data` inside guest
-- [✅] MongoDB data lives on `/data/mongodb`
-- [✅] Auth is enabled
-- [✅] `mdb_user` works
-- [✅] `mdb_admin` works
-- [✅] Rerunning `make provision PLATFORM=lima` is safe (idempotent-ish)
+- [✅] Ubuntu image is pinned deterministically (digest) 🔒  
+- [✅] Multiple independent VMs can exist: `mongodb-vz`, `postgres-vz`, etc. 🧩  
+- [✅] Disks are per-VM: `mongodb-data`, `postgres-data` (no accidental sharing) 💾  
+- [✅] VMs can be diskless when appropriate (e.g. nginx) 🪶  
+- [✅] MongoDB stores data on `/data/mongodb` and auth works 🔐🍃  
+- [✅] Postgres stores data on `/data/postgres/...` and app role can create tables 🐘  
+- [✅] Rerunning provisioning is safe (idempotent behavior) 🔁  
 
 ---
 
-That’s it for lima! ✅  
+## Wrap-up 🎬
+
+This repo is intentionally small and boring (in a good way). 😄  
+It’s a repeatable pattern you can grow:
+
+- add more VM configs under `vms/`
+- add more provisioners under `scripts/guest/`
+- keep a consistent lifecycle: `up → provision → test → down/destroy`
+
+If you’re building local demos, POCs, or just want a reliable VM baseline on Apple Silicon… this is a great place to start. 🦙🍏

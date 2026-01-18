@@ -15,8 +15,6 @@
     --on-secondary-container-color: var(--text-color);
 }
 
-/* Material Design Colors */
-
 /* Material Pink Dark mode */
 html[data-theme-set="material-pink"][data-mode="dark"] {
     --bg-color: #880E4F; /* Pink 900 */
