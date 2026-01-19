@@ -14,7 +14,7 @@ Helpful background links:
 * [Relational model](https://en.wikipedia.org/wiki/Relational_model)
 * [MongoDB data modeling overview](https://www.mongodb.com/docs/manual/data-modeling/)
 * Embedding vs referencing:
-  - [1 to 1]((https://www.mongodb.com/docs/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/))
+  - [1 to 1](https://www.mongodb.com/docs/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/)
   - [1 to Many](https://www.mongodb.com/docs/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/)
 * [$lookup (joins in aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/)
 * [Aggregation framework](https://www.mongodb.com/docs/manual/aggregation/)
@@ -139,7 +139,7 @@ db.subscribers.aggregate([
   {
     $lookup: {
       from: "subscriber_profiles",
-      localField: _id,
+      localField: "_id",
       foreignField: subscriberId,
       as: "profile"
     }
@@ -547,7 +547,7 @@ If you truly need to join (often you don’t):
 ```js
 db.tickets.aggregate([
   { $match: { subscriberId: 501 } },
-  { $lookup: { from: "ticket_status_codes", localField: "statusCode", foreignField: _id, as: "status" } },
+  { $lookup: { from: "ticket_status_codes", localField: "statusCode", foreignField: "_id", as: "status" } },
   { $set: { status: { $first: "$status" } } }
 ])
 ```
