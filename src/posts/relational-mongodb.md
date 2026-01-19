@@ -5,26 +5,24 @@ tags: ["mongodb", "relational", "rdbms", "sql", "postgres"]
 description: "A walk down the relational lane with MongoDB"
 ---
 
-Below is a **single, coherent “CarrierOps” dataset** you can use to *show* how classic relational patterns map cleanly to MongoDB—**including when MongoDB is a bad fit** (or when you should keep things relational).
+I used to think of MongoDB as “that place you put JSON when you don’t want to design a schema.” Then I watched enough production systems to learn the obvious truth: relationships don’t disappear just because your database isn’t an RDBMS.
 
-I’ll go **pattern by pattern** in order (starting with **1:1**), and for each one you’ll get:
-
-* What it is + **why people implement it**
-* **Postgres** schema (DDL) + a representative **SQL query**
-* The **MongoDB equivalent** (embed vs reference), plus a representative query (including **$lookup** when appropriate)
+This post is a guided reality check. We’ll use a telco-style dataset (“CarrierOps”) and model it in Postgres and MongoDB. We’ll cover the relationship patterns you already know—1:1, 1:N (small/medium/large), M:N, hierarchies, code tables, and a few of the weird ones. You’ll see that MongoDB is absolutely relational… it just lets you pick the shape that fits the workload instead of defaulting to “normalize everything and join forever.”
 
 Helpful background links:
 
-* Relational model (Wikipedia): [https://en.wikipedia.org/wiki/Relational_model](https://en.wikipedia.org/wiki/Relational_model)
-* MongoDB data modeling overview: [https://www.mongodb.com/docs/manual/data-modeling/](https://www.mongodb.com/docs/manual/data-modeling/)
-* Embedding vs referencing: [https://www.mongodb.com/docs/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/](https://www.mongodb.com/docs/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/) and [https://www.mongodb.com/docs/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/](https://www.mongodb.com/docs/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/)
-* $lookup (joins in aggregation): [https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/)
-* Aggregation framework: [https://www.mongodb.com/docs/manual/aggregation/](https://www.mongodb.com/docs/manual/aggregation/)
-* Transactions: [https://www.mongodb.com/docs/manual/core/transactions/](https://www.mongodb.com/docs/manual/core/transactions/)
+* [Relational model](https://en.wikipedia.org/wiki/Relational_model)
+* [MongoDB data modeling overview](https://www.mongodb.com/docs/manual/data-modeling/)
+* Embedding vs referencing:
+  - [1 to 1]((https://www.mongodb.com/docs/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/))
+  - [1 to Many](https://www.mongodb.com/docs/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/)
+* [$lookup (joins in aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/)
+* [Aggregation framework](https://www.mongodb.com/docs/manual/aggregation/)
+* [Transactions](https://www.mongodb.com/docs/manual/core/transactions/)
 
 ---
 
-# CarrierOps domain (shared vocabulary)
+## CarrierOps domain (shared vocabulary)
 
 We’ll use these “real telco-ish” entities across every pattern:
 
@@ -40,11 +38,11 @@ We’ll use these “real telco-ish” entities across every pattern:
 
 ---
 
-# 1) One-to-One (1:1) — Subscriber ↔ SubscriberProfile
+## 1) One-to-One (1:1) — Subscriber ↔ SubscriberProfile
 
-**Wikipedia:** [https://en.wikipedia.org/wiki/One-to-one_(data_model)](https://en.wikipedia.org/wiki/One-to-one_%28data_model%29)
+* [One-to-One](https://en.wikipedia.org/wiki/One-to-one_%28data_model%29)
 
-## Why it exists (in the real world)
+### Why it exists (in the real world)
 
 Teams implement 1:1 splits to:
 
@@ -52,7 +50,7 @@ Teams implement 1:1 splits to:
 * move **rarely used** / “wide” columns out of the hot path (keep core row small)
 * make an “optional extension” without bloating every row
 
-## Postgres (DDL)
+### Postgres (DDL)
 
 ```sql
 CREATE TABLE subscribers (
@@ -75,7 +73,7 @@ CREATE TABLE subscriber_profiles (
 );
 ```
 
-## Postgres query (fetch subscriber + profile)
+### Postgres query (fetch subscriber + profile)
 
 ```sql
 SELECT s.subscriber_id, s.msisdn, s.status,
@@ -86,9 +84,9 @@ LEFT JOIN subscriber_profiles p
 WHERE s.msisdn = '+12145551212';
 ```
 
-## MongoDB equivalent (two common options)
+### MongoDB equivalent (two common options)
 
-### Option A — **Embed** the profile (best when you almost always read it with subscriber)
+#### Option A — **Embed** the profile (best when you almost always read it with subscriber)
 
 **Collection:** `subscribers`
 
@@ -118,7 +116,7 @@ db.subscribers.findOne({ msisdn: "+12145551212" })
 
 **When not to embed:** if you need **separate security controls** (PII access), separate lifecycle, or large blobs.
 
-### Option B — **Reference** into a separate `subscriber_profiles` collection (more “RDBMS-like”)
+#### Option B — **Reference** into a separate `subscriber_profiles` collection (more “RDBMS-like”)
 
 ```js
 // subscribers
@@ -154,11 +152,11 @@ db.subscribers.aggregate([
 
 ---
 
-# 2) One-to-Many (1:N) — and why “small/medium/large N” changes everything
+## 2) One-to-Many (1:N) — and why “small/medium/large N” changes everything
 
-**Wikipedia:** [https://en.wikipedia.org/wiki/One-to-many_(data_model)](https://en.wikipedia.org/wiki/One-to-many_%28data_model%29)
+* [One-to-Many](https://en.wikipedia.org/wiki/One-to-many_%28data_model%29)
 
-## Why it exists
+### Why it exists
 
 Because the world is full of “parent + children”:
 
@@ -170,13 +168,13 @@ The *shape* of the relationship (small vs huge N) determines whether you **embed
 
 ---
 
-## 2a) 1:N (small N) — Order → OrderItems
+### 2a) 1:N (small N) — Order → OrderItems
 
-### Why implement it
+#### Why implement it
 
 A handful of child records that are usually fetched together with the parent.
 
-### Postgres (DDL)
+#### Postgres (DDL)
 
 ```sql
 CREATE TABLE orders (
@@ -197,7 +195,7 @@ CREATE TABLE order_items (
 CREATE INDEX order_items_order_id_idx ON order_items(order_id);
 ```
 
-### Postgres query (order with items)
+#### Postgres query (order with items)
 
 ```sql
 SELECT o.order_id, o.status, i.sku, i.qty, i.price_cents
@@ -206,7 +204,7 @@ JOIN order_items i ON i.order_id = o.order_id
 WHERE o.order_id = 771;
 ```
 
-### MongoDB equivalent (best practice: **embed items**)
+#### MongoDB equivalent (best practice: **embed items**)
 
 ```js
 // orders
@@ -234,13 +232,13 @@ db.orders.findOne({ _id: 771 })
 
 ---
 
-## 2b) 1:N (medium N) — Device → DeviceEvents (hundreds/thousands)
+### 2b) 1:N (medium N) — Device → DeviceEvents (hundreds/thousands)
 
-### Why implement it
+#### Why implement it
 
 Operational visibility and troubleshooting: “show me last 24h of events for this device”.
 
-### Postgres (DDL)
+#### Postgres (DDL)
 
 ```sql
 CREATE TABLE devices (
@@ -261,7 +259,7 @@ CREATE TABLE device_events (
 CREATE INDEX device_events_device_ts_idx ON device_events(device_id, ts DESC);
 ```
 
-### Postgres query (last 100 events)
+#### Postgres query (last 100 events)
 
 ```sql
 SELECT event_type, ts, payload
@@ -271,7 +269,7 @@ ORDER BY ts DESC
 LIMIT 100;
 ```
 
-### MongoDB equivalent (usually **separate collection** + time-index)
+#### MongoDB equivalent (usually **separate collection** + time-index)
 
 ```js
 // devices
@@ -306,13 +304,13 @@ db.device_events
 
 ---
 
-## 2c) 1:N (large N) — Subscriber → UsageRecords (CDRs / millions)
+### 2c) 1:N (large N) — Subscriber → UsageRecords (CDRs / millions)
 
-### Why implement it
+#### Why implement it
 
 This is the “heavy consumer legacy app” reality: huge append-only datasets queried by **time windows** and secondary filters.
 
-### Postgres (DDL)
+#### Postgres (DDL)
 
 ```sql
 CREATE TABLE usage_records (
@@ -327,7 +325,7 @@ CREATE TABLE usage_records (
 CREATE INDEX usage_subscriber_ts_idx ON usage_records(subscriber_id, ts DESC);
 ```
 
-### Postgres query (windowed)
+#### Postgres query (windowed)
 
 ```sql
 SELECT ts, usage_type, units, rated_cents
@@ -337,7 +335,7 @@ WHERE subscriber_id = 501
 ORDER BY ts DESC;
 ```
 
-### MongoDB equivalent (separate collection; **windowed queries**; consider partitioning/sharding if needed)
+#### MongoDB equivalent (separate collection; **windowed queries**; consider partitioning/sharding if needed)
 
 ```js
 // usage_records
@@ -366,22 +364,22 @@ db.usage_records.find({
 }).sort({ ts: -1 })
 ```
 
-**Where MongoDB “doesn’t fit” (be honest):**
+**Where MongoDB “doesn’t fit”:**
 
 * If the app’s primary workload is **huge multi-table joins over massive fact tables** *every time* (classic star-schema analytics), MongoDB can do it, but a columnar warehouse or RDBMS tuned for that may be better.
 * MongoDB wins when the operational read/write path is **entity-centric** (subscriber/order/ticket/device) and analytics is offloaded (or handled differently).
 
 ---
 
-# 3) Many-to-Many (M:N) — Subscribers ↔ Features
+## 3) Many-to-Many (M:N) — Subscribers ↔ Features
 
-**Wikipedia:** [https://en.wikipedia.org/wiki/Many-to-many_(data_model)](https://en.wikipedia.org/wiki/Many-to-many_%28data_model%29)
+* [Many-to-Many](https://en.wikipedia.org/wiki/Many-to-many_%28data_model%29)
 
-## Why it exists
+### Why it exists
 
 Entitlements: a subscriber can have many add-ons; an add-on belongs to many subscribers.
 
-## Postgres (DDL)
+### Postgres (DDL)
 
 ```sql
 CREATE TABLE features (
@@ -397,7 +395,7 @@ CREATE TABLE subscriber_features (
 );
 ```
 
-## Postgres query (features for a subscriber)
+### Postgres query (features for a subscriber)
 
 ```sql
 SELECT f.code, f.name
@@ -406,9 +404,9 @@ JOIN features f ON f.feature_id = sf.feature_id
 WHERE sf.subscriber_id = 501;
 ```
 
-## MongoDB equivalents (two standard approaches)
+### MongoDB equivalents (two standard approaches)
 
-### Option A — embed “feature codes” in the subscriber (fastest reads)
+#### Option A — embed “feature codes” in the subscriber (fastest reads)
 
 ```js
 // subscribers
@@ -421,7 +419,7 @@ Query:
 db.subscribers.findOne({ _id: 501 }, { featureCodes: 1 })
 ```
 
-### Option B — separate join collection + $lookup (more relational)
+#### Option B — separate join collection + $lookup (more relational)
 
 ```js
 // subscriber_features
@@ -453,15 +451,15 @@ db.subscriber_features.aggregate([
 
 ---
 
-# 4) Self-Referencing (Adjacency List) — OrgUnit hierarchy
+## 4) Self-Referencing (Adjacency List) — OrgUnit hierarchy
 
-**Wikipedia:** [https://en.wikipedia.org/wiki/Adjacency_list](https://en.wikipedia.org/wiki/Adjacency_list)
+* [Adjacency List](https://en.wikipedia.org/wiki/Adjacency_list)
 
-## Why it exists
+### Why it exists
 
 Hierarchies: escalation routing, ownership, product categories, org charts.
 
-## Postgres (DDL)
+### Postgres (DDL)
 
 ```sql
 CREATE TABLE org_units (
@@ -473,7 +471,7 @@ CREATE TABLE org_units (
 CREATE INDEX org_units_parent_idx ON org_units(parent_org_unit_id);
 ```
 
-## Postgres query (get children of a node)
+### Postgres query (get children of a node)
 
 ```sql
 SELECT org_unit_id, name
@@ -481,7 +479,7 @@ FROM org_units
 WHERE parent_org_unit_id = 42;
 ```
 
-## MongoDB equivalent (same adjacency model)
+### MongoDB equivalent (same adjacency model)
 
 ```js
 // org_units
@@ -499,15 +497,15 @@ db.org_units.find({ parentId: 42 })
 
 ---
 
-# 5) Lookup / Reference Tables — TicketStatus codes
+## 5) Lookup / Reference Tables — TicketStatus codes
 
-**Wikipedia:** [https://en.wikipedia.org/wiki/Lookup_table](https://en.wikipedia.org/wiki/Lookup_table)
+* [Reference Tables](https://en.wikipedia.org/wiki/Lookup_table)
 
-## Why it exists
+### Why it exists
 
 Controlled vocabularies: enforce valid values; consistent reporting.
 
-## Postgres (DDL)
+### Postgres (DDL)
 
 ```sql
 CREATE TABLE ticket_status_codes (
@@ -523,7 +521,7 @@ CREATE TABLE tickets (
 );
 ```
 
-## Postgres query (tickets + status description)
+### Postgres query (tickets + status description)
 
 ```sql
 SELECT t.ticket_id, t.opened_at, s.description
@@ -532,7 +530,7 @@ JOIN ticket_status_codes s ON s.code = t.status_code
 WHERE t.subscriber_id = 501;
 ```
 
-## MongoDB equivalent
+### MongoDB equivalent
 
 Commonly: store the **code** in the main doc and keep codes in a small collection (or in app config).
 
@@ -556,15 +554,15 @@ db.tickets.aggregate([
 
 ---
 
-# 6) Associative Entity (M:N with attributes) — SubscriberFeature lifecycle
+## 6) Associative Entity (M:N with attributes) — SubscriberFeature lifecycle
 
-**Wikipedia:** [https://en.wikipedia.org/wiki/Associative_entity](https://en.wikipedia.org/wiki/Associative_entity)
+* [Associative Entity](https://en.wikipedia.org/wiki/Associative_entity)
 
-## Why it exists
+### Why it exists
 
 Because the relationship itself has **meaningful data**: dates, state, source, provisioning workflow, etc.
 
-## Postgres (DDL)
+### Postgres (DDL)
 
 ```sql
 CREATE TABLE subscriber_feature_state (
@@ -578,7 +576,7 @@ CREATE TABLE subscriber_feature_state (
 );
 ```
 
-## Postgres query (active features now)
+### Postgres query (active features now)
 
 ```sql
 SELECT f.code, sfs.provisioning_state, sfs.source
@@ -589,7 +587,7 @@ WHERE sfs.subscriber_id = 501
   AND (sfs.effective_to IS NULL OR sfs.effective_to > now());
 ```
 
-## MongoDB equivalent (join collection is natural here)
+### MongoDB equivalent (join collection is natural here)
 
 ```js
 // subscriber_feature_state
@@ -616,15 +614,15 @@ db.subscriber_feature_state.find({
 
 ---
 
-# 7) Inheritance / Subtypes (table-per-subclass) — Service → WirelessService / BroadbandService
+## 7) Inheritance / Subtypes (table-per-subclass) — Service → WirelessService / BroadbandService
 
-**Wikipedia (class table inheritance):** [https://en.wikipedia.org/wiki/Class_table_inheritance](https://en.wikipedia.org/wiki/Class_table_inheritance)
+* [Class Table Inheritance](https://en.wikipedia.org/wiki/Class_table_inheritance)
 
-## Why it exists
+### Why it exists
 
 A shared “base type” plus subtype-specific fields.
 
-## Postgres (DDL)
+### Postgres (DDL)
 
 ```sql
 CREATE TABLE services (
@@ -647,7 +645,7 @@ CREATE TABLE broadband_services (
 );
 ```
 
-## Postgres query (fetch a service with subtype fields)
+### Postgres query (fetch a service with subtype fields)
 
 ```sql
 SELECT s.service_id, s.service_type, s.status,
@@ -659,7 +657,7 @@ LEFT JOIN broadband_services bs ON bs.service_id = s.service_id
 WHERE s.subscriber_id = 501;
 ```
 
-## MongoDB equivalent (most common: **single collection with discriminator**)
+### MongoDB equivalent (most common: **single collection with discriminator**)
 
 ```js
 // services
@@ -696,15 +694,15 @@ db.services.find({ subscriberId: 501 })
 
 ---
 
-# 8) Polymorphic Association — Notes attach to Order OR Ticket OR Subscriber
+## 8) Polymorphic Association — Notes attach to Order OR Ticket OR Subscriber
 
-**Wikipedia (conceptual):** [https://en.wikipedia.org/wiki/Polymorphism_(computer_science)](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29)
+* [Polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29)
 
-## Why it exists
+### Why it exists
 
 “Comments/notes/audit entries” inevitably need to attach to many entity types.
 
-## Postgres (how it’s usually done, awkwardly)
+### Postgres (how it’s usually done, awkwardly)
 
 One common pattern is: `(entity_type, entity_id)` + application-enforced constraints.
 
@@ -730,7 +728,7 @@ WHERE entity_type = 'ticket' AND entity_id = 90001
 ORDER BY created_at DESC;
 ```
 
-## MongoDB equivalent (natural fit)
+### MongoDB equivalent (natural fit)
 
 ```js
 // notes
@@ -757,15 +755,15 @@ db.notes.find({ ref: { type: "ticket", id: 90001 } }).sort({ createdAt: -1 })
 
 ---
 
-# 9) Ternary relationship (3-way join) — Rate depends on Plan + Region + DeviceClass
+## 9) Ternary relationship (3-way join) — Rate depends on Plan + Region + DeviceClass
 
-**Wikipedia:** [https://en.wikipedia.org/wiki/Ternary_relationship](https://en.wikipedia.org/wiki/Ternary_relationship)
+* [Ternary Relationship](https://en.wikipedia.org/wiki/Ternary_relationship)
 
-## Why it exists
+### Why it exists
 
 Some relationships are inherently 3D (or more). Pricing/eligibility matrices are classic.
 
-## Postgres (DDL)
+### Postgres (DDL)
 
 ```sql
 CREATE TABLE plans (
@@ -800,7 +798,7 @@ FROM rates
 WHERE plan_id = 10 AND region_id = 3 AND device_class_id = 2;
 ```
 
-## MongoDB equivalent (document-as-matrix row)
+### MongoDB equivalent (document-as-matrix row)
 
 ```js
 // rates
@@ -827,19 +825,24 @@ db.rates.findOne({ planCode: "UNL-5G", regionCode: "TX-NORTH", deviceClass: "PHO
 
 ---
 
-# The “relational fit” punchline
+## The Relational Punchline
 
-MongoDB absolutely supports relational patterns (including joins via `$lookup`)—the difference is **you’re not forced to normalize everything**.
+If you take one thing from this post, take this: **MongoDB is relational.** It supports the same relationship patterns you’ve used forever—and yes, it can even *join* (`$lookup`) when you need it. The real difference is you’re **not forced into “normalize everything and join everything”** as the default.
 
-MongoDB tends to make the most sense for “heavy consumer” legacy apps when:
+### MongoDB is a strong fit when…
 
-* Reads/writes are naturally **entity/aggregate-centric** (subscriber, order, ticket, device)
-* You want **fewer joins in the hot path** (embed where it makes sense)
-* You need **flexible schemas** as teams modernize and requirements churn
-* You still occasionally need relational constructs (M:N, lookups, hierarchies) and can do them via referencing / `$lookup`
+* Your reads/writes are naturally **centered on an entity** (subscriber, order, ticket, device) and you want to fetch “the thing” in one trip.
+* You’d rather keep the **hot path simple**: fewer joins, fewer round trips, fewer moving parts (embed where it makes sense, reference where it doesn’t).
+* You’re modernizing a legacy app and the schema is going to **evolve** (because it always does), and you don’t want every change to be a mini migration project.
+* You still need real relational patterns—**M:N, lookups, hierarchies**—but you want the flexibility to model them as documents, references, *or* `$lookup` depending on the query.
 
-MongoDB tends to be a poorer fit (or at least not the default) when:
+### MongoDB is not the default choice when…
 
-* The core workload is **constant multi-table joins** over large fact tables as the primary operational query shape
-* The system depends heavily on **strict relational constraints everywhere** (complex cross-entity invariants enforced purely in the DB layer)
-* The requirement is basically “we want a normalized OLTP RDBMS and we won’t change the app query shapes”
+* The core workload is basically: **“join five big tables all day long”** as the primary operational query shape (especially over giant fact tables).
+* Your system requires **hard relational constraints everywhere**, enforced purely in the database, across lots of entities (not just in the app).
+* The real requirement is: **“we want a classic normalized OLTP RDBMS and we’re not changing the query shapes.”** That’s fine—just call it what it is.
+
+Bottom line: MongoDB doesn’t remove relationships—it gives you more ways to express them. The win is choosing the model that matches how the app actually reads and writes data, instead of letting the modeling rules pick for you.
+
+
+
