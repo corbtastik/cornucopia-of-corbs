@@ -23,6 +23,7 @@ I chose this stack because I wanted something:
 
 Here is a quick look at the simplicity that won me over. A simple Nunjucks template can power an entire layout:
 
+{% raw %}
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +37,7 @@ Here is a quick look at the simplicity that won me over. A simple Nunjucks templ
 </body>
 </html>
 ```
+{% endraw %}
 
 ## What to Expect
 
