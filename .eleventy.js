@@ -3,6 +3,12 @@ const { DateTime } = require("luxon"); // Optional: helper for dates if needed l
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function(eleventyConfig) {
+    // DRAFTS LOGIC
+    // If in production mode, ignore the drafts folder.
+    if (process.env.ELEVENTY_ENV === "production") {
+        eleventyConfig.ignores.add("src/drafts");
+    }
+
     eleventyConfig.addPlugin(syntaxHighlight);
     // --- NEW DATE FILTERS START ---
     // 1. Human Readable (e.g., "October 4, 2023")
