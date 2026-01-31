@@ -11,6 +11,7 @@
             const savedMode = localStorage.getItem('theme-mode') || 'dark';
             document.documentElement.setAttribute('data-theme-set', savedTheme);
             document.documentElement.setAttribute('data-mode', savedMode);
+            document.documentElement.setAttribute('data-bg-style', 'quantum-fog');
         })();
     </script>
 
@@ -30,12 +31,6 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="site-body">
-    <div class="ambient-bg" aria-hidden="true">
-        <span class="ambient-orb orb-1"></span>
-        <span class="ambient-orb orb-2"></span>
-        <span class="ambient-orb orb-3"></span>
-        <span class="ambient-orb orb-4"></span>
-    </div>
     <div class="page-shell">
     <header>
         <nav class="site-nav">
