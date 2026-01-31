@@ -4,7 +4,18 @@ layout: base.njk
 description: "Browse posts by topic."
 ---
 
-<h1>Tags</h1>
+<section class="page-hero compact">
+    <div class="hero-copy">
+        <p class="hero-kicker">Index</p>
+        <h1 class="hero-title">Themes, threads, and deep dives.</h1>
+        <p class="hero-subtitle">Jump into a topic and follow the trail.</p>
+    </div>
+    <div class="hero-panel">
+        <p class="panel-label">Tag count</p>
+        <p class="panel-value">{{ collections | length }}</p>
+        <p class="panel-caption">topics</p>
+    </div>
+</section>
 
 <!-- 1. Tag Cloud / Navigation -->
 <div class="tag-list">

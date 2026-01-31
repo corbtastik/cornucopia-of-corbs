@@ -4,7 +4,18 @@ layout: base.njk
 description: "A complete list of every post written on this blog."
 ---
 
-<h1>All Posts</h1>
+<section class="page-hero compact">
+    <div class="hero-copy">
+        <p class="hero-kicker">Archive</p>
+        <h1 class="hero-title">All posts, one stream.</h1>
+        <p class="hero-subtitle">Everything published so far, newest to oldest.</p>
+    </div>
+    <div class="hero-panel">
+        <p class="panel-label">Total</p>
+        <p class="panel-value">{{ collections.posts | length }}</p>
+        <p class="panel-caption">entries</p>
+    </div>
+</section>
 
 <ul class="post-list">
 {% for post in collections.posts | reverse %}

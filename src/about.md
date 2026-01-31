@@ -4,6 +4,14 @@ description: "A little bit about the developer behind the code."
 layout: "base.njk"
 ---
 
+<section class="page-hero compact">
+  <div class="hero-copy">
+    <p class="hero-kicker">About</p>
+    <h1 class="hero-title">Builder, tinkerer, perpetual learner.</h1>
+    <p class="hero-subtitle">A short intro and a longer list of things I like to ship.</p>
+  </div>
+</section>
+
 ## Hi, I'm You.
 
 I am a full-stack developer, dog enthusiast, and digital explorer. I built this site to share my learnings on **11ty**, **Web Development**, and the history of technology.
