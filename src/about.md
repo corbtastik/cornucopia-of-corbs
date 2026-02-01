@@ -7,30 +7,19 @@ layout: "base.njk"
 <section class="page-hero compact">
   <div class="hero-copy">
     <p class="hero-kicker">About</p>
-    <h1 class="hero-title">Builder, tinkerer, perpetual learner.</h1>
-    <p class="hero-subtitle">A short intro and a longer list of things I like to ship.</p>
+    <h1 class="hero-title">Builder, tinkerer, thinker.</h1>
+    <p class="hero-subtitle">T.H.I.N.K - saying what is true, helpful, important, necessary and kind.</p>
   </div>
 </section>
 
-## Hi, I'm You.
+## Howdy all!
 
-I am a full-stack developer, dog enthusiast, and digital explorer. I built this site to share my learnings on **11ty**, **Web Development**, and the history of technology.
+I’m Corbett Martin. I work at MongoDB as an Advisory Solutions Architect, where I help large enterprises modernize how they build and run data-driven applications. My day-to-day is a mix of technical strategy and hands-on engineering: translating business goals into practical architectures, guiding teams through migrations and platform decisions, and building proof-of-concepts that show what “good” looks like in the real world.
 
-![Profile Picture](https://placehold.co/400x400/222/eee?text=You)
+A big part of my work centers on operational excellence at scale: automation, repeatable delivery patterns, and designing systems that stay reliable as workloads and teams grow. Lately, that also means helping people connect data platforms to AI workflows.
 
-### What I Do
+I studied at Southern Methodist University and the University of Texas at Arlington (CS in both cases).
 
-*   **Frontend:** HTML, CSS (Sass/PostCSS), JavaScript (Vanilla/React)
-*   **Backend:** Node.js, Java, Kotlin
-*   **Database:** MongoDB (is there anything else?)
-*   **Vibe:** 100%
+I have a developer background and mess about on GitHub ([corbtastik](https://github.com/corbtastik)).
 
-### My Philosophy
-
-> "Code is poetry written for machines to read and humans to understand."
-
-I believe in the open web, fast load times, and accessible design. This blog is my playground for testing new ideas (like the theme switcher you see up top!).
-
-### Contact
-
-Want to get in touch? You can find me on [GitHub](#) or [Twitter](#).
+Feel free to connect on LinkedIn: [corbettmartin](https://www.linkedin.com/in/corbettmartin/)

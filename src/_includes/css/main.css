@@ -140,7 +140,7 @@ header {
     /* border-bottom: 1px solid var(--border-color); */
     width: 100%;
     backdrop-filter: blur(var(--glass-blur));
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--bg-color);
 }
 
 .site-nav {
@@ -195,7 +195,7 @@ header {
 #search-input {
     width: 100%;
     background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--glass-bg);
     color: var(--text-color);
     padding: 10px 16px;
     border-radius: 999px;
@@ -245,7 +245,7 @@ header {
 .theme-select {
     background: var(--glass-bg);
     color: var(--text-color);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--glass-bg);
     border-radius: 999px;
     cursor: pointer;
     font-family: inherit;
@@ -269,7 +269,7 @@ header {
     padding: 8px 16px;
     cursor: pointer;
     background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--glass-bg);
     color: var(--on-secondary-container-color);
     border-radius: 999px;
 }
@@ -344,7 +344,7 @@ footer p {
 .post-item,
 .simple-item {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent), var(--card-bg);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--card-bg);
     border-radius: var(--surface-radius);
     transition: background-color var(--transition-speed), border-color var(--transition-speed), transform 0.2s ease;
     padding: 1.5rem;
@@ -357,7 +357,7 @@ footer p {
 .post-item:hover,
 .simple-item:hover {
     background: var(--primary-container-bg);
-    border: 1px solid var(--link-color);
+    border: 1px solid var(--primary-container-bg);
     transform: translateY(-2px);
 }
 
@@ -409,7 +409,7 @@ footer p {
     max-width: 100%;
     background: linear-gradient(140deg, var(--glass-bg), transparent), var(--primary-container-bg);
     border-radius: calc(var(--surface-radius) + 4px);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--primary-container-bg);
     box-shadow: 0 30px 70px var(--shadow-color);
 }
 
@@ -445,7 +445,7 @@ footer p {
     min-width: 160px;
     padding: 1.5rem;
     background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--glass-bg);
     border-radius: var(--surface-radius-tight);
     text-align: center;
 }
@@ -474,7 +474,7 @@ footer p {
     margin-bottom: 2.5rem;
     padding: 1.5rem 1.75rem;
     background: linear-gradient(135deg, var(--glass-bg), transparent), var(--primary-container-bg);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--primary-container-bg);
     border-radius: var(--surface-radius);
     box-shadow: 0 25px 60px var(--shadow-color);
 }
@@ -503,9 +503,9 @@ footer p {
     display: inline-block;
     padding: 6px 14px;
     border-radius: 50px;
-    background-color: var(--glass-bg);
-    color: var(--text-color);
-    border: 1px solid var(--glass-border);
+    background-color: var(--link-color);
+    color: var(--bg-color);
+    border: 1px solid var(--link-color);
     font-family: var(--font-family-secondary);
     font-size: 0.85rem;
     font-weight: 700;
@@ -533,7 +533,7 @@ footer p {
 
 .tag-list a:visited,
 .post-tags a:visited {
-    color: var(--text-color);
+    color: var(--bg-color);
 }
 
 .pagination {
@@ -544,12 +544,12 @@ footer p {
 
 hr {
     border: 0;
-    border-bottom: 1px dashed var(--tertiary-color);
+    border-bottom: 1px dashed var(--bg-color);
     margin: 2rem 0;
 }
 
 blockquote {
-    border-left: 0.25rem solid var(--tertiary-color);
+    border-left: 0.25rem solid var(--secondary-container-bg);
     background-color: var(--glass-bg);
     color: var(--on-secondary-container-color);
     margin: 1.5rem 0;
@@ -582,7 +582,7 @@ table {
     text-align: left;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid var(--heading-color);
+    border: 1px solid var(--bg-color);
 }
 
 .table-wrapper {
@@ -606,8 +606,8 @@ td {
     padding: 12px 15px;
     font-family: var(--font-family-monospace);
     color: var(--text-color);
-    border-bottom: 1px solid var(--heading-color);
-    border-right: 1px solid var(--heading-color);
+    border-bottom: 1px solid var(--bg-color);
+    border-right: 1px solid var(--bg-color);
 }
 
 td:last-child {
@@ -637,7 +637,7 @@ img {
 .code-wrapper {
     margin: 2rem 0;
     border-radius: var(--surface-radius-tight);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--card-bg);
     background-color: var(--card-bg);
     overflow: hidden;
 }
@@ -645,7 +645,7 @@ img {
 .code-wrapper pre {
     margin: 0;
     border: none;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--card-bg);
     border-radius: 0;
 }
 
@@ -689,7 +689,7 @@ img {
 }
 
 .code-wrapper.collapsed {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--card-bg);
 }
 
 .image-grid {
@@ -706,14 +706,14 @@ img {
     border-radius: var(--surface-radius-tight);
     cursor: zoom-in;
     transition: transform 0.2s, filter 0.2s;
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--card-bg);
     display: block;
 }
 
 .image-grid img:hover {
     transform: scale(1.03);
     filter: brightness(1.1);
-    border-color: var(--link-color);
+    border-color: var(--card-bg);
 }
 
 #lightbox {
@@ -800,7 +800,7 @@ img {
     transition: transform 0.3s ease-in-out;
     box-shadow: 10px 0 40px var(--shadow-color);
     backdrop-filter: blur(var(--glass-blur));
-    border-right: 1px solid var(--glass-border);
+    border-right: 1px solid var(--primary-container-bg);
 }
 
 #sidebar.active {
@@ -861,7 +861,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(2px);
     z-index: 1999;
     display: none;
