@@ -2038,8 +2038,8 @@ html[data-theme-set="solar-pop"][data-mode="light"] {
 }
 
 
-/* --- Cream --- */
-html[data-theme-set="cream"][data-mode="dark"] {
+/* --- Cotton Candy --- */
+html[data-theme-set="cotton-candy"][data-mode="dark"] {
     --bg-color: #f0f7f6;
     --text-color: #8b1852;
     --link-color: #ff016e;
@@ -2063,7 +2063,7 @@ html[data-theme-set="cream"][data-mode="dark"] {
     --sh-comment: #d73364;
     --sh-punctuation: #8b1852;
 }
-html[data-theme-set="cream"][data-mode="light"] {
+html[data-theme-set="cotton-candy"][data-mode="light"] {
     --bg-color: #f0f7f6;
     --text-color: #117e96;
     --link-color: #1abddf;
@@ -2287,8 +2287,8 @@ html[data-theme-set="mongo"][data-mode="light"] {
     --sh-punctuation: #001e2b;
 }
 
-/* --- Newspaper --- */
-html[data-theme-set="newspaper"][data-mode="dark"] {
+/* --- News --- */
+html[data-theme-set="news"][data-mode="dark"] {
     --bg-color: #141414;
     --text-color: #e0e0e0;
     --link-color: #f72685;
@@ -2312,7 +2312,7 @@ html[data-theme-set="newspaper"][data-mode="dark"] {
     --sh-comment: #5c5c5c;
     --sh-punctuation: #e0e0e0;
 }
-html[data-theme-set="newspaper"][data-mode="light"] {
+html[data-theme-set="news"][data-mode="light"] {
     --bg-color: #e0e0e0;
     --text-color: #0a0a0a;
     --link-color: #d60064;
@@ -2337,8 +2337,8 @@ html[data-theme-set="newspaper"][data-mode="light"] {
     --sh-punctuation: #0a0a0a;
 }
 
-/* --- No Style --- */
-html[data-theme-set="no-style"][data-mode="dark"] {
+/* --- Office --- */
+html[data-theme-set="office"][data-mode="dark"] {
     --bg-color: #000000;
     --text-color: #ffffff;
     --link-color: #3391ff;
@@ -2362,7 +2362,7 @@ html[data-theme-set="no-style"][data-mode="dark"] {
     --sh-comment: #ffffff;
     --sh-punctuation: #ffffff;
 }
-html[data-theme-set="no-style"][data-mode="light"] {
+html[data-theme-set="office"][data-mode="light"] {
     --bg-color: #ffffff;
     --text-color: #000000;
     --link-color: #0000EE;
