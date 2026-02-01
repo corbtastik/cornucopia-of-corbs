@@ -1789,6 +1789,157 @@ html[data-theme-set="graphite-bloom"][data-mode="light"] {
     --sh-punctuation: #2A2433;
 }
 
+/* --- Vader --- */
+html[data-theme-set="vader"][data-mode="dark"] {
+    --bg-color: #0B0B0D;
+    --text-color: #E6E6E6;
+    --link-color: #FF3B30;
+    --heading-color: #F2F2F2;
+    --tertiary-color: color-mix(in srgb, var(--text-color) 70%, var(--bg-color));
+    --card-bg: #15151A;
+    --search-bg: #0B0B0D;
+    --border-color: #2A2A33;
+    --primary-color: #FF3B30;
+    --primary-container-bg: #15151A;
+    --on-primary-container-color: #E6E6E6;
+    --secondary-container-bg: #1B1B24;
+    --on-secondary-container-color: #F2F2F2;
+    --sh-bg: #15151A;
+    --sh-text: #E6E6E6;
+    --sh-border: #2A2A33;
+    --sh-keyword: #FF3B30;
+    --sh-string: #F2F2F2;
+    --sh-function: #8A8A98;
+    --sh-variable: #E6E6E6;
+    --sh-comment: #6B6B76;
+    --sh-punctuation: #E6E6E6;
+}
+html[data-theme-set="vader"][data-mode="light"] {
+    --bg-color: #F6F6F7;
+    --text-color: #1C1C22;
+    --link-color: #C21F1A;
+    --heading-color: #111118;
+    --tertiary-color: color-mix(in srgb, var(--text-color) 70%, var(--bg-color));
+    --card-bg: #FFFFFF;
+    --search-bg: #F6F6F7;
+    --border-color: #D3D3DB;
+    --primary-color: #C21F1A;
+    --primary-container-bg: #EFEFF3;
+    --on-primary-container-color: #1C1C22;
+    --secondary-container-bg: #E2E2E8;
+    --on-secondary-container-color: #1C1C22;
+    --sh-bg: #FFFFFF;
+    --sh-text: #1C1C22;
+    --sh-border: #D3D3DB;
+    --sh-keyword: #C21F1A;
+    --sh-string: #111118;
+    --sh-function: #6B6B76;
+    --sh-variable: #1C1C22;
+    --sh-comment: #8A8A98;
+    --sh-punctuation: #1C1C22;
+}
+
+/* --- Orbit --- */
+html[data-theme-set="orbit"][data-mode="dark"] {
+    --bg-color: #060B31;
+    --text-color: #ECE9C5;
+    --link-color: #9A867B;
+    --heading-color: #F5F2D8;
+    --tertiary-color: color-mix(in srgb, var(--text-color) 70%, var(--bg-color));
+    --card-bg: #0F163E;
+    --search-bg: #060B31;
+    --border-color: #2B1F4A;
+    --primary-color: #9A867B;
+    --primary-container-bg: #0F163E;
+    --on-primary-container-color: #ECE9C5;
+    --secondary-container-bg: #1B234F;
+    --on-secondary-container-color: #F5F2D8;
+    --sh-bg: #0F163E;
+    --sh-text: #ECE9C5;
+    --sh-border: #2B1F4A;
+    --sh-keyword: #9A867B;
+    --sh-string: #F5F2D8;
+    --sh-function: #798485;
+    --sh-variable: #ECE9C5;
+    --sh-comment: #626168;
+    --sh-punctuation: #ECE9C5;
+}
+html[data-theme-set="orbit"][data-mode="light"] {
+    --bg-color: #F6F2E0;
+    --text-color: #2B1F4A;
+    --link-color: #8F7476;
+    --heading-color: #1E1738;
+    --tertiary-color: color-mix(in srgb, var(--text-color) 70%, var(--bg-color));
+    --card-bg: #FFFFFF;
+    --search-bg: #F6F2E0;
+    --border-color: #D2C9B3;
+    --primary-color: #9A867B;
+    --primary-container-bg: #EFE7D1;
+    --on-primary-container-color: #2B1F4A;
+    --secondary-container-bg: #E6DCC4;
+    --on-secondary-container-color: #2B1F4A;
+    --sh-bg: #FFFFFF;
+    --sh-text: #2B1F4A;
+    --sh-border: #D2C9B3;
+    --sh-keyword: #8F7476;
+    --sh-string: #1E1738;
+    --sh-function: #798485;
+    --sh-variable: #2B1F4A;
+    --sh-comment: #626168;
+    --sh-punctuation: #2B1F4A;
+}
+
+/* --- Star-Lord --- */
+html[data-theme-set="star-lord"][data-mode="dark"] {
+    --bg-color: #0A0D24;
+    --text-color: #F3E9FF;
+    --link-color: #FF5DA2;
+    --heading-color: #7FD7FF;
+    --tertiary-color: color-mix(in srgb, var(--text-color) 70%, var(--bg-color));
+    --card-bg: #15183A;
+    --search-bg: #0A0D24;
+    --border-color: #2A2E5A;
+    --primary-color: #FF5DA2;
+    --primary-container-bg: #15183A;
+    --on-primary-container-color: #F3E9FF;
+    --secondary-container-bg: #1D224A;
+    --on-secondary-container-color: #FFE9B6;
+    --sh-bg: #15183A;
+    --sh-text: #F3E9FF;
+    --sh-border: #2A2E5A;
+    --sh-keyword: #7FD7FF;
+    --sh-string: #FFE98A;
+    --sh-function: #FF5DA2;
+    --sh-variable: #F3E9FF;
+    --sh-comment: #8A7FAF;
+    --sh-punctuation: #F3E9FF;
+}
+html[data-theme-set="star-lord"][data-mode="light"] {
+    --bg-color: #F7F3FF;
+    --text-color: #241A3D;
+    --link-color: #FF3D8E;
+    --heading-color: #0D6FB8;
+    --tertiary-color: color-mix(in srgb, var(--text-color) 70%, var(--bg-color));
+    --card-bg: #FFFFFF;
+    --search-bg: #F7F3FF;
+    --border-color: #D5CCF0;
+    --primary-color: #FF3D8E;
+    --primary-container-bg: #EFE6FF;
+    --on-primary-container-color: #241A3D;
+    --secondary-container-bg: #E5DBFF;
+    --on-secondary-container-color: #241A3D;
+    --sh-bg: #FFFFFF;
+    --sh-text: #241A3D;
+    --sh-border: #D5CCF0;
+    --sh-keyword: #0D6FB8;
+    --sh-string: #B85A00;
+    --sh-function: #FF3D8E;
+    --sh-variable: #241A3D;
+    --sh-comment: #8A7FAF;
+    --sh-punctuation: #241A3D;
+}
+
+
 /* --- Neon Reef --- */
 html[data-theme-set="neon-reef"][data-mode="dark"] {
     --bg-color: #111E24;
