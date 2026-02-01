@@ -860,6 +860,30 @@ img {
     padding-top: 10px;
 }
 
+.sidebar-block {
+    padding: 0 0 1.25rem;
+}
+
+.sidebar-block-title {
+    margin: 0 0 0.6rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--tertiary-color);
+}
+
+.sidebar-block-body {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--on-primary-container-color);
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
 #sidebar-overlay {
     position: fixed;
     top: 0;
