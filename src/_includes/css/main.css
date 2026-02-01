@@ -137,7 +137,7 @@ html[data-theme-set="monochrome"] a {
 /* --- Header Layout (STICKY) --- */
 header {
     background-color: var(--bg-color);
-    background: color-mix(in srgb, var(--bg-color) 88%, transparent);
+    background: linear-gradient(140deg, var(--glass-bg), transparent), var(--bg-color);
     transition: border-color var(--transition-speed);
     position: sticky;
     top: 0;
