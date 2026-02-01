@@ -327,6 +327,42 @@ footer p {
     letter-spacing: -0.01em;
 }
 
+.post-hero .post-title {
+    background-image: linear-gradient(120deg,
+        var(--heading-color),
+        var(--link-color),
+        var(--primary-color),
+        var(--text-color)
+    );
+    background-size: 260% 260%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: title-glow 2.2s ease-out 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .post-hero .post-title {
+        animation: none;
+        background-size: 100% 100%;
+    }
+}
+
+@keyframes title-glow {
+    0% {
+        background-position: 0% 50%;
+        filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.25)) saturate(1.15);
+    }
+    60% {
+        background-position: 100% 50%;
+        filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35)) saturate(1.25);
+    }
+    100% {
+        background-position: 50% 50%;
+        filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0)) saturate(1);
+    }
+}
+
 .post-title-date {
     display: block;
     margin-bottom: .5rem; /* Space between date and body text */
