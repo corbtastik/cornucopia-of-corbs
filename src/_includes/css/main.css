@@ -124,6 +124,11 @@ a {
     text-decoration: none;
 }
 
+html[data-theme-set="monochrome"] a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
 /* Utility Classes */
 .hidden {
     display: none !important;
