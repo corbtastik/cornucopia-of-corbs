@@ -841,7 +841,7 @@ html[data-theme-set="matrix-blue"][data-mode="light"] {
 
 html[data-theme-set="matrix-indigo"][data-mode="dark"] {
     --bg-color: #000000;
-    --text-color: #4b0082;
+    --text-color: #d8bfd8;
     --link-color: #8a2be2;
     --heading-color: #ffffff;
     --tertiary-color: color-mix(in srgb, var(--text-color) 70%, var(--bg-color));
@@ -850,11 +850,11 @@ html[data-theme-set="matrix-indigo"][data-mode="dark"] {
     --border-color: #310055;
     --primary-color: #4b0082;
     --primary-container-bg: #10001a;
-    --on-primary-container-color: #4b0082;
+    --on-primary-container-color: #d8bfd8;
     --secondary-container-bg: #1a002b;
     --on-secondary-container-color: #ffffff;
     --sh-bg: #05000a;
-    --sh-text: #4b0082;
+    --sh-text: #d8bfd8;
     --sh-border: #310055;
     --sh-keyword: #ffffff;
     --sh-string: #8a2be2;
@@ -1545,8 +1545,8 @@ html[data-theme-set="corbs"][data-mode="dark"] {
     --search-bg: #14043a;
     --border-color: #4493ef;
     --primary-color: #4493ef;
-    --primary-container-bg: #f61379;
-    --on-primary-container-color: #16004f;
+    --primary-container-bg: #14043a;
+    --on-primary-container-color: #f83a90;
     --secondary-container-bg: #280873;
     --on-secondary-container-color: #e126c5;
     --sh-bg: #190648;
@@ -1565,12 +1565,12 @@ html[data-theme-set="corbs"][data-mode="light"] {
     --text-color: #3b0aa4;
     --link-color: #4493ef;
     --heading-color: #3389ed;
-    --tertiary-color: color-mix(in srgb, var(--text-color) 70%, var(--bg-color));
+    --tertiary-color: #f83a90;
     --card-bg: #e9e2ff;
     --search-bg: #ffffff;
     --border-color: #3389ed;
     --primary-color: #3389ed;
-    --primary-container-bg: #f61379;
+    --primary-container-bg: #f1ecff;
     --on-primary-container-color: #16004f;
     --secondary-container-bg: #e9e2ff;
     --on-secondary-container-color: #280873;
@@ -2089,7 +2089,7 @@ html[data-theme-set="cotton-candy"][data-mode="light"] {
 }
 
 /* --- Grayscale --- */
-html[data-theme-set="grayscale"][data-mode="dark"] {
+html[data-theme-set="stock"][data-mode="dark"] {
     --bg-color: #121212;
     --text-color: #d4d4d4;
     --link-color: #89CFF0;
@@ -2113,7 +2113,7 @@ html[data-theme-set="grayscale"][data-mode="dark"] {
     --sh-comment: #808080;
     --sh-punctuation: #d4d4d4;
 }
-html[data-theme-set="grayscale"][data-mode="light"] {
+html[data-theme-set="stock"][data-mode="light"] {
     --bg-color: #ffffff;
     --text-color: #333333;
     --link-color: #4A90E2;

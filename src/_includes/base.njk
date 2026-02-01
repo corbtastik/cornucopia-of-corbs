@@ -87,7 +87,7 @@
                         <option value="corbs">Corbs</option>
                         <option value="cotton-candy">Cotton Candy</option>
                         <option value="glacial">Glacial</option>
-                        <option value="grayscale">Grayscale</option>
+                        <option value="stock">Stock</option>
                         <option value="horizon">Horizon</option>
                         <option value="matrix-neon">Matrix Neon</option>
                         <option value="mongo">Mongo</option>
@@ -185,6 +185,21 @@
         themeSelect.addEventListener('change', (e) => {
             html.setAttribute('data-theme-set', e.target.value);
             localStorage.setItem('theme-set', e.target.value);
+        });
+
+        themeSelect.addEventListener('keydown', (e) => {
+            if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+            e.preventDefault();
+            const options = Array.from(themeSelect.options).filter(opt => !opt.disabled && opt.value);
+            if (options.length === 0) return;
+            const currentIndex = options.findIndex(opt => opt.value === themeSelect.value);
+            const delta = e.key === 'ArrowUp' ? -1 : 1;
+            const nextIndex = (currentIndex + delta + options.length) % options.length;
+            const nextValue = options[nextIndex]?.value;
+            if (!nextValue) return;
+            themeSelect.value = nextValue;
+            html.setAttribute('data-theme-set', nextValue);
+            localStorage.setItem('theme-set', nextValue);
         });
 
         themeToggle.addEventListener('click', () => {
