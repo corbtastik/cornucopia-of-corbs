@@ -930,6 +930,21 @@ img {
     color: var(--tertiary-color);
 }
 
+.soul-food-verse {
+    display: inline-block;
+    background-image: linear-gradient(120deg,
+        var(--heading-color),
+        var(--link-color),
+        var(--primary-color),
+        var(--text-color)
+    );
+    background-size: 260% 260%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: title-loop 12s ease-in-out infinite;
+}
+
 .sidebar-block-body {
     margin: 0;
     font-size: 0.95rem;
