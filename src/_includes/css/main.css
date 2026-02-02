@@ -194,7 +194,9 @@ header {
 .search-container {
     flex-grow: 1;
     position: relative;
-    max-width: 600px;
+    max-width: none;
+    width: 100%;
+    justify-self: stretch;
 }
 
 #search-input {
@@ -393,6 +395,12 @@ footer p {
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 20px 45px var(--shadow-color);
+}
+
+html[data-mode="light"] .post-item,
+html[data-mode="light"] .simple-item {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent), var(--primary-container-bg);
+    border-color: var(--primary-container-bg);
 }
 
 .post-item:hover,
