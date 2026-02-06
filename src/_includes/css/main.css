@@ -755,6 +755,20 @@ img {
     border-bottom: 1px solid var(--card-bg);
 }
 
+.ascii-art-wrapper {
+    margin: 2rem 0;
+    border-radius: var(--surface-radius-tight);
+    border: 1px solid var(--card-bg);
+    background-color: var(--card-bg);
+    overflow: hidden;
+}
+
+.ascii-art-wrapper pre {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
 .image-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));

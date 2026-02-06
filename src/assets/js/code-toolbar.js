@@ -2,6 +2,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const codeBlocks = document.querySelectorAll("pre");
 
   codeBlocks.forEach((pre) => {
+    // Check for ascii-art language
+    const codeTag = pre.querySelector("code");
+    let language = "Code";
+    let isAsciiArt = false;
+    if (codeTag) {
+      codeTag.classList.forEach((cls) => {
+        if (cls.startsWith("language-")) {
+          language = cls.replace("language-", "");
+          if (language === "ascii-art") {
+            isAsciiArt = true;
+          }
+        }
+      });
+    }
+
+    // ASCII art: simple wrapper without header
+    if (isAsciiArt) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "ascii-art-wrapper";
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      return;
+    }
+
     // 1. Wrapper
     const wrapper = document.createElement("div");
     wrapper.className = "code-wrapper";
@@ -11,16 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     header.className = "code-header";
 
     // 3. Language Label (e.g., "JavaScript")
-    const codeTag = pre.querySelector("code");
-    let language = "Code";
-    if (codeTag) {
-      // Find class starting with "language-"
-      codeTag.classList.forEach((cls) => {
-        if (cls.startsWith("language-")) {
-          language = cls.replace("language-", "");
-        }
-      });
-    }
     const langSpan = document.createElement("span");
     langSpan.className = "code-lang";
     langSpan.innerText = language.charAt(0).toUpperCase() + language.slice(1); // Capitalize
