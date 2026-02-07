@@ -644,6 +644,15 @@ description: "Create and customize your own color theme."
             root.style.setProperty('--sh-text', colors.text);
             root.style.setProperty('--sh-punctuation', colors.text);
             root.style.setProperty('--secondary-container-bg', colors.border);
+
+            // Set glass/shadow colors based on mode for sidebar and other glass effects
+            if (fullPage) {
+                const isDark = currentMode === 'dark';
+                root.style.setProperty('--glass-bg', isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)');
+                root.style.setProperty('--glass-border', isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)');
+                root.style.setProperty('--shadow-color', isDark ? 'rgba(0, 0, 0, 0.35)' : 'rgba(0, 0, 0, 0.12)');
+                root.style.setProperty('--grid-line', isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)');
+            }
         }
     }
 
