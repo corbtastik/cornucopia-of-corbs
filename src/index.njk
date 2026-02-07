@@ -14,8 +14,10 @@ pagination:
         <h1 class="hero-title">Cornucopica of Corbs</h1>
         <p class="hero-subtitle">Experiments and quick hits from the casa lab on code, prose and AI.</p>
     </div>
-    <div class="hero-panel">
-        <p class="panel-value">{{ collections.posts | length }}</p>
+    <div class="hero-panel-wrapper">
+        <div class="hero-panel">
+            <p class="panel-value">{{ collections.posts | length }}</p>
+        </div>
         <p class="panel-label">posts</p>
     </div>
 </section>

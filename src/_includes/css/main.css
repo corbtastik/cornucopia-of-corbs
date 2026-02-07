@@ -504,6 +504,13 @@ html[data-mode="light"] .simple-item {
     font-size: 1rem;
 }
 
+.hero-panel-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
 .hero-panel {
     width: 120px;
     height: 120px;
@@ -511,10 +518,8 @@ html[data-mode="light"] .simple-item {
     background: var(--glass-bg);
     border: 1px solid var(--border-color);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
 }
 
 .panel-value {
@@ -526,7 +531,7 @@ html[data-mode="light"] .simple-item {
 }
 
 .panel-label {
-    margin: 0.25rem 0 0;
+    margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     font-size: 0.7rem;
@@ -1215,9 +1220,17 @@ body .gist-wrapper .gist-data {
         text-align: left;
     }
 
+    .hero-panel-wrapper {
+        gap: 0.5rem;
+    }
+
     .hero-panel {
         width: 100px;
         height: 100px;
+    }
+
+    .panel-value {
+        font-size: 2rem;
     }
 
     .post-header,
