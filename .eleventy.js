@@ -58,15 +58,27 @@ module.exports = function(eleventyConfig) {
 
     // GITHUB GIST SHORTCODE
     eleventyConfig.addShortcode("gist", (url, file) => {
+        // Validate URL
+        if (!url || typeof url !== 'string') {
+            console.warn('[gist shortcode] Missing or invalid URL');
+            return `<p class="shortcode-error">Error: Gist URL required</p>`;
+        }
+
+        // Validate it's a GitHub Gist URL
+        if (!url.includes('gist.github.com')) {
+            console.warn(`[gist shortcode] Invalid gist URL: ${url}`);
+            return `<p class="shortcode-error">Error: URL must be from gist.github.com</p>`;
+        }
+
         // Ensure the URL ends in .js for the embed script
         let embedUrl = url;
         if (!embedUrl.endsWith(".js")) {
-        embedUrl += ".js";
+            embedUrl += ".js";
         }
-        
+
         // If a specific file is requested, append it
         if (file) {
-        embedUrl += `?file=${file}`;
+            embedUrl += `?file=${encodeURIComponent(file)}`;
         }
 
         return `<div class="gist-wrapper"><script src="${embedUrl}"></script></div>`;
@@ -74,14 +86,29 @@ module.exports = function(eleventyConfig) {
 
     // GOOGLE SLIDES SHORTCODE
     eleventyConfig.addShortcode("slide", (url, title) => {
+        // Validate URL
+        if (!url || typeof url !== 'string') {
+            console.warn('[slide shortcode] Missing or invalid URL');
+            return `<p class="shortcode-error">Error: Slide URL required</p>`;
+        }
+
+        // Validate it's a Google Docs/Slides URL
+        if (!url.includes('docs.google.com')) {
+            console.warn(`[slide shortcode] Invalid slide URL: ${url}`);
+            return `<p class="shortcode-error">Error: URL must be from docs.google.com</p>`;
+        }
+
+        // Sanitize title to prevent XSS
+        const safeTitle = (title || 'Google Slides presentation').replace(/[<>"'&]/g, '');
+
         return `
         <div class="slide-container">
-            <iframe 
-            src="${url}" 
-            title="${title || 'Google Slides presentation'}"
-            frameborder="0" 
-            allowfullscreen="true" 
-            mozallowfullscreen="true" 
+            <iframe
+            src="${url}"
+            title="${safeTitle}"
+            frameborder="0"
+            allowfullscreen="true"
+            mozallowfullscreen="true"
             webkitallowfullscreen="true">
             </iframe>
         </div>
@@ -90,23 +117,33 @@ module.exports = function(eleventyConfig) {
 
     // YOUTUBE SHORTCODE
     eleventyConfig.addShortcode("youtube", (videoURL, title) => {
+        // Validate URL
+        if (!videoURL || typeof videoURL !== 'string') {
+            console.warn('[youtube shortcode] Missing or invalid URL');
+            return `<p class="shortcode-error">Error: YouTube URL required</p>`;
+        }
+
         // Regex to extract video ID from various YouTube URL formats
         const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
         const match = videoURL.match(regExp);
         const videoId = (match && match[7].length == 11) ? match[7] : false;
 
         if (!videoId) {
-        return `<p style="color: red">Error: Invalid YouTube URL provided</p>`;
+            console.warn(`[youtube shortcode] Could not extract video ID from: ${videoURL}`);
+            return `<p class="shortcode-error">Error: Invalid YouTube URL</p>`;
         }
+
+        // Sanitize title to prevent XSS
+        const safeTitle = (title || 'YouTube video player').replace(/[<>"'&]/g, '');
 
         // Return the HTML (Wrapped in a responsive container)
         return `
         <div class="video-container">
-            <iframe 
-            src="https://www.youtube.com/embed/${videoId}" 
-            title="${title || 'YouTube video player'}"
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            <iframe
+            src="https://www.youtube.com/embed/${videoId}"
+            title="${safeTitle}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
             </iframe>
         </div>
