@@ -31,13 +31,8 @@ BlogApp.focus = {
 
         if (save) {
             localStorage.setItem(this.STORAGE_KEY, 'true');
-        }
-
-        // Clear search input
-        const searchInput = document.getElementById('search-input');
-        if (searchInput) {
-            searchInput.value = '';
-            searchInput.blur();
+            // Navigate to home
+            window.location.href = '/';
         }
     },
 
@@ -47,13 +42,8 @@ BlogApp.focus = {
     disable: function() {
         document.body.classList.remove('focus-mode');
         localStorage.setItem(this.STORAGE_KEY, 'false');
-
-        // Clear search input
-        const searchInput = document.getElementById('search-input');
-        if (searchInput) {
-            searchInput.value = '';
-            searchInput.blur();
-        }
+        // Navigate to home
+        window.location.href = '/';
     },
 
     /**

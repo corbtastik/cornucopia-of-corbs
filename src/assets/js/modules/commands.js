@@ -14,6 +14,7 @@ BlogApp.commands = {
         '/about': { url: '/about/', description: 'Go to about page' },
         '/designs': { url: '/designs/', description: 'Go to designs page' },
         '/themes': { url: '/themes/', description: 'Go to theme builder' },
+        '/commands': { url: '/commands/', description: 'View all function codes' },
         // Social (open in new tab)
         '/github': { url: 'https://github.com/corbtastik', description: 'Open GitHub profile', newTab: true },
         '/linkedin': { url: 'https://www.linkedin.com/in/corbettmartin/', description: 'Open LinkedIn profile', newTab: true },

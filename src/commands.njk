@@ -1,0 +1,132 @@
+---
+title: "Commands"
+layout: base.njk
+description: "Function codes for quick navigation and actions."
+---
+
+<div class="commands-page">
+    <h1>Function Codes</h1>
+    <p>Type these commands in the search bar and press Enter.</p>
+
+    <div class="commands-grid">
+        <div class="commands-section">
+            <h3>Navigation</h3>
+            <ul class="commands-list">
+                <li><code>/home</code> <span>Go to home page</span></li>
+                <li><code>/archive</code> <span>Go to archive page</span></li>
+                <li><code>/tags</code> <span>Go to tags page</span></li>
+                <li><code>/about</code> <span>Go to about page</span></li>
+                <li><code>/designs</code> <span>Go to designs page</span></li>
+                <li><code>/themes</code> <span>Go to theme builder</span></li>
+                <li><code>/commands</code> <span>Go to this page</span></li>
+            </ul>
+        </div>
+
+        <div class="commands-section">
+            <h3>Social Links</h3>
+            <ul class="commands-list">
+                <li><code>/github</code> <span>Open GitHub profile</span></li>
+                <li><code>/linkedin</code> <span>Open LinkedIn profile</span></li>
+                <li><code>/instagram</code> <span>Open Instagram profile</span></li>
+            </ul>
+        </div>
+
+        <div class="commands-section">
+            <h3>Display</h3>
+            <ul class="commands-list">
+                <li><code>/dark</code> <span>Enable dark mode</span></li>
+                <li><code>/light</code> <span>Enable light mode</span></li>
+                <li><code>/egg</code> <span>Generate random theme</span></li>
+                <li><code>/focus</code> <span>Enter distraction-free mode</span></li>
+                <li><code>/unfocus</code> <span>Exit distraction-free mode</span></li>
+            </ul>
+        </div>
+
+        <div class="commands-section">
+            <h3>Posts</h3>
+            <ul class="commands-list">
+                <li><code>/sort new</code> <span>Sort posts newest first</span></li>
+                <li><code>/sort old</code> <span>Sort posts oldest first</span></li>
+                <li><code>/tag &lt;name&gt;</code> <span>Filter by tag</span></li>
+            </ul>
+        </div>
+
+        <div class="commands-section">
+            <h3>Pagination</h3>
+            <ul class="commands-list">
+                <li><code>/first</code> <span>Go to first page</span></li>
+                <li><code>/last</code> <span>Go to last page</span></li>
+                <li><code>/next</code> <span>Go to next page</span></li>
+                <li><code>/prev</code> <span>Go to previous page</span></li>
+                <li><code>/page &lt;n&gt;</code> <span>Go to page n</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+.commands-page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.commands-page h1 {
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+.commands-page > p {
+    color: var(--tertiary-color);
+    margin-bottom: 2rem;
+}
+
+.commands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.commands-section {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.25rem;
+}
+
+.commands-section h3 {
+    color: var(--heading-color);
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+}
+
+.commands-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.commands-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+}
+
+.commands-list li:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.commands-list code {
+    font-family: var(--font-family-monospace);
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    background: var(--bg-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.commands-list span {
+    color: var(--tertiary-color);
+    font-size: 0.9rem;
+}
+</style>
