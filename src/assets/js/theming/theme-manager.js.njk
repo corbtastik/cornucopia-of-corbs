@@ -1,0 +1,122 @@
+---
+permalink: /assets/js/theming/theme-manager.js
+---
+/**
+ * Theme Manager - Runtime CSS variable injection
+ * Generated from _data/themes.js at build time
+ */
+(function() {
+    'use strict';
+
+    // Theme data embedded at build time
+    const THEMES = {{ themes | dump | safe }};
+
+    /**
+     * Find a theme by ID
+     */
+    function findTheme(id) {
+        for (const group of THEMES.groups) {
+            const found = group.themes.find(t => t.id === id);
+            if (found) return found;
+        }
+        return null;
+    }
+
+    /**
+     * Apply a theme's colors as CSS custom properties
+     */
+    function applyTheme(themeId, mode) {
+        const theme = findTheme(themeId);
+        if (!theme) {
+            console.warn(`Theme "${themeId}" not found, falling back to default`);
+            return applyTheme(THEMES.defaultTheme, mode);
+        }
+
+        const colors = theme[mode];
+        if (!colors) {
+            console.warn(`Mode "${mode}" not found for theme "${themeId}"`);
+            return;
+        }
+
+        const root = document.documentElement;
+
+        // Core colors
+        root.style.setProperty('--bg-color', colors.bg);
+        root.style.setProperty('--text-color', colors.text);
+        root.style.setProperty('--heading-color', colors.heading);
+        root.style.setProperty('--link-color', colors.link);
+        root.style.setProperty('--primary-color', colors.primary);
+        root.style.setProperty('--card-bg', colors.surface);
+        root.style.setProperty('--search-bg', colors.bg);
+        root.style.setProperty('--border-color', colors.border);
+
+        // Derived colors (using color-mix for browser computation)
+        root.style.setProperty('--tertiary-color', `color-mix(in srgb, ${colors.text} 70%, ${colors.bg})`);
+
+        // Container colors
+        root.style.setProperty('--primary-container-bg', colors.surface);
+        root.style.setProperty('--on-primary-container-color', colors.text);
+        root.style.setProperty('--secondary-container-bg', colors.border);
+        root.style.setProperty('--on-secondary-container-color', colors.text);
+
+        // Syntax highlighting
+        root.style.setProperty('--sh-bg', colors.surface);
+        root.style.setProperty('--sh-text', colors.text);
+        root.style.setProperty('--sh-border', colors.border);
+        root.style.setProperty('--sh-keyword', colors.shKeyword);
+        root.style.setProperty('--sh-string', colors.shString);
+        root.style.setProperty('--sh-function', colors.shFunction);
+        root.style.setProperty('--sh-variable', colors.shVariable);
+        root.style.setProperty('--sh-comment', colors.shComment);
+        root.style.setProperty('--sh-punctuation', colors.text);
+
+        // Update data attributes (for any CSS that still references them)
+        root.setAttribute('data-theme-set', themeId);
+        root.setAttribute('data-mode', mode);
+
+        // Persist selection
+        localStorage.setItem('theme-set', themeId);
+        localStorage.setItem('theme-mode', mode);
+    }
+
+    /**
+     * Get current theme state
+     */
+    function getCurrentTheme() {
+        return {
+            id: localStorage.getItem('theme-set') || THEMES.defaultTheme,
+            mode: localStorage.getItem('theme-mode') || THEMES.defaultMode
+        };
+    }
+
+    /**
+     * Toggle between dark and light mode
+     */
+    function toggleMode() {
+        const current = getCurrentTheme();
+        const newMode = current.mode === 'dark' ? 'light' : 'dark';
+        applyTheme(current.id, newMode);
+        return newMode;
+    }
+
+    /**
+     * Initialize theme on page load
+     */
+    function init() {
+        const { id, mode } = getCurrentTheme();
+        applyTheme(id, mode);
+    }
+
+    // Apply theme immediately to prevent flash
+    init();
+
+    // Expose API globally
+    window.ThemeManager = {
+        applyTheme,
+        toggleMode,
+        getCurrentTheme,
+        findTheme,
+        THEMES
+    };
+
+})();

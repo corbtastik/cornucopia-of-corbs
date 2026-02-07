@@ -6,6 +6,8 @@
     <title>{{ title }} | DevBlog</title>
     
     <script>
+        // Set data attributes immediately to prevent flash
+        // theme-manager.js will apply the actual CSS variables
         (function() {
             const savedTheme = localStorage.getItem('theme-set') || 'corbs';
             const savedMode = localStorage.getItem('theme-mode') || 'dark';
@@ -14,6 +16,8 @@
             document.documentElement.setAttribute('data-bg-style', 'quantum-fog');
         })();
     </script>
+    <!-- Theme Manager must load early to apply colors before paint -->
+    <script src="/assets/js/theming/theme-manager.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,68 +55,15 @@
             </div>
 
             <div class="theme-controls">
+                <!-- Data-driven theme selector from _data/themes.js -->
                 <select id="theme-select" class="theme-select" aria-label="Select Theme">
-                    <optgroup label="Material Themes">
-                        <option value="material-blue">Material Blue</option>
-                        <option value="material-blue-gray">Material Blue Gray</option>
-                        <option value="material-brown">Material Brown</option>
-                        <option value="material-cyan">Material Cyan</option>
-                        <option value="material-deep-purple">Material Deep Purple</option>
-                        <option value="material-gray">Material Gray</option>
-                        <option value="material-indigo">Material Indigo</option>
-                        <option value="material-pink">Material Pink</option>
-                        <option value="material-purple">Material Purple</option>
-                        <option value="material-teal">Material Teal</option>
+                    {% for group in themes.groups %}
+                    <optgroup label="{{ group.label }}">
+                        {% for theme in group.themes %}
+                        <option value="{{ theme.id }}">{{ theme.name }}</option>
+                        {% endfor %}
                     </optgroup>
-                    <optgroup label="Chroma Themes">
-                        <option value="chroma-blue">Chroma Blue</option>
-                        <option value="chroma-green">Chroma Green</option>
-                        <option value="chroma-indigo">Chroma Indigo</option>
-                        <option value="chroma-orange">Chroma Orange</option>
-                        <option value="chroma-red">Chroma Red</option>
-                        <option value="chroma-violet">Chroma Violet</option>
-                        <option value="chroma-yellow">Chroma Yellow</option>
-                    </optgroup>
-                    <optgroup label="Matrix Themes">
-                        <option value="matrix-blue">Matrix Blue</option>
-                        <option value="matrix-green">Matrix Green</option>
-                        <option value="matrix-indigo">Matrix Indigo</option>
-                        <option value="matrix-orange">Matrix Orange</option>
-                        <option value="matrix-red">Matrix Red</option>
-                        <option value="matrix-violet">Matrix Violet</option>
-                        <option value="matrix-yellow">Matrix Yellow</option>
-                    </optgroup>
-                    <optgroup label="Corbs Themes">
-                        <option value="abyssal">Abyssal</option>
-                        <option value="amethyst">Amethyst</option>
-                        <option value="berry">Berry</option>
-                        <option value="bluebonnet">Bluebonnet</option>
-                        <option value="corbs">Corbs</option>
-                        <option value="cotton-candy">Cotton Candy</option>
-                        <option value="glacial">Glacial</option>
-                        <option value="stock">Stock</option>
-                        <option value="horizon">Horizon</option>
-                        <option value="matrix-neon">Matrix Neon</option>
-                        <option value="mongo">Mongo</option>
-                        <option value="tideglass">Tideglass</option>
-                        <option value="graphite-bloom">Graphite Bloom</option>
-                        <option value="orbit">Orbit</option>
-                        <option value="star-lord">Star Lord</option>
-                        <option value="monochrome">Monochrome</option>
-                        <option value="neon-reef">Neon Reef</option>
-                        <option value="sunflare">Sunflare</option>
-                        <option value="cyan-pulse">Cyan Pulse</option>
-                        <option value="solar-pop">Solar Pop</option>
-                        <option value="news">News</option>
-                        <option value="office">Office</option>
-                        <option value="reef">Reef</option>
-                        <option value="reveal">Reveal</option>
-                        <option value="snazzy">Snazzy</option>
-                        <option value="sunset">Sunset</option>
-                        <option value="vice">Vice (80s)</option>
-                        <option value="winter-is-coming">Winter is Coming</option>
-                        <option value="yolo">Yolo</option>              
-                    </optgroup>                       
+                    {% endfor %}
                 </select>
                 <button id="theme-toggle" class="theme-btn">Light Mode</button>
             </div>
@@ -215,16 +166,19 @@
     <script>
         const themeSelect = document.getElementById('theme-select');
         const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
 
-        themeSelect.value = html.getAttribute('data-theme-set');
-        themeToggle.innerText = html.getAttribute('data-mode') === 'dark' ? 'Light Mode' : 'Dark Mode';
+        // Initialize UI state from ThemeManager
+        const { id: currentTheme, mode: currentMode } = ThemeManager.getCurrentTheme();
+        themeSelect.value = currentTheme;
+        themeToggle.innerText = currentMode === 'dark' ? 'Light Mode' : 'Dark Mode';
 
+        // Theme selection change
         themeSelect.addEventListener('change', (e) => {
-            html.setAttribute('data-theme-set', e.target.value);
-            localStorage.setItem('theme-set', e.target.value);
+            const { mode } = ThemeManager.getCurrentTheme();
+            ThemeManager.applyTheme(e.target.value, mode);
         });
 
+        // Arrow key navigation for theme select
         themeSelect.addEventListener('keydown', (e) => {
             if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
             e.preventDefault();
@@ -236,18 +190,17 @@
             const nextValue = options[nextIndex]?.value;
             if (!nextValue) return;
             themeSelect.value = nextValue;
-            html.setAttribute('data-theme-set', nextValue);
-            localStorage.setItem('theme-set', nextValue);
+            const { mode } = ThemeManager.getCurrentTheme();
+            ThemeManager.applyTheme(nextValue, mode);
         });
 
+        // Dark/Light mode toggle
         themeToggle.addEventListener('click', () => {
-            const current = html.getAttribute('data-mode');
-            const next = current === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-mode', next);
-            localStorage.setItem('theme-mode', next);
-            themeToggle.innerText = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+            const newMode = ThemeManager.toggleMode();
+            themeToggle.innerText = newMode === 'dark' ? 'Light Mode' : 'Dark Mode';
         });
 
+        // Track header height for scroll calculations
         function updateHeaderHeight() {
             const header = document.querySelector('header');
             if (header) document.documentElement.style.setProperty('--header-height-real', header.getBoundingClientRect().height + 'px');
