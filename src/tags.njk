@@ -10,10 +10,11 @@ description: "Browse posts by topic."
         <h1 class="hero-title">Threads and tags.</h1>
         <p class="hero-subtitle">Jump into a topic and follow the trail.</p>
     </div>
-    <div class="hero-panel">
-        <p class="panel-label">Tag count</p>
-        <p class="panel-value">{{ collections | length }}</p>
-        <p class="panel-caption">topics</p>
+    <div class="hero-panel-wrapper">
+        <div class="hero-panel">
+            <p class="panel-value">{{ collections | length }}</p>
+        </div>
+        <p class="panel-label">tags</p>
     </div>
 </section>
 
