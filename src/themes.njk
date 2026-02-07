@@ -1,0 +1,676 @@
+---
+title: "Theme Builder"
+layout: base.njk
+description: "Create and customize your own color theme."
+---
+
+<div class="theme-builder">
+    <h1>Theme Builder</h1>
+    <p>Create your own color theme. Changes preview in real-time. Export as JSON when done.</p>
+
+    <div class="builder-layout">
+        <div class="builder-controls">
+            <div class="control-section">
+                <h3>Base Colors</h3>
+                <div class="color-row">
+                    <label for="tb-bg">Background</label>
+                    <input type="color" id="tb-bg" value="#0A0D24">
+                    <input type="text" id="tb-bg-hex" value="#0A0D24" class="hex-input">
+                </div>
+                <div class="color-row">
+                    <label for="tb-text">Text</label>
+                    <input type="color" id="tb-text" value="#F3E9FF">
+                    <input type="text" id="tb-text-hex" value="#F3E9FF" class="hex-input">
+                </div>
+                <div class="color-row">
+                    <label for="tb-heading">Heading</label>
+                    <input type="color" id="tb-heading" value="#7FD7FF">
+                    <input type="text" id="tb-heading-hex" value="#7FD7FF" class="hex-input">
+                </div>
+                <div class="color-row">
+                    <label for="tb-link">Link</label>
+                    <input type="color" id="tb-link" value="#FF5DA2">
+                    <input type="text" id="tb-link-hex" value="#FF5DA2" class="hex-input">
+                </div>
+                <div class="color-row">
+                    <label for="tb-primary">Primary</label>
+                    <input type="color" id="tb-primary" value="#FF5DA2">
+                    <input type="text" id="tb-primary-hex" value="#FF5DA2" class="hex-input">
+                </div>
+                <div class="color-row">
+                    <label for="tb-surface">Surface</label>
+                    <input type="color" id="tb-surface" value="#15183A">
+                    <input type="text" id="tb-surface-hex" value="#15183A" class="hex-input">
+                </div>
+                <div class="color-row">
+                    <label for="tb-border">Border</label>
+                    <input type="color" id="tb-border" value="#2A2E5A">
+                    <input type="text" id="tb-border-hex" value="#2A2E5A" class="hex-input">
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>Syntax Highlighting</h3>
+                <div class="color-row">
+                    <label for="tb-sh-keyword">Keyword</label>
+                    <input type="color" id="tb-sh-keyword" value="#7FD7FF">
+                    <input type="text" id="tb-sh-keyword-hex" value="#7FD7FF" class="hex-input">
+                </div>
+                <div class="color-row">
+                    <label for="tb-sh-string">String</label>
+                    <input type="color" id="tb-sh-string" value="#FFE98A">
+                    <input type="text" id="tb-sh-string-hex" value="#FFE98A" class="hex-input">
+                </div>
+                <div class="color-row">
+                    <label for="tb-sh-function">Function</label>
+                    <input type="color" id="tb-sh-function" value="#FF5DA2">
+                    <input type="text" id="tb-sh-function-hex" value="#FF5DA2" class="hex-input">
+                </div>
+                <div class="color-row">
+                    <label for="tb-sh-variable">Variable</label>
+                    <input type="color" id="tb-sh-variable" value="#F3E9FF">
+                    <input type="text" id="tb-sh-variable-hex" value="#F3E9FF" class="hex-input">
+                </div>
+                <div class="color-row">
+                    <label for="tb-sh-comment">Comment</label>
+                    <input type="color" id="tb-sh-comment" value="#8A7FAF">
+                    <input type="text" id="tb-sh-comment-hex" value="#8A7FAF" class="hex-input">
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>Actions</h3>
+                <div class="builder-actions">
+                    <button id="tb-apply" class="builder-btn primary">Apply Theme</button>
+                    <button id="tb-export" class="builder-btn">Export JSON</button>
+                    <button id="tb-reset" class="builder-btn">Reset</button>
+                </div>
+                <div class="mode-toggle">
+                    <label>Editing Mode:</label>
+                    <button id="tb-mode-dark" class="mode-btn active">Dark</button>
+                    <button id="tb-mode-light" class="mode-btn">Light</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="builder-preview">
+            <h3>Preview</h3>
+            <div class="preview-card">
+                <div class="preview-header">
+                    <span class="preview-title">Sample Post Title</span>
+                    <span class="preview-date">January 1, 2025</span>
+                </div>
+                <p class="preview-text">This is how your body text will appear. It should be readable against the background color you've chosen.</p>
+                <p class="preview-text">Here's a <a href="#" class="preview-link">sample link</a> to see link colors in action.</p>
+                <div class="preview-code">
+                    <pre><code><span class="token keyword">const</span> <span class="token variable">greeting</span> <span class="token punctuation">=</span> <span class="token string">"Hello, World!"</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Print the greeting</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token variable">greeting</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+                </div>
+                <div class="preview-tags">
+                    <span class="preview-tag">#javascript</span>
+                    <span class="preview-tag">#tutorial</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="export-modal" id="export-modal">
+        <div class="modal-content">
+            <h3>Theme JSON</h3>
+            <p>Copy this JSON and add it to your themes.js file:</p>
+            <textarea id="export-json" readonly></textarea>
+            <div class="modal-actions">
+                <button id="copy-json" class="builder-btn primary">Copy to Clipboard</button>
+                <button id="close-modal" class="builder-btn">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.theme-builder {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.theme-builder h1 {
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+.theme-builder > p {
+    color: var(--tertiary-color);
+    margin-bottom: 2rem;
+}
+
+.builder-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 900px) {
+    .builder-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.builder-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.control-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
+}
+
+.control-section h3 {
+    color: var(--heading-color);
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.color-row {
+    display: grid;
+    grid-template-columns: 100px 40px 1fr;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.color-row:last-child {
+    margin-bottom: 0;
+}
+
+.color-row label {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.color-row input[type="color"] {
+    width: 40px;
+    height: 32px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 2px;
+    background: var(--card-bg);
+}
+
+.hex-input {
+    font-family: var(--font-family-monospace);
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-color);
+    text-transform: uppercase;
+}
+
+.hex-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.builder-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.builder-btn {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.builder-btn:hover {
+    border-color: var(--primary-color);
+}
+
+.builder-btn.primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+.builder-btn.primary:hover {
+    opacity: 0.9;
+}
+
+.mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.mode-toggle label {
+    color: var(--tertiary-color);
+    font-size: 0.85rem;
+}
+
+.mode-btn {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.mode-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+.builder-preview {
+    position: sticky;
+    top: 80px;
+}
+
+.builder-preview h3 {
+    color: var(--heading-color);
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+}
+
+.preview-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: var(--card-bg);
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+
+.preview-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+.preview-date {
+    font-size: 0.85rem;
+    color: var(--tertiary-color);
+}
+
+.preview-text {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.preview-link {
+    color: var(--link-color);
+}
+
+.preview-code {
+    background: var(--sh-bg, var(--card-bg));
+    border: 1px solid var(--sh-border, var(--border-color));
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+}
+
+.preview-code pre {
+    margin: 0;
+    font-family: var(--font-family-monospace);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.preview-code code {
+    color: var(--sh-text, var(--text-color));
+}
+
+.preview-code .token.keyword { color: var(--sh-keyword); }
+.preview-code .token.string { color: var(--sh-string); }
+.preview-code .token.function { color: var(--sh-function); }
+.preview-code .token.variable { color: var(--sh-variable); }
+.preview-code .token.comment { color: var(--sh-comment); font-style: italic; }
+.preview-code .token.punctuation { color: var(--sh-punctuation, var(--text-color)); }
+
+.preview-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.preview-tag {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--secondary-container-bg, var(--border-color));
+    color: var(--primary-color);
+    border-radius: 4px;
+}
+
+/* Export Modal */
+.export-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.export-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content h3 {
+    color: var(--heading-color);
+    margin: 0 0 0.5rem 0;
+}
+
+.modal-content p {
+    color: var(--tertiary-color);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+#export-json {
+    flex: 1;
+    min-height: 300px;
+    font-family: var(--font-family-monospace);
+    font-size: 0.8rem;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    color: var(--text-color);
+    resize: none;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    justify-content: flex-end;
+}
+</style>
+
+<script>
+(function() {
+    'use strict';
+
+    // Color properties mapping
+    const COLOR_MAP = {
+        'tb-bg': 'bg',
+        'tb-text': 'text',
+        'tb-heading': 'heading',
+        'tb-link': 'link',
+        'tb-primary': 'primary',
+        'tb-surface': 'surface',
+        'tb-border': 'border',
+        'tb-sh-keyword': 'shKeyword',
+        'tb-sh-string': 'shString',
+        'tb-sh-function': 'shFunction',
+        'tb-sh-variable': 'shVariable',
+        'tb-sh-comment': 'shComment'
+    };
+
+    // CSS variable mapping
+    const CSS_VAR_MAP = {
+        'bg': '--bg-color',
+        'text': '--text-color',
+        'heading': '--heading-color',
+        'link': '--link-color',
+        'primary': '--primary-color',
+        'surface': '--card-bg',
+        'border': '--border-color',
+        'shKeyword': '--sh-keyword',
+        'shString': '--sh-string',
+        'shFunction': '--sh-function',
+        'shVariable': '--sh-variable',
+        'shComment': '--sh-comment'
+    };
+
+    // Current theme state
+    let currentMode = 'dark';
+    let themeData = {
+        dark: {},
+        light: {}
+    };
+
+    // Initialize from default theme (Star Lord)
+    const defaultDark = {
+        bg: '#0A0D24', text: '#F3E9FF', heading: '#7FD7FF', link: '#FF5DA2',
+        primary: '#FF5DA2', surface: '#15183A', border: '#2A2E5A',
+        shKeyword: '#7FD7FF', shString: '#FFE98A', shFunction: '#FF5DA2',
+        shVariable: '#F3E9FF', shComment: '#8A7FAF'
+    };
+
+    const defaultLight = {
+        bg: '#F7F3FF', text: '#241A3D', heading: '#0D6FB8', link: '#FF3D8E',
+        primary: '#FF3D8E', surface: '#FFFFFF', border: '#D5CCF0',
+        shKeyword: '#0D6FB8', shString: '#B85A00', shFunction: '#FF3D8E',
+        shVariable: '#241A3D', shComment: '#8A7FAF'
+    };
+
+    themeData.dark = { ...defaultDark };
+    themeData.light = { ...defaultLight };
+
+    // Sync color picker and hex input
+    function syncColorInputs(colorId, value) {
+        const picker = document.getElementById(colorId);
+        const hex = document.getElementById(colorId + '-hex');
+        if (picker) picker.value = value;
+        if (hex) hex.value = value.toUpperCase();
+    }
+
+    // Get current colors from inputs
+    function getCurrentColors() {
+        const colors = {};
+        for (const [inputId, propName] of Object.entries(COLOR_MAP)) {
+            const picker = document.getElementById(inputId);
+            if (picker) colors[propName] = picker.value;
+        }
+        return colors;
+    }
+
+    // Load colors into inputs
+    function loadColorsToInputs(colors) {
+        for (const [inputId, propName] of Object.entries(COLOR_MAP)) {
+            if (colors[propName]) {
+                syncColorInputs(inputId, colors[propName]);
+            }
+        }
+    }
+
+    // Apply colors to preview (and optionally full page)
+    function applyPreview(colors, fullPage = false) {
+        const root = fullPage ? document.documentElement : document.querySelector('.preview-card');
+        if (!root) return;
+
+        for (const [propName, cssVar] of Object.entries(CSS_VAR_MAP)) {
+            if (colors[propName]) {
+                root.style.setProperty(cssVar, colors[propName]);
+            }
+        }
+
+        // Also set derived colors
+        if (colors.bg && colors.text) {
+            root.style.setProperty('--tertiary-color', `color-mix(in srgb, ${colors.text} 70%, ${colors.bg})`);
+            root.style.setProperty('--search-bg', colors.bg);
+            root.style.setProperty('--sh-bg', colors.surface);
+            root.style.setProperty('--sh-border', colors.border);
+            root.style.setProperty('--sh-text', colors.text);
+            root.style.setProperty('--sh-punctuation', colors.text);
+            root.style.setProperty('--secondary-container-bg', colors.border);
+        }
+    }
+
+    // Initialize event listeners
+    function init() {
+        // Load initial colors
+        loadColorsToInputs(themeData[currentMode]);
+        applyPreview(themeData[currentMode]);
+
+        // Color picker change
+        for (const inputId of Object.keys(COLOR_MAP)) {
+            const picker = document.getElementById(inputId);
+            const hex = document.getElementById(inputId + '-hex');
+
+            if (picker) {
+                picker.addEventListener('input', (e) => {
+                    syncColorInputs(inputId, e.target.value);
+                    themeData[currentMode] = getCurrentColors();
+                    applyPreview(themeData[currentMode]);
+                });
+            }
+
+            if (hex) {
+                hex.addEventListener('input', (e) => {
+                    let value = e.target.value.trim();
+                    if (!value.startsWith('#')) value = '#' + value;
+                    if (/^#[0-9A-Fa-f]{6}$/.test(value)) {
+                        syncColorInputs(inputId, value);
+                        themeData[currentMode] = getCurrentColors();
+                        applyPreview(themeData[currentMode]);
+                    }
+                });
+
+                hex.addEventListener('blur', (e) => {
+                    const picker = document.getElementById(inputId);
+                    if (picker) e.target.value = picker.value.toUpperCase();
+                });
+            }
+        }
+
+        // Mode toggle
+        const darkBtn = document.getElementById('tb-mode-dark');
+        const lightBtn = document.getElementById('tb-mode-light');
+
+        darkBtn?.addEventListener('click', () => {
+            themeData[currentMode] = getCurrentColors();
+            currentMode = 'dark';
+            darkBtn.classList.add('active');
+            lightBtn.classList.remove('active');
+            loadColorsToInputs(themeData.dark);
+            applyPreview(themeData.dark);
+        });
+
+        lightBtn?.addEventListener('click', () => {
+            themeData[currentMode] = getCurrentColors();
+            currentMode = 'light';
+            lightBtn.classList.add('active');
+            darkBtn.classList.remove('active');
+            loadColorsToInputs(themeData.light);
+            applyPreview(themeData.light);
+        });
+
+        // Apply button - applies to full page
+        document.getElementById('tb-apply')?.addEventListener('click', () => {
+            themeData[currentMode] = getCurrentColors();
+            applyPreview(themeData[currentMode], true);
+            document.documentElement.setAttribute('data-theme-set', 'custom');
+            document.documentElement.setAttribute('data-mode', currentMode);
+
+            // Clear random theme state
+            if (window.BlogApp && BlogApp.state) {
+                BlogApp.state.randomTheme = null;
+            }
+        });
+
+        // Reset button
+        document.getElementById('tb-reset')?.addEventListener('click', () => {
+            themeData.dark = { ...defaultDark };
+            themeData.light = { ...defaultLight };
+            loadColorsToInputs(themeData[currentMode]);
+            applyPreview(themeData[currentMode]);
+        });
+
+        // Export button
+        document.getElementById('tb-export')?.addEventListener('click', () => {
+            themeData[currentMode] = getCurrentColors();
+            const json = generateJSON();
+            document.getElementById('export-json').value = json;
+            document.getElementById('export-modal').classList.add('active');
+        });
+
+        // Close modal
+        document.getElementById('close-modal')?.addEventListener('click', () => {
+            document.getElementById('export-modal').classList.remove('active');
+        });
+
+        // Copy JSON
+        document.getElementById('copy-json')?.addEventListener('click', () => {
+            const textarea = document.getElementById('export-json');
+            textarea.select();
+            document.execCommand('copy');
+            const btn = document.getElementById('copy-json');
+            const original = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = original, 2000);
+        });
+
+        // Close modal on backdrop click
+        document.getElementById('export-modal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'export-modal') {
+                e.target.classList.remove('active');
+            }
+        });
+    }
+
+    // Generate JSON export
+    function generateJSON() {
+        const themeName = 'my-custom-theme';
+        const output = {
+            id: themeName,
+            name: 'My Custom Theme',
+            dark: themeData.dark,
+            light: themeData.light
+        };
+
+        return JSON.stringify(output, null, 2);
+    }
+
+    // Run init when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>

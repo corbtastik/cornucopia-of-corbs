@@ -19,6 +19,11 @@
         if (BlogApp.isSearchPage()) {
             BlogApp.search.init();
         }
+
+        // Initialize command palette (global, works on all pages)
+        if (BlogApp.commandPalette) {
+            BlogApp.commandPalette.init();
+        }
     }
 
     // Run init when DOM is ready
