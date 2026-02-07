@@ -213,7 +213,7 @@ header {
 
 #search-input:focus {
     outline: none;
-    border-color: var(--link-color);
+    border-color: var(--glass-bg);
 }
 
 /* FIX FOR SEARCH RESULTS LAYOUT */
@@ -268,7 +268,7 @@ header {
 
 .theme-select:focus {
     outline: none;
-    border-color: var(--link-color);
+    border-color: var(--glass-bg);
 }
 
 .theme-btn {
@@ -285,6 +285,7 @@ header {
     background: var(--link-color);
     color: var(--bg-color);
     border: 1px solid var(--link-color);
+    /* Border matches background on hover */
 }
 
 /* =========================================
@@ -516,7 +517,7 @@ html[data-mode="light"] .simple-item {
     height: 120px;
     border-radius: 50%;
     background: var(--glass-bg);
-    border: 1px solid var(--border-color);
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -573,7 +574,7 @@ html[data-mode="light"] .simple-item {
     border-radius: 50px;
     background-color: var(--link-color);
     color: var(--bg-color);
-    border: 1px solid var(--link-color);
+    border: none;
     font-family: var(--font-family-secondary);
     font-size: 0.85rem;
     font-weight: 700;
@@ -596,7 +597,6 @@ html[data-mode="light"] .simple-item {
     filter: brightness(1.1);
     text-decoration: none;
     cursor: pointer;
-    border-color: var(--link-color);
 }
 
 .tag-list a:visited,
@@ -667,7 +667,7 @@ th {
     font-family: var(--font-family-secondary);
     font-weight: 800;
     padding: 12px 15px;
-    border-bottom: 1px solid var(--heading-color);
+    border-bottom: none;
 }
 
 td {
@@ -1101,7 +1101,7 @@ img {
     overflow: hidden;
     aspect-ratio: 16 / 9;
     background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
+    border: none;
 }
 
 .video-container iframe,
