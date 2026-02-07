@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="site-body">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress"></div>
+
     <div class="page-shell">
     <header>
         <nav class="site-nav">
@@ -142,6 +145,16 @@
     <!-- GLOBAL UI ELEMENTS -->
     <div id="lightbox"></div>
     <div id="sidebar-overlay"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- Keyboard Shortcuts Hint -->
+    <div class="keyboard-hint"></div>
     
     <aside id="sidebar" class="sidebar">
         <div class="sidebar-header">
@@ -190,7 +203,8 @@
     <script src="/assets/js/code-toolbar.js"></script>
     <script src="/assets/js/lightbox.js"></script>
     <script src="/assets/js/sidebar.js"></script>
-    
+    <script src="/assets/js/reading-experience.js" defer></script>
+
     {% if load_toc_script %}
     <script src="/assets/js/toc.js" defer></script>
     {% endif %}

@@ -21,6 +21,18 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addFilter("dateIso", (dateObj) => {
         return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toISODate();
     });
+
+    // 3. Reading Time (e.g., "5 min read")
+    eleventyConfig.addFilter("readingTime", (content) => {
+        if (!content) return "1 min read";
+        // Strip HTML tags and count words
+        const text = content.replace(/<[^>]*>/g, '');
+        const words = text.trim().split(/\s+/).length;
+        const wordsPerMinute = 200;
+        const minutes = Math.ceil(words / wordsPerMinute);
+        return `${minutes} min read`;
+    });
+
     // Copy the `favicon.ico` to the output folder
     eleventyConfig.addPassthroughCopy("favicon.ico");
     // --- NEW DATE FILTERS END ---

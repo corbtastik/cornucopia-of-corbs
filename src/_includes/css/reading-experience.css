@@ -1,0 +1,146 @@
+/* =========================================
+   Reading Experience Enhancements
+   ========================================= */
+
+/* Reading Progress Bar */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--link-color));
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+}
+
+/* Post Meta Container */
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em 1em;
+    margin-bottom: 0.5rem;
+}
+
+.post-meta .post-title-date {
+    display: inline;
+    margin-bottom: 0;
+}
+
+/* Reading Time in Post Meta */
+.reading-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    color: var(--tertiary-color);
+    font-family: var(--font-family-monospace);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.reading-time svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+    z-index: 1000;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.back-to-top:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+}
+
+/* Keyboard Shortcuts Help (optional tooltip) */
+.keyboard-hint {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--surface-radius-tight);
+    padding: 0.75rem 1.25rem;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    z-index: 1001;
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.keyboard-hint.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.keyboard-hint kbd {
+    display: inline-block;
+    padding: 0.15em 0.4em;
+    font-size: 0.85em;
+    font-family: var(--font-family-monospace);
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin: 0 0.2em;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 40px;
+        height: 40px;
+    }
+
+    .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3em;
+    }
+
+    .keyboard-hint {
+        display: none;
+    }
+}

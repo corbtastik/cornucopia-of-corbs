@@ -23,10 +23,19 @@ wrapperClass: "layout-with-toc"
         <!-- Render Title -->
         <h1 class="post-title">{{ title }}</h1>
         
-        <!-- Render Date -->
-        <time class="post-title-date" datetime="{{ page.date | dateIso }}">
-            {{ page.date | dateReadable }} 
-        </time>
+        <!-- Render Date and Reading Time -->
+        <div class="post-meta">
+            <time class="post-title-date" datetime="{{ page.date | dateIso }}">
+                {{ page.date | dateReadable }}
+            </time>
+            <span class="reading-time">
+                <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                {{ content | readingTime }}
+            </span>
+        </div>
 
         <!-- NEW: Render Tags (The Pills) -->
         {% if tags %}
