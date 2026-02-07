@@ -28,7 +28,7 @@ pagination:
 {% endfor %}
 </ul>
 
-<div class="pagination">
+<div class="pagination" data-current-page="{{ pagination.pageNumber + 1 }}" data-total-pages="{{ pagination.pages.length }}">
     {% if pagination.href.previous %}
         <a href="{{ pagination.href.previous }}"><<< Newer</a>
     {% else %}
