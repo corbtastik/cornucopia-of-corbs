@@ -505,31 +505,31 @@ html[data-mode="light"] .simple-item {
 }
 
 .hero-panel {
-    min-width: 160px;
-    padding: 1.5rem;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
     background: var(--glass-bg);
-    border: 1px solid var(--glass-bg);
-    border-radius: var(--surface-radius-tight);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 
-.panel-label {
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.65rem;
-    color: var(--tertiary-color);
-}
-
 .panel-value {
-    margin: 0.4rem 0 0.2rem;
-    font-size: 2rem;
+    margin: 0;
+    font-size: 2.5rem;
     font-weight: 700;
+    line-height: 1;
+    color: var(--heading-color);
 }
 
-.panel-caption {
-    margin: 0;
-    font-size: 0.8rem;
+.panel-label {
+    margin: 0.25rem 0 0;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.7rem;
     color: var(--tertiary-color);
 }
 
@@ -1216,8 +1216,8 @@ body .gist-wrapper .gist-data {
     }
 
     .hero-panel {
-        width: 100%;
-        text-align: left;
+        width: 100px;
+        height: 100px;
     }
 
     .post-header,
