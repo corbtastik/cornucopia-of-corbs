@@ -75,11 +75,10 @@
   font-weight: bold;
 }
 
-/* --- src/_includes/css/gallery.css (Replace the bottom section) --- */
-
-/* --- src/_includes/css/gallery.css (Replace the bottom section) --- */
-
-/* LIGHTBOX OVERLAY */
+/* =========================================
+   LIGHTBOX
+   Full-screen image viewer with navigation
+   ========================================= */
 #lightbox {
   position: fixed;
   z-index: 9999;
