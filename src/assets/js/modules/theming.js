@@ -1,6 +1,7 @@
 /**
  * Theming Module
  * Handles theme mode switching and random theme generation
+ * Uses Material Design color theory: analogous, complementary, triadic relationships
  */
 window.BlogApp = window.BlogApp || {};
 
@@ -28,6 +29,16 @@ BlogApp.theming = {
         blueGrey:   { 900: '#263238', 700: '#455A64', 500: '#607D8B', 300: '#90A4AE', 100: '#CFD8DC', 50: '#ECEFF1' }
     },
 
+    // Color wheel order (chromatic colors only, arranged by hue)
+    COLOR_WHEEL: [
+        'red', 'pink', 'purple', 'deepPurple', 'indigo', 'blue',
+        'lightBlue', 'cyan', 'teal', 'green', 'lightGreen', 'lime',
+        'yellow', 'amber', 'orange', 'deepOrange'
+    ],
+
+    // Color relationship types per Material Design guidelines
+    RELATIONSHIPS: ['analogous', 'complementary', 'triadic'],
+
     /**
      * Pick a random item from an array
      */
@@ -36,13 +47,70 @@ BlogApp.theming = {
     },
 
     /**
-     * Generate a random color theme using Material Design colors
+     * Get color position on the wheel (0-15)
+     */
+    getColorPosition: function(colorName) {
+        return this.COLOR_WHEEL.indexOf(colorName);
+    },
+
+    /**
+     * Get color at wheel position (wraps around)
+     */
+    getColorAtPosition: function(position) {
+        const len = this.COLOR_WHEEL.length;
+        const wrappedPos = ((position % len) + len) % len;
+        return this.COLOR_WHEEL[wrappedPos];
+    },
+
+    /**
+     * Get analogous colors (adjacent on wheel, +/- 1-2 positions)
+     */
+    getAnalogousColor: function(primaryPos) {
+        const offset = this.pickRandom([1, 2, -1, -2]);
+        return this.getColorAtPosition(primaryPos + offset);
+    },
+
+    /**
+     * Get complementary color (opposite on wheel, +8 positions = 180°)
+     */
+    getComplementaryColor: function(primaryPos) {
+        return this.getColorAtPosition(primaryPos + 8);
+    },
+
+    /**
+     * Get triadic color (120° apart on wheel, +/- ~5 positions)
+     */
+    getTriadicColor: function(primaryPos) {
+        const offset = this.pickRandom([5, -5, 6, -6]);
+        return this.getColorAtPosition(primaryPos + offset);
+    },
+
+    /**
+     * Generate a random color theme using Material Design color theory
      */
     generateRandomTheme: function() {
         const palette = this.MATERIAL_PALETTE;
-        const colorNames = Object.keys(palette);
-        const primaryColorName = this.pickRandom(colorNames);
-        const accentColorName = this.pickRandom(colorNames.filter(c => c !== primaryColorName));
+
+        // Pick a random chromatic color as primary
+        const primaryColorName = this.pickRandom(this.COLOR_WHEEL);
+        const primaryPos = this.getColorPosition(primaryColorName);
+
+        // Pick a random relationship type
+        const relationship = this.pickRandom(this.RELATIONSHIPS);
+
+        // Get secondary color based on relationship
+        let accentColorName;
+        switch (relationship) {
+            case 'analogous':
+                accentColorName = this.getAnalogousColor(primaryPos);
+                break;
+            case 'complementary':
+                accentColorName = this.getComplementaryColor(primaryPos);
+                break;
+            case 'triadic':
+                accentColorName = this.getTriadicColor(primaryPos);
+                break;
+        }
 
         const primaryColor = palette[primaryColorName];
         const accentColor = palette[accentColorName];
