@@ -32,7 +32,7 @@ description: "Browse posts by topic."
 <hr>
 
 <!-- 2. The Sections -->
-{% for tag, posts in collections %}
+{% for tag, posts in collections | dictsort %}
   {% if tag != "all" and tag != "posts" %}
     
     <section id="{{ tag }}">
