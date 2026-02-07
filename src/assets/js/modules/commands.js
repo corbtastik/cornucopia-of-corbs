@@ -18,7 +18,9 @@ BlogApp.commands = {
         '/page': { action: 'goPage', description: 'Go to page N (e.g., /page 2)', hasParam: true },
         '/dark': { action: 'setDark', description: 'Enable dark mode' },
         '/light': { action: 'setLight', description: 'Enable light mode' },
-        '/egg': { action: 'randomTheme', description: 'Generate random color theme' }
+        '/egg': { action: 'randomTheme', description: 'Generate random color theme' },
+        '/focus': { action: 'enableFocus', description: 'Enable distraction-free mode' },
+        '/unfocus': { action: 'disableFocus', description: 'Exit distraction-free mode' }
     },
 
     /**
@@ -97,6 +99,12 @@ BlogApp.commands = {
                 break;
             case 'randomTheme':
                 BlogApp.theming.generateRandomTheme();
+                break;
+            case 'enableFocus':
+                BlogApp.focus.enable();
+                break;
+            case 'disableFocus':
+                BlogApp.focus.disable();
                 break;
         }
     },

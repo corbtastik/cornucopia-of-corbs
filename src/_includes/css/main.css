@@ -1347,3 +1347,69 @@ body .gist-wrapper .gist-data {
         display: block;
     }
 }
+
+/* =========================================
+   FOCUS MODE (Distraction-Free)
+   ========================================= */
+
+/* Focus mode: hide sidebar, center content */
+.focus-mode #sidebar,
+.focus-mode #sidebar-overlay,
+.focus-mode #menu-btn {
+    display: none !important;
+}
+
+.focus-mode .page-shell {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.focus-mode main {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.focus-mode header {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.focus-mode .site-nav {
+    padding-left: 0;
+}
+
+.focus-mode .nav-left {
+    gap: 0;
+}
+
+/* Focus mode indicator */
+.focus-mode::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--link-color));
+    z-index: 10000;
+    animation: focusPulse 3s ease-in-out infinite;
+}
+
+@keyframes focusPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* Responsive adjustments for focus mode */
+@media (max-width: 768px) {
+    .focus-mode .page-shell {
+        padding: 0 1rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .focus-mode .page-shell {
+        max-width: 1000px;
+    }
+}
