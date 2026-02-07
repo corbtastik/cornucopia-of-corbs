@@ -1,0 +1,224 @@
+/* =========================================
+   Visual Polish Enhancements
+   ========================================= */
+
+/* =========================================
+   1. Animated Theme Transitions
+   ========================================= */
+
+/* Smooth transitions for all theme-aware elements */
+*,
+*::before,
+*::after {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease-out;
+}
+
+/* Exclude elements that shouldn't transition (animations, transforms) */
+.back-to-top,
+.lightbox-trigger,
+.reading-progress,
+[class*="animate"],
+svg,
+img,
+video,
+canvas {
+    transition-property: none;
+}
+
+/* Re-enable specific transitions for interactive elements */
+.back-to-top {
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+a,
+button,
+.theme-btn,
+.theme-select {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+/* Theme change flash prevention */
+html.theme-transitioning {
+    transition: none !important;
+}
+
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+    transition-duration: 0s !important;
+}
+
+/* =========================================
+   2. Pull Quotes
+   ========================================= */
+
+/* Standard blockquote enhanced */
+blockquote {
+    position: relative;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed);
+}
+
+/* Pull quote - use with class="pull-quote" on blockquote */
+blockquote.pull-quote {
+    border-left: none;
+    border-top: 3px solid var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+    background: transparent;
+    text-align: center;
+    font-size: 1.35em;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
+    padding: 1.5rem 2rem;
+    margin: 2.5rem auto;
+    max-width: 85%;
+    color: var(--heading-color);
+    position: relative;
+}
+
+blockquote.pull-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.15em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4em;
+    line-height: 1;
+    color: var(--primary-color);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+    pointer-events: none;
+}
+
+blockquote.pull-quote p {
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+blockquote.pull-quote cite,
+blockquote.pull-quote footer {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.7em;
+    font-weight: 400;
+    color: var(--tertiary-color);
+    font-style: normal;
+}
+
+blockquote.pull-quote cite::before,
+blockquote.pull-quote footer::before {
+    content: '\2014\00a0';
+}
+
+/* Alternate pull quote style - aside variation */
+blockquote.pull-quote-aside {
+    float: right;
+    width: 45%;
+    margin: 0.5rem 0 1rem 2rem;
+    border-left: none;
+    border-right: 4px solid var(--link-color);
+    background: transparent;
+    text-align: right;
+    font-size: 1.15em;
+    font-style: italic;
+    padding: 0.75rem 1.25rem 0.75rem 0;
+    color: var(--heading-color);
+}
+
+blockquote.pull-quote-aside p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    blockquote.pull-quote {
+        font-size: 1.15em;
+        padding: 1.25rem 1rem;
+        max-width: 100%;
+        margin: 2rem 0;
+    }
+
+    blockquote.pull-quote::before {
+        font-size: 3em;
+    }
+
+    blockquote.pull-quote-aside {
+        float: none;
+        width: 100%;
+        margin: 1.5rem 0;
+        text-align: center;
+        border-right: none;
+        border-top: 3px solid var(--link-color);
+        border-bottom: 3px solid var(--link-color);
+        padding: 1rem;
+    }
+}
+
+/* =========================================
+   3. Scroll-Triggered Image Animations
+   ========================================= */
+
+/* Initial state for images - hidden and slightly below */
+.post-content img,
+.gallery-item img {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Visible state when in viewport */
+.post-content img.in-view,
+.gallery-item img.in-view,
+.post-content img.no-animate,
+.gallery-item img.no-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animation for gallery grids */
+.masonry-grid .gallery-item:nth-child(1) img { transition-delay: 0s; }
+.masonry-grid .gallery-item:nth-child(2) img { transition-delay: 0.1s; }
+.masonry-grid .gallery-item:nth-child(3) img { transition-delay: 0.2s; }
+.masonry-grid .gallery-item:nth-child(4) img { transition-delay: 0.3s; }
+.masonry-grid .gallery-item:nth-child(5) img { transition-delay: 0.4s; }
+.masonry-grid .gallery-item:nth-child(6) img { transition-delay: 0.5s; }
+
+/* Reset delay after animation completes for subsequent scrolling */
+.masonry-grid .gallery-item img.in-view {
+    transition-delay: 0s;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .post-content img,
+    .gallery-item img {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* Fade in for other content elements (optional enhancement) */
+.post-content h2,
+.post-content h3 {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, color var(--transition-speed);
+}
+
+.post-content h2.in-view,
+.post-content h3.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .post-content h2,
+    .post-content h3 {
+        opacity: 1;
+        transform: none;
+        transition: color var(--transition-speed);
+    }
+}
