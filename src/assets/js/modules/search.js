@@ -71,6 +71,9 @@ BlogApp.search = {
     displayResults: function(matches) {
         const resultsList = BlogApp.dom.resultsList;
 
+        // Guard: Ensure results list exists
+        if (!resultsList) return;
+
         resultsList.innerHTML = ''; // Clear previous results
 
         if (matches.length === 0) {

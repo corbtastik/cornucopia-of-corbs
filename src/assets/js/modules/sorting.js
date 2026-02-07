@@ -10,6 +10,9 @@ BlogApp.sorting = {
      * @param {string} order - 'asc' for oldest first, 'desc' for newest first
      */
     sortAllPosts: function(order) {
+        // Guard: Ensure we're on a search-enabled page
+        if (!BlogApp.isSearchPage()) return;
+
         const searchIndex = BlogApp.state.searchIndex;
 
         if (searchIndex.length === 0) {
@@ -24,17 +27,16 @@ BlogApp.sorting = {
             return order === 'asc' ? dateA - dateB : dateB - dateA;
         });
 
-        // Clear search input
-        if (BlogApp.dom.searchInput) {
-            BlogApp.dom.searchInput.value = '';
-        }
-
-        // Show results
+        // Clear search input and show results
+        BlogApp.clearSearch();
         BlogApp.showResults();
 
         // Update results header
         const sortLabel = order === 'asc' ? 'Oldest First' : 'Newest First';
-        BlogApp.dom.resultsWrapper.querySelector('h2').textContent = `All Posts (${sortLabel})`;
+        const resultsHeader = BlogApp.dom.resultsWrapper.querySelector('h2');
+        if (resultsHeader) {
+            resultsHeader.textContent = `All Posts (${sortLabel})`;
+        }
 
         // Display sorted posts
         BlogApp.search.displayResults(sorted);

@@ -10,6 +10,9 @@ BlogApp.filtering = {
      * @param {string} tag - The tag to filter by
      */
     filterByTag: function(tag) {
+        // Guard: Ensure we're on a search-enabled page
+        if (!BlogApp.isSearchPage()) return;
+
         const searchIndex = BlogApp.state.searchIndex;
 
         if (searchIndex.length === 0) {
@@ -38,16 +41,15 @@ BlogApp.filtering = {
             return dateB - dateA;
         });
 
-        // Clear search input
-        if (BlogApp.dom.searchInput) {
-            BlogApp.dom.searchInput.value = '';
-        }
-
-        // Show results
+        // Clear search input and show results
+        BlogApp.clearSearch();
         BlogApp.showResults();
 
         // Update results header
-        BlogApp.dom.resultsWrapper.querySelector('h2').textContent = `Posts tagged #${tag}`;
+        const resultsHeader = BlogApp.dom.resultsWrapper.querySelector('h2');
+        if (resultsHeader) {
+            resultsHeader.textContent = `Posts tagged #${tag}`;
+        }
 
         // Display filtered posts
         BlogApp.search.displayResults(matches);
