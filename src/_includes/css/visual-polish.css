@@ -3,51 +3,55 @@
    ========================================= */
 
 /* =========================================
-   1. Animated Theme Transitions
+   1. Theme-Aware Transitions
+   Only apply to elements that benefit from smooth theme changes
    ========================================= */
 
-/* Smooth transitions for all theme-aware elements */
-*,
-*::before,
-*::after {
-    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
-    transition-duration: var(--transition-speed);
-    transition-timing-function: ease-out;
+/* Base document transitions */
+body {
+    transition: background-color var(--transition-speed) ease-out;
 }
 
-/* Exclude elements that shouldn't transition (animations, transforms) */
-.back-to-top,
-.lightbox-trigger,
-.reading-progress,
-[class*="animate"],
-svg,
-img,
-video,
-canvas {
-    transition-property: none;
+/* Interactive elements */
+a {
+    transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-/* Re-enable specific transitions for interactive elements */
+button,
+.theme-btn,
+.theme-select,
+select,
+input {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Navigation and UI */
+.site-nav,
+.sidebar,
+header,
+footer {
+    transition: background-color var(--transition-speed) ease-out, border-color var(--transition-speed) ease-out;
+}
+
+/* Content containers */
+.post-item,
+.card,
+.hero-panel,
+.page-hero,
+pre,
+code,
+blockquote {
+    transition: background-color var(--transition-speed) ease-out, border-color var(--transition-speed) ease-out;
+}
+
+/* Back to top button */
 .back-to-top {
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-a,
-button,
-.theme-btn,
-.theme-select {
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
-
-/* Theme change flash prevention */
-html.theme-transitioning {
-    transition: none !important;
-}
-
-html.theme-transitioning *,
-html.theme-transitioning *::before,
-html.theme-transitioning *::after {
-    transition-duration: 0s !important;
+/* Tags */
+.tag {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 /* =========================================
