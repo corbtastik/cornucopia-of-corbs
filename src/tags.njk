@@ -20,7 +20,7 @@ description: "Browse posts by topic."
 
 <!-- 1. Tag Cloud / Navigation -->
 <div class="tag-list">
-{% for tag, posts in collections %}
+{% for tag, posts in collections | dictsort %}
   {% if tag != "all" and tag != "posts" %}
     <a href="#{{ tag }}" class="tag">
         #{{ tag }} <span>{{ posts.length }}</span>
