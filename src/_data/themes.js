@@ -24,12 +24,6 @@ module.exports = {
           light: { bg: "#F3E5F5", text: "#4A148C", heading: "#6A1B9A", link: "#7B1FA2", primary: "#9C27B0", surface: "#ffffff", border: "#E1BEE7", shKeyword: "#8E24AA", shString: "#6A1B9A", shFunction: "#9C27B0", shVariable: "#7B1FA2", shComment: "#9e9e9e" }
         },
         {
-          id: "material-deep-purple",
-          name: "Material Deep Purple",
-          dark: { bg: "#311B92", text: "#EDE7F6", heading: "#D1C4E9", link: "#B388FF", primary: "#9575CD", surface: "#4527A0", border: "#512DA8", shKeyword: "#B388FF", shString: "#D1C4E9", shFunction: "#7E57C2", shVariable: "#9575CD", shComment: "#6200EA" },
-          light: { bg: "#EDE7F6", text: "#311B92", heading: "#4527A0", link: "#512DA8", primary: "#673AB7", surface: "#ffffff", border: "#D1C4E9", shKeyword: "#5E35B1", shString: "#4527A0", shFunction: "#673AB7", shVariable: "#512DA8", shComment: "#9e9e9e" }
-        },
-        {
           id: "material-indigo",
           name: "Material Indigo",
           dark: { bg: "#1A237E", text: "#E8EAF6", heading: "#C5CAE9", link: "#8C9EFF", primary: "#7986CB", surface: "#283593", border: "#303F9F", shKeyword: "#8C9EFF", shString: "#C5CAE9", shFunction: "#5C6BC0", shVariable: "#7986CB", shComment: "#304FFE" },
@@ -273,12 +267,6 @@ module.exports = {
           light: { bg: "#e0e0e0", text: "#0a0a0a", heading: "#000000", link: "#d60064", primary: "#d60064", surface: "#f5f5f5", border: "#5c5c5c", shKeyword: "#f72685", shString: "#f72685", shFunction: "#0a0a0a", shVariable: "#5c5c5c", shComment: "#5c5c5c" }
         },
         {
-          id: "office",
-          name: "Office",
-          dark: { bg: "#000000", text: "#ffffff", heading: "#ffffff", link: "#3391ff", primary: "#3391ff", surface: "#000000", border: "#ffffff", shKeyword: "#ffffff", shString: "#ffffff", shFunction: "#ffffff", shVariable: "#ffffff", shComment: "#ffffff" },
-          light: { bg: "#ffffff", text: "#000000", heading: "#000000", link: "#0000EE", primary: "#0000EE", surface: "#ffffff", border: "#000000", shKeyword: "#000000", shString: "#000000", shFunction: "#000000", shVariable: "#000000", shComment: "#000000" }
-        },
-        {
           id: "orbit",
           name: "Orbit",
           dark: { bg: "#060B31", text: "#ECE9C5", heading: "#F5F2D8", link: "#9A867B", primary: "#9A867B", surface: "#0F163E", border: "#2B1F4A", shKeyword: "#9A867B", shString: "#F5F2D8", shFunction: "#798485", shVariable: "#ECE9C5", shComment: "#626168" },
@@ -313,12 +301,6 @@ module.exports = {
           name: "Stock",
           dark: { bg: "#121212", text: "#d4d4d4", heading: "#ffffff", link: "#89CFF0", primary: "#89CFF0", surface: "#1e1e1e", border: "#333333", shKeyword: "#89CFF0", shString: "#89CFF0", shFunction: "#ffffff", shVariable: "#808080", shComment: "#808080" },
           light: { bg: "#ffffff", text: "#333333", heading: "#000000", link: "#4A90E2", primary: "#4A90E2", surface: "#f8f9fa", border: "#e0e0e0", shKeyword: "#4A90E2", shString: "#4A90E2", shFunction: "#000000", shVariable: "#bbbbbb", shComment: "#bbbbbb" }
-        },
-        {
-          id: "sunflare",
-          name: "Sunflare",
-          dark: { bg: "#1E160E", text: "#FFF2D6", heading: "#FFD36B", link: "#FFB84D", primary: "#FFB84D", surface: "#2A1C12", border: "#4A2B15", shKeyword: "#FFB84D", shString: "#FFD36B", shFunction: "#FF7A59", shVariable: "#FFF2D6", shComment: "#8A6B4E" },
-          light: { bg: "#FFF8EC", text: "#3B2A1B", heading: "#B85A00", link: "#E98900", primary: "#FFB84D", surface: "#FFFFFF", border: "#F2D3AA", shKeyword: "#E98900", shString: "#B85A00", shFunction: "#FF7A59", shVariable: "#3B2A1B", shComment: "#8A6B4E" }
         },
         {
           id: "sunset",
