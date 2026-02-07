@@ -1362,21 +1362,25 @@ body .gist-wrapper .gist-data {
 .focus-mode .page-shell {
     max-width: 900px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0;
 }
 
 .focus-mode main {
     max-width: 100%;
     margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 .focus-mode header {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 100%;
 }
 
 .focus-mode .site-nav {
-    padding-left: 0;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 .focus-mode .nav-left {
@@ -1403,13 +1407,16 @@ body .gist-wrapper .gist-data {
 
 /* Responsive adjustments for focus mode */
 @media (max-width: 768px) {
-    .focus-mode .page-shell {
-        padding: 0 1rem;
+    .focus-mode main,
+    .focus-mode .site-nav {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
 
 @media (min-width: 1200px) {
-    .focus-mode .page-shell {
+    .focus-mode .page-shell,
+    .focus-mode .site-nav {
         max-width: 1000px;
     }
 }
