@@ -1359,32 +1359,24 @@ body .gist-wrapper .gist-data {
     display: none !important;
 }
 
-.focus-mode .page-shell {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0;
-}
-
-.focus-mode main {
-    max-width: 100%;
-    margin: 0 auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-}
-
-.focus-mode header {
-    max-width: 100%;
+.focus-mode .nav-left {
+    display: none;
 }
 
 .focus-mode .site-nav {
     max-width: 900px;
     margin: 0 auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding: 1rem 1.5rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    box-sizing: border-box;
 }
 
-.focus-mode .nav-left {
-    gap: 0;
+.focus-mode main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    box-sizing: border-box;
 }
 
 /* Focus mode indicator */
@@ -1415,7 +1407,7 @@ body .gist-wrapper .gist-data {
 }
 
 @media (min-width: 1200px) {
-    .focus-mode .page-shell,
+    .focus-mode main,
     .focus-mode .site-nav {
         max-width: 1000px;
     }
