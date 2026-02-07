@@ -81,6 +81,7 @@ description: "Create and customize your own color theme."
             <div class="control-section">
                 <h3>Actions</h3>
                 <div class="builder-actions">
+                    <button id="tb-random" class="builder-btn">Random</button>
                     <button id="tb-apply" class="builder-btn primary">Apply Theme</button>
                     <button id="tb-export" class="builder-btn">Export JSON</button>
                     <button id="tb-reset" class="builder-btn">Reset</button>
@@ -491,6 +492,111 @@ description: "Create and customize your own color theme."
     themeData.dark = { ...defaultDark };
     themeData.light = { ...defaultLight };
 
+    // Material Design 2014 Color Palette (same as theming.js)
+    const MATERIAL_PALETTE = {
+        red:        { 900: '#B71C1C', 700: '#D32F2F', 500: '#F44336', 300: '#E57373', 100: '#FFCDD2', 50: '#FFEBEE', A200: '#FF5252', A400: '#FF1744' },
+        pink:       { 900: '#880E4F', 700: '#C2185B', 500: '#E91E63', 300: '#F06292', 100: '#F8BBD0', 50: '#FCE4EC', A200: '#FF4081', A400: '#F50057' },
+        purple:     { 900: '#4A148C', 700: '#7B1FA2', 500: '#9C27B0', 300: '#BA68C8', 100: '#E1BEE7', 50: '#F3E5F5', A200: '#E040FB', A400: '#D500F9' },
+        deepPurple: { 900: '#311B92', 700: '#512DA8', 500: '#673AB7', 300: '#9575CD', 100: '#D1C4E9', 50: '#EDE7F6', A200: '#7C4DFF', A400: '#651FFF' },
+        indigo:     { 900: '#1A237E', 700: '#303F9F', 500: '#3F51B5', 300: '#7986CB', 100: '#C5CAE9', 50: '#E8EAF6', A200: '#536DFE', A400: '#3D5AFE' },
+        blue:       { 900: '#0D47A1', 700: '#1976D2', 500: '#2196F3', 300: '#64B5F6', 100: '#BBDEFB', 50: '#E3F2FD', A200: '#448AFF', A400: '#2979FF' },
+        lightBlue:  { 900: '#01579B', 700: '#0288D1', 500: '#03A9F4', 300: '#4FC3F7', 100: '#B3E5FC', 50: '#E1F5FE', A200: '#40C4FF', A400: '#00B0FF' },
+        cyan:       { 900: '#006064', 700: '#0097A7', 500: '#00BCD4', 300: '#4DD0E1', 100: '#B2EBF2', 50: '#E0F7FA', A200: '#18FFFF', A400: '#00E5FF' },
+        teal:       { 900: '#004D40', 700: '#00796B', 500: '#009688', 300: '#4DB6AC', 100: '#B2DFDB', 50: '#E0F2F1', A200: '#64FFDA', A400: '#1DE9B6' },
+        green:      { 900: '#1B5E20', 700: '#388E3C', 500: '#4CAF50', 300: '#81C784', 100: '#C8E6C9', 50: '#E8F5E9', A200: '#69F0AE', A400: '#00E676' },
+        lightGreen: { 900: '#33691E', 700: '#689F38', 500: '#8BC34A', 300: '#AED581', 100: '#DCEDC8', 50: '#F1F8E9', A200: '#B2FF59', A400: '#76FF03' },
+        lime:       { 900: '#827717', 700: '#AFB42B', 500: '#CDDC39', 300: '#DCE775', 100: '#F0F4C3', 50: '#F9FBE7', A200: '#EEFF41', A400: '#C6FF00' },
+        yellow:     { 900: '#F57F17', 700: '#FBC02D', 500: '#FFEB3B', 300: '#FFF176', 100: '#FFF9C4', 50: '#FFFDE7', A200: '#FFFF00', A400: '#FFEA00' },
+        amber:      { 900: '#FF6F00', 700: '#FFA000', 500: '#FFC107', 300: '#FFD54F', 100: '#FFECB3', 50: '#FFF8E1', A200: '#FFD740', A400: '#FFC400' },
+        orange:     { 900: '#E65100', 700: '#F57C00', 500: '#FF9800', 300: '#FFB74D', 100: '#FFE0B2', 50: '#FFF3E0', A200: '#FFAB40', A400: '#FF9100' },
+        deepOrange: { 900: '#BF360C', 700: '#E64A19', 500: '#FF5722', 300: '#FF8A65', 100: '#FFCCBC', 50: '#FBE9E7', A200: '#FF6E40', A400: '#FF3D00' },
+        grey:       { 900: '#212121', 700: '#616161', 500: '#9E9E9E', 300: '#E0E0E0', 100: '#F5F5F5', 50: '#FAFAFA' }
+    };
+
+    // Color wheel order (chromatic colors only, arranged by hue)
+    const COLOR_WHEEL = [
+        'red', 'pink', 'purple', 'deepPurple', 'indigo', 'blue',
+        'lightBlue', 'cyan', 'teal', 'green', 'lightGreen', 'lime',
+        'yellow', 'amber', 'orange', 'deepOrange'
+    ];
+
+    // Color relationship types
+    const RELATIONSHIPS = ['analogous', 'complementary', 'triadic'];
+
+    // Helper functions for color generation
+    function pickRandom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function getColorAtPosition(position) {
+        const len = COLOR_WHEEL.length;
+        const wrappedPos = ((position % len) + len) % len;
+        return COLOR_WHEEL[wrappedPos];
+    }
+
+    function getRelatedColor(primaryName, relationship) {
+        const primaryPos = COLOR_WHEEL.indexOf(primaryName);
+        let offset;
+
+        switch (relationship) {
+            case 'analogous':
+                offset = pickRandom([1, 2, -1, -2]);
+                break;
+            case 'complementary':
+                offset = 8; // 180° on 16-color wheel
+                break;
+            case 'triadic':
+                offset = pickRandom([5, -5, 6, -6]); // ~120°
+                break;
+            default:
+                offset = 1;
+        }
+
+        return getColorAtPosition(primaryPos + offset);
+    }
+
+    // Generate random colors using Material Design color theory
+    function generateRandomColors(mode) {
+        const primaryName = pickRandom(COLOR_WHEEL);
+        const relationship = pickRandom(RELATIONSHIPS);
+        const accentName = getRelatedColor(primaryName, relationship);
+
+        const primary = MATERIAL_PALETTE[primaryName];
+        const accent = MATERIAL_PALETTE[accentName];
+
+        if (mode === 'dark') {
+            return {
+                bg: primary[900],
+                text: primary[50],
+                heading: accent[300] || accent[100],
+                link: accent.A200 || accent[300],
+                primary: accent.A400 || accent[500],
+                surface: primary[700] || primary[900],
+                border: primary[500] || primary[700],
+                shKeyword: accent.A200 || accent[300],
+                shString: accent[100] || accent[300],
+                shFunction: accent[300] || accent[500],
+                shVariable: primary[100],
+                shComment: primary[500] || primary[300]
+            };
+        } else {
+            return {
+                bg: primary[50],
+                text: primary[900],
+                heading: accent[700] || accent[900],
+                link: accent[700] || accent[500],
+                primary: accent[500],
+                surface: '#FFFFFF',
+                border: primary[100],
+                shKeyword: accent[700] || accent[500],
+                shString: accent[900] || accent[700],
+                shFunction: accent[500],
+                shVariable: primary[700],
+                shComment: MATERIAL_PALETTE.grey[500]
+            };
+        }
+    }
+
     // Sync color picker and hex input
     function syncColorInputs(colorId, value) {
         const picker = document.getElementById(colorId);
@@ -611,6 +717,14 @@ description: "Create and customize your own color theme."
             if (window.BlogApp && BlogApp.state) {
                 BlogApp.state.randomTheme = null;
             }
+        });
+
+        // Random button - generates random colors using Material Design color theory
+        document.getElementById('tb-random')?.addEventListener('click', () => {
+            const randomColors = generateRandomColors(currentMode);
+            themeData[currentMode] = randomColors;
+            loadColorsToInputs(randomColors);
+            applyPreview(randomColors);
         });
 
         // Reset button
