@@ -10,10 +10,11 @@ description: "A complete list of every post written on this blog."
         <h1 class="hero-title">All posts, one stream.</h1>
         <p class="hero-subtitle">Everything published so far, newest to oldest.</p>
     </div>
-    <div class="hero-panel">
-        <p class="panel-label">Total</p>
-        <p class="panel-value">{{ collections.posts | length }}</p>
-        <p class="panel-caption">entries</p>
+    <div class="hero-panel-wrapper">
+        <div class="hero-panel">
+            <p class="panel-value">{{ collections.posts | length }}</p>
+        </div>
+        <p class="panel-label">posts</p>
     </div>
 </section>
 
