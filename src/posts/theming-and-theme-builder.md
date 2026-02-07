@@ -1,6 +1,6 @@
 ---
 title: "Theming & The Theme Builder"
-date: 2025-02-07
+date: 2026-02-07
 tags: ["features", "theme", "tutorial", "design"]
 description: "Discover 50+ color themes, slash commands for quick switching, and the interactive Theme Builder for creating your own custom palettes."
 ---
