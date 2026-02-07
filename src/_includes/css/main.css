@@ -1363,19 +1363,37 @@ body .gist-wrapper .gist-data {
     display: none;
 }
 
-.focus-mode .site-nav {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 1rem 1.5rem;
-    grid-template-columns: minmax(0, 1fr) auto;
-    box-sizing: border-box;
+/* Reset sidebar margin on header */
+.focus-mode header {
+    margin-left: 0 !important;
+    width: 100% !important;
 }
 
+.focus-mode footer {
+    margin-left: 0 !important;
+}
+
+.focus-mode .site-nav {
+    grid-template-columns: 1fr auto;
+}
+
+.focus-mode .search-container {
+    grid-column: 1;
+}
+
+.focus-mode .theme-controls {
+    grid-column: 2;
+}
+
+/* Shared width constraints for focus mode */
+.focus-mode .site-nav,
 .focus-mode main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    width: 100%;
+    max-width: 900px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
     box-sizing: border-box;
 }
 
@@ -1399,16 +1417,16 @@ body .gist-wrapper .gist-data {
 
 /* Responsive adjustments for focus mode */
 @media (max-width: 768px) {
-    .focus-mode main,
-    .focus-mode .site-nav {
+    .focus-mode .site-nav,
+    .focus-mode main {
         padding-left: 1rem;
         padding-right: 1rem;
     }
 }
 
 @media (min-width: 1200px) {
-    .focus-mode main,
-    .focus-mode .site-nav {
-        max-width: 1000px;
+    .focus-mode .site-nav,
+    .focus-mode main {
+        max-width: 1000px !important;
     }
 }

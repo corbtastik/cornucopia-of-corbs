@@ -7,15 +7,28 @@ window.BlogApp = window.BlogApp || {};
 BlogApp.commands = {
     // Function code definitions
     CODES: {
+        // Navigation
         '/home': { url: '/', description: 'Go to home page' },
+        '/archive': { url: '/archive/', description: 'Go to archive page' },
+        '/tags': { url: '/tags/', description: 'Go to tags page' },
+        '/about': { url: '/about/', description: 'Go to about page' },
+        '/designs': { url: '/designs/', description: 'Go to designs page' },
+        '/themes': { url: '/themes/', description: 'Go to theme builder' },
+        // Social (open in new tab)
+        '/github': { url: 'https://github.com/corbtastik', description: 'Open GitHub profile', newTab: true },
+        '/linkedin': { url: 'https://www.linkedin.com/in/corbettmartin/', description: 'Open LinkedIn profile', newTab: true },
+        '/instagram': { url: 'https://www.instagram.com/corbsmartin', description: 'Open Instagram profile', newTab: true },
+        // Sorting & filtering
         '/sort old': { action: 'sortOld', description: 'Sort posts oldest first' },
         '/sort new': { action: 'sortNew', description: 'Sort posts newest first' },
         '/tag': { action: 'filterTag', description: 'Filter by tag (e.g., /tag photos)', hasParam: true },
+        // Pagination
         '/first': { action: 'goFirst', description: 'Go to first page' },
         '/last': { action: 'goLast', description: 'Go to last page' },
         '/next': { action: 'goNext', description: 'Go to next page' },
         '/prev': { action: 'goPrev', description: 'Go to previous page' },
         '/page': { action: 'goPage', description: 'Go to page N (e.g., /page 2)', hasParam: true },
+        // Theme & display
         '/dark': { action: 'setDark', description: 'Enable dark mode' },
         '/light': { action: 'setLight', description: 'Enable light mode' },
         '/egg': { action: 'randomTheme', description: 'Generate random color theme' },
@@ -35,7 +48,11 @@ BlogApp.commands = {
             const cmd = this.CODES[code];
 
             if (cmd.url) {
-                window.location.href = cmd.url;
+                if (cmd.newTab) {
+                    window.open(cmd.url, '_blank', 'noopener,noreferrer');
+                } else {
+                    window.location.href = cmd.url;
+                }
                 return true;
             }
 
