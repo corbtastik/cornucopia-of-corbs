@@ -1,4 +1,6 @@
 {
   "name": "CorbsBlog",
+  "description": "Notes on dev, design, and experiments.",
+  "url": "https://corbs.io",
   "enable_toc": true
 }

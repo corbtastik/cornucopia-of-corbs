@@ -1,0 +1,24 @@
+---
+permalink: /feed.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>{{ site.name | escape }}</title>
+    <link>{{ "/" | absoluteUrl(site.url) }}</link>
+    <description>{{ site.description | escape }}</description>
+    <language>en</language>
+    {% set latestPost = collections.posts | reverse | first %}
+    <lastBuildDate>{{ latestPost.date | dateRfc822 }}</lastBuildDate>
+    {% set posts = collections.posts | reverse %}
+    {% for post in posts %}
+    <item>
+      <title>{{ post.data.title | escape }}</title>
+      <link>{{ post.url | absoluteUrl(site.url) }}</link>
+      <guid>{{ post.url | absoluteUrl(site.url) }}</guid>
+      <pubDate>{{ post.date | dateRfc822 }}</pubDate>
+      {% if post.data.description %}<description>{{ post.data.description | escape }}</description>{% endif %}
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

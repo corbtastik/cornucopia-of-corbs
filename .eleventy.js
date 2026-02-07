@@ -22,6 +22,11 @@ module.exports = function(eleventyConfig) {
         return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toISODate();
     });
 
+    // 2b. RFC 822 format for RSS feeds
+    eleventyConfig.addFilter("dateRfc822", (dateObj) => {
+        return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toRFC2822();
+    });
+
     // 3. Reading Time (e.g., "5 min read")
     eleventyConfig.addFilter("readingTime", (content) => {
         if (!content) return "1 min read";
@@ -31,6 +36,13 @@ module.exports = function(eleventyConfig) {
         const wordsPerMinute = 200;
         const minutes = Math.ceil(words / wordsPerMinute);
         return `${minutes} min read`;
+    });
+
+    // Absolute URL helper (for sitemap/feed)
+    eleventyConfig.addFilter("absoluteUrl", (url, siteUrl) => {
+        if (!siteUrl) return url;
+        if (url.startsWith("http://") || url.startsWith("https://")) return url;
+        return `${siteUrl.replace(/\/$/, "")}${url.startsWith("/") ? "" : "/"}${url}`;
     });
 
     // Copy the `favicon.ico` to the output folder
