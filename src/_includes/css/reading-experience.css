@@ -139,8 +139,4 @@
         align-items: flex-start;
         gap: 0.3em;
     }
-
-    .keyboard-hint {
-        display: none;
-    }
 }

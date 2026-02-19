@@ -41,7 +41,6 @@ h6 {
 /* Monospace Font (Source Code Pro) */
 code,
 pre,
-.logo,
 #search-input {
     font-family: var(--font-family-monospace);
 }
@@ -50,18 +49,9 @@ pre,
    3. GLOBAL STYLES & VARIABLES
    ========================================= */
 :root {
-    --sidebar-width: 280px;
-    --toc-width: 250px;
-    --header-height: 73px;
-    /* Desktop Header Height */
     --header-height-mobile: 130px;
-    /* Fallback for mobile */
-    --surface-radius: 16px;
     --surface-radius-tight: 10px;
-    --glass-blur: 16px;
     --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --shadow-color: rgba(0, 0, 0, 0.35);
     --grid-line: rgba(255, 255, 255, 0.06);
     --hero-max-width: 1200px;
 }
@@ -142,7 +132,6 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    /* border-bottom: 1px solid var(--border-color); */
     width: 100%;
     backdrop-filter: blur(var(--glass-blur));
     border-bottom: 1px solid var(--bg-color);
@@ -300,13 +289,8 @@ main {
     min-height: 60vh;
 }
 
-/* .post-content {
-    padding-top: .25rem;
-} */
-
 footer {
     padding: 24px;
-    /* border-top: 1px solid var(--border-color); */
     text-align: center;
     margin-top: 40px;
     color: var(--tertiary-color);
