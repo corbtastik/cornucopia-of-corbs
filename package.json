@@ -4,14 +4,19 @@
   "main": "index.js",
   "scripts": {
     "start": "ELEVENTY_ENV=development eleventy --serve",
-    "build": "ELEVENTY_ENV=production eleventy"
+    "build": "ELEVENTY_ENV=production eleventy && npm run minify",
+    "minify": "npm run minify:css && npm run minify:js",
+    "minify:css": "cleancss -o _site/assets/css/style.css _site/assets/css/style.css",
+    "minify:js": "find _site/assets/js -name '*.js' -exec terser {} -o {} -c -m \\;"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2"
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "clean-css-cli": "^5.6.3",
+    "terser": "^5.46.0"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.18.0",
