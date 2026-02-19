@@ -15,6 +15,20 @@
     <!-- Meta Description -->
     <meta name="description" content="{{ description | default(site.description) }}">
 
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description | default(site.description) }}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:type" content="{% if tags %}article{% else %}website{% endif %}">
+    <meta property="og:image" content="{{ site.url }}{{ image | default('/assets/me.jpg') }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description | default(site.description) }}">
+    <meta name="twitter:image" content="{{ site.url }}{{ image | default('/assets/me.jpg') }}">
+
     <script>
         // Set data attributes immediately to prevent flash
         // theme-manager.js will apply the actual CSS variables
